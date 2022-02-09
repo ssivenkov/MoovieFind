@@ -17,13 +17,14 @@ export const ErrorAll = (): ReturnComponentType => {
   }, [error]);
 
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
       {error && (
         <div>
           <h1>Error:</h1>
           <h2>{textError}</h2>
         </div>
       )}
-    </div>
+    </>
   );
 };

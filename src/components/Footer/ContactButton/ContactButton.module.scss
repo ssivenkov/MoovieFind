@@ -1,0 +1,32 @@
+@import '/src/App.module';
+
+.contactButton {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    margin: 15px 0;
+    font-size: 35px;
+    border-radius: 50%;
+    color: var(--primary_dark);
+    background-color: var(--primary);
+    @include no-select;
+}
+
+@media (pointer:coarse) {
+    .contactButton:active {
+        box-shadow: 0 0 9px 1px var(--primary_light);
+    }
+}
+
+@media (pointer:fine) {
+    .contactButton:hover {
+        border: 2px solid var(--primary_light);
+        box-shadow: 0 0 13px 1px var(--primary);
+        text-shadow: 0 0 15px var(--primary), 0 0 5px var(--primary);
+    }
+    .contactButton:active {
+        box-shadow: 0 0 9px 1px var(--primary_light);
+    }
+}
