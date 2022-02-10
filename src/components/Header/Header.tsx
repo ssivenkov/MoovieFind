@@ -2,15 +2,37 @@ import React from 'react';
 
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 
 import style from './Header.module.scss';
 
 import { PATH } from 'routes/routes';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
+const StyledContainer = styled.div`
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #505050;
+`;
+
+const StyledCategoriesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const StyledAuthContainer = styled.div`
+  display: flex;
+`;
+
 export const Header = (): ReturnComponentType => (
-  <div className={style.container}>
-    <div className={style.categoriesContainer}>
+  <StyledContainer>
+    <StyledCategoriesContainer>
       <div className={style.item}>
         <NavLink
           to={PATH.MAIN}
@@ -43,24 +65,24 @@ export const Header = (): ReturnComponentType => (
           novelties
         </NavLink>
       </div>
-    </div>
-    <div className={style.userContainer}>
-      <div className={style.userLink}>
-        <NavLink
-          to={PATH.LOGIN}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          Login
-        </NavLink>
-      </div>
-      <div className={style.userLink}>
-        <NavLink
-          to={PATH.REGISTRATION}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          Registration
-        </NavLink>
-      </div>
-    </div>
-  </div>
+    </StyledCategoriesContainer>
+    <StyledAuthContainer>
+      <NavLink
+        to={PATH.LOGIN}
+        className={({ isActive }) =>
+          cn(style.item, style.authLink, { [style.active]: isActive })
+        }
+      >
+        Login
+      </NavLink>
+      <NavLink
+        to={PATH.REGISTRATION}
+        className={({ isActive }) =>
+          cn(style.item, style.authLink, { [style.active]: isActive })
+        }
+      >
+        Registration
+      </NavLink>
+    </StyledAuthContainer>
+  </StyledContainer>
 );

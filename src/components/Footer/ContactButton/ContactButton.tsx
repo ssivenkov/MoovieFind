@@ -1,14 +1,44 @@
 import React from 'react';
 
-import s from './ContactButton.module.scss';
+import styled from 'styled-components';
 
 type ContactButtonType = {
   link: string;
   iconClass: string;
 };
 
+const StyledContactButton = styled.a`
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  margin: 15px 0;
+  font-size: 35px;
+  border-radius: 50%;
+  color: var(--primary_dark);
+  background-color: var(--primary);
+
+  @media (pointer: coarse) {
+    &:active {
+      box-shadow: 0 0 9px 1px var(--primary_light);
+    }
+  }
+
+  @media (pointer: fine) {
+    &:hover {
+      border: 2px solid var(--primary_light);
+      box-shadow: 0 0 13px 1px var(--primary);
+      text-shadow: 0 0 15px var(--primary), 0 0 5px var(--primary);
+    }
+    &:active {
+      box-shadow: 0 0 9px 1px var(--primary_light);
+    }
+  }
+`;
+
 export const ContactButton: React.FC<ContactButtonType> = ({ link, iconClass }) => (
-  <a className={s.contactButton} href={link} target="_blank" rel="noreferrer">
-    <span className={`${s.contactButtonIcon} fab ${iconClass}`} />
-  </a>
+  <StyledContactButton href={link} target="_blank" rel="noreferrer">
+    <span className={`fab ${iconClass}`} />
+  </StyledContactButton>
 );

@@ -1,25 +1,4 @@
-.container {
-    width: 100%;
-    height: 65px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #505050;
-}
-
-.categoriesContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.userContainer {
-    display: flex;
-}
-
-.userLink a {
+.authLink {
     color: #fff;
     margin: 0 10px;
 }
@@ -41,20 +20,12 @@
     text-transform: uppercase;
 }
 
-.item .active {
+.active {
     background-color: var(--primary);
     border-radius: 7px;
 }
 
 @media (pointer:coarse) {
-    .container {
-        height: 60px;
-    }
-
-    .item {
-        width: 100%;
-    }
-
     .item a {
         font-size: 18px;
         padding: 0 10px;

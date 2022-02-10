@@ -1,13 +1,29 @@
 import React from 'react';
 
+import styled from 'styled-components';
+
 import { ContactButton } from './ContactButton/ContactButton';
-import style from './Footer.module.scss';
 
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
+const StyledFooter = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #505050;
+`;
+
+const StyledContactsContainer = styled.div`
+  width: 350px;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+`;
+
 export const Footer = (): ReturnComponentType => (
-  <div className={style.container}>
-    <div className={style.contactsContainer}>
+  <StyledFooter>
+    <StyledContactsContainer>
       <ContactButton
         link="https://www.linkedin.com/in/ssivenkov"
         iconClass="fa-linkedin-in"
@@ -18,6 +34,6 @@ export const Footer = (): ReturnComponentType => (
         link="https://join.skype.com/invite/cdkkYBX1uutB"
         iconClass="fa-skype"
       />
-    </div>
-  </div>
+    </StyledContactsContainer>
+  </StyledFooter>
 );
