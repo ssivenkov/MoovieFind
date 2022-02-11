@@ -1,22 +1,24 @@
 {
   "files": {
     "main.css": "/MoovieFind/static/css/main.c726ca39.chunk.css",
-    "main.js": "/MoovieFind/static/js/main.e640e29f.chunk.js",
-    "main.js.map": "/MoovieFind/static/js/main.e640e29f.chunk.js.map",
+    "main.js": "/MoovieFind/static/js/main.d14320e4.chunk.js",
+    "main.js.map": "/MoovieFind/static/js/main.d14320e4.chunk.js.map",
     "runtime-main.js": "/MoovieFind/static/js/runtime-main.a33a50b2.js",
     "runtime-main.js.map": "/MoovieFind/static/js/runtime-main.a33a50b2.js.map",
-    "static/js/2.b6f6eb9c.chunk.js": "/MoovieFind/static/js/2.b6f6eb9c.chunk.js",
-    "static/js/2.b6f6eb9c.chunk.js.map": "/MoovieFind/static/js/2.b6f6eb9c.chunk.js.map",
+    "static/js/2.d0b01a22.chunk.js": "/MoovieFind/static/js/2.d0b01a22.chunk.js",
+    "static/js/2.d0b01a22.chunk.js.map": "/MoovieFind/static/js/2.d0b01a22.chunk.js.map",
     "static/js/3.57ea82c4.chunk.js": "/MoovieFind/static/js/3.57ea82c4.chunk.js",
     "static/js/3.57ea82c4.chunk.js.map": "/MoovieFind/static/js/3.57ea82c4.chunk.js.map",
     "index.html": "/MoovieFind/index.html",
     "static/css/main.c726ca39.chunk.css.map": "/MoovieFind/static/css/main.c726ca39.chunk.css.map",
-    "static/js/2.b6f6eb9c.chunk.js.LICENSE.txt": "/MoovieFind/static/js/2.b6f6eb9c.chunk.js.LICENSE.txt"
+    "static/js/2.d0b01a22.chunk.js.LICENSE.txt": "/MoovieFind/static/js/2.d0b01a22.chunk.js.LICENSE.txt",
+    "static/media/loader.f412b255.svg": "/MoovieFind/static/media/loader.f412b255.svg",
+    "static/media/tmdb_logo.bb8aa703.svg": "/MoovieFind/static/media/tmdb_logo.bb8aa703.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a33a50b2.js",
-    "static/js/2.b6f6eb9c.chunk.js",
+    "static/js/2.d0b01a22.chunk.js",
     "static/css/main.c726ca39.chunk.css",
-    "static/js/main.e640e29f.chunk.js"
+    "static/js/main.d14320e4.chunk.js"
   ]
 }
