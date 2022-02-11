@@ -7,22 +7,30 @@ import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { RoutesContainer } from './components/RoutesContainer/RoutesContainer';
 
-import { ErrorAll } from 'components/common/ErrorPages/ErrorAll';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-const AppWrapper = styled.div`
-  min-height: 100vh;
+const AppContainer = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #0f0f1a;
 `;
 
+const AppWrapper = styled.div`
+  min-height: 100vh;
+  width: 1150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const App: FC = (): ReturnComponentType => (
-  <AppWrapper>
-    <ErrorAll />
-    <Header />
-    <RoutesContainer />
-    <Footer />
-  </AppWrapper>
+  <AppContainer>
+    <AppWrapper>
+      <Header />
+      <RoutesContainer />
+      <Footer />
+    </AppWrapper>
+  </AppContainer>
 );

@@ -11,9 +11,9 @@ const StyledContactButton = styled.a`
   display: flex !important;
   align-items: center;
   justify-content: center;
-  width: 55px;
-  height: 55px;
-  margin: 15px 0;
+  width: 50px;
+  height: 50px;
+  margin: 12px 0;
   font-size: 35px;
   border-radius: 50%;
   color: var(--primary_dark);

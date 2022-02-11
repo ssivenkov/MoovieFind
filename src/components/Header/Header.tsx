@@ -35,7 +35,7 @@ export const Header = (): ReturnComponentType => (
     <StyledCategoriesContainer>
       <div className={style.item}>
         <NavLink
-          to={PATH.MAIN}
+          to={PATH.FILMS}
           className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
         >
           films
