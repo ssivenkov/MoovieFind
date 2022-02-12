@@ -26,6 +26,7 @@ const StyledMoovieTitle = styled.div`
 
 const Moovie = (): ReturnComponentType => {
   console.log('moovie render');
+
   return (
     <StyledMoovie>
       <StyledMoovieImage />

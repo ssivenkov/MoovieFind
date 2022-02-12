@@ -2,6 +2,7 @@ import { APP_ACTIONS, AppActionsType } from 'store/actions/appActions';
 
 const initialAppState = {
   appInitialized: false,
+  language: 'en-US',
 };
 
 export type InitialAppStateType = typeof initialAppState;

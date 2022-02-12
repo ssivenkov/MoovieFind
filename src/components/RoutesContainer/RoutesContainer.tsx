@@ -3,20 +3,33 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+// eslint-disable-next-line camelcase
+import { api_key } from 'api/key';
 import { Error404 } from 'components/common/ErrorPages/Error404';
 import { Loader } from 'components/common/Loader/Loader';
 import { Films } from 'components/Films/Films';
 import { PATH } from 'routes/routes';
-import { initializeApp } from 'store/actions/appActions';
 import { AppRootStateType } from 'store/store';
+import { getMoovies, initializeApp } from 'store/thunks/appThunks';
 import { ReturnComponentType } from 'types/ReturnComponentType';
+
+export type TempObjType = {
+  // eslint-disable-next-line camelcase
+  api_key: string;
+  language: string;
+};
 
 export const RoutesContainer = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const appInitialized = useSelector<AppRootStateType>(state => state.app.appInitialized);
 
+  // eslint-disable-next-line camelcase
+  const language = useSelector<AppRootStateType, string>(state => state.app.language);
+  const tempRequestObj: TempObjType = { api_key, language };
+
   useEffect(() => {
     dispatch(initializeApp());
+    dispatch(getMoovies(tempRequestObj));
   }, []);
 
   if (!appInitialized) {
