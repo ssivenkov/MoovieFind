@@ -3,6 +3,6 @@ import { TempObjType } from 'components/RoutesContainer/RoutesContainer';
 
 export const MooviesAPI = {
   getPopularMoovies(tempObj: TempObjType) {
-    return instance.get(`movie/550`, { params: tempObj });
+    return instance.get(`movie/now_playing`, { params: tempObj });
   },
 };

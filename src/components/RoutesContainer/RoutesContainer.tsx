@@ -8,6 +8,7 @@ import { api_key } from 'api/key';
 import { Error404 } from 'components/common/ErrorPages/Error404';
 import { Loader } from 'components/common/Loader/Loader';
 import { Films } from 'components/Films/Films';
+import { ONE } from 'constants/common';
 import { PATH } from 'routes/routes';
 import { AppRootStateType } from 'store/store';
 import { getMoovies, initializeApp } from 'store/thunks/appThunks';
@@ -17,6 +18,7 @@ export type TempObjType = {
   // eslint-disable-next-line camelcase
   api_key: string;
   language: string;
+  page: number;
 };
 
 export const RoutesContainer = (): ReturnComponentType => {
@@ -24,8 +26,9 @@ export const RoutesContainer = (): ReturnComponentType => {
   const appInitialized = useSelector<AppRootStateType>(state => state.app.appInitialized);
 
   // eslint-disable-next-line camelcase
+  const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
-  const tempRequestObj: TempObjType = { api_key, language };
+  const tempRequestObj: TempObjType = { api_key, language, page };
 
   useEffect(() => {
     dispatch(initializeApp());
