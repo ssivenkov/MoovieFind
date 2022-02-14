@@ -22,7 +22,7 @@ html {
     --primary: #ff4046;
     --primary_dim: #d2484d;
     --primary_medium: #b52634;
-    --primary_almost-medium: #87363d;
+    --primary_almost-medium: #87293a;
     --primary_half-medium: #500608;
     --primary_dark: #3b0305;
     --background1: #c27481;

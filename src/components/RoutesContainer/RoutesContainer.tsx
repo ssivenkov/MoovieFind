@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 // eslint-disable-next-line camelcase
-import { api_key } from 'api/key';
+import { api_key } from 'api/config';
 import { Error404 } from 'components/common/ErrorPages/Error404';
 import { Loader } from 'components/common/Loader/Loader';
 import { Films } from 'components/Films/Films';
 import { ONE } from 'constants/common';
 import { PATH } from 'routes/routes';
 import { AppRootStateType } from 'store/store';
-import { getMoovies, initializeApp } from 'store/thunks/appThunks';
+import { initializeApp } from 'store/thunks/appThunks';
+import { getMoovies } from 'store/thunks/filmsThunk';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 export type TempObjType = {
