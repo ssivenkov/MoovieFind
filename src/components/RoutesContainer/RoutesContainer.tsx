@@ -15,7 +15,7 @@ import { initializeApp } from 'store/thunks/appThunks';
 import { getMoovies } from 'store/thunks/filmsThunk';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export type TempObjType = {
+export type TempRequestObjType = {
   // eslint-disable-next-line camelcase
   api_key: string;
   language: string;
@@ -29,7 +29,7 @@ export const RoutesContainer = (): ReturnComponentType => {
   // eslint-disable-next-line camelcase
   const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
-  const tempRequestObj: TempObjType = { api_key, language, page };
+  const tempRequestObj: TempRequestObjType = { api_key, language, page };
 
   useEffect(() => {
     dispatch(initializeApp());

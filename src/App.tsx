@@ -18,11 +18,26 @@ const AppContainer = styled.div`
 
 const AppWrapper = styled.div`
   min-height: 100vh;
-  width: 1150px;
+  width: var(--content-width);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 1450px) {
+    & {
+      --content-width: 900px;
+    }
+  }
+  @media (max-width: 950px) {
+    & {
+      --content-width: 350px;
+    }
+  }
+  @media (max-width: 400px) {
+    & {
+      --content-width: 180px;
+    }
+  }
 `;
 
 export const App: FC = (): ReturnComponentType => (

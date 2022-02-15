@@ -1,8 +1,8 @@
 import { instance } from 'api/instance';
-import { TempObjType } from 'components/RoutesContainer/RoutesContainer';
+import { TempRequestObjType } from 'components/RoutesContainer/RoutesContainer';
 
 export const MooviesAPI = {
-  getPopularMoovies(tempObj: TempObjType) {
-    return instance.get(`movie/now_playing`, { params: tempObj });
+  getPopularMoovies(tempRequestObj: TempRequestObjType) {
+    return instance.get(`movie/now_playing`, { params: tempRequestObj });
   },
 };

@@ -31,6 +31,11 @@ html {
     --black: #000;
 }
 
+// width
+html {
+    --content-width: 1400px;
+}
+
 // hide default background color on click
 * {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
