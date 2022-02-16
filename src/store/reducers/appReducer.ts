@@ -1,7 +1,7 @@
 import { APP_ACTIONS, AppActionsType } from 'store/actions/appActions';
 
 const initialAppState = {
-  appInitialized: false,
+  appInitialized: true,
   language: 'en-US',
 };
 

@@ -30,6 +30,7 @@ const StyledTmdbContainer = styled.div`
 const StyledTmdbLogo = styled.img`
   display: block;
   margin-top: 10px;
+  user-select: none;
 `;
 
 export const Footer = (): ReturnComponentType => (

@@ -17,12 +17,12 @@
     line-height: 1.08;
     text-align: center;
     color: #fff;
+    border-radius: 7px;
     text-transform: uppercase;
 }
 
 .active {
     background-color: var(--primary);
-    border-radius: 7px;
 }
 
 @media (pointer:coarse) {

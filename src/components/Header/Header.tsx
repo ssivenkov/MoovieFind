@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import style from './Header.module.scss';
 
+import logo from 'assets/images/logo.svg';
 import { PATH } from 'routes/routes';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -13,10 +14,19 @@ const StyledContainer = styled.div`
   width: 100%;
   height: 65px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #505050;
+`;
+
+const StyledAppLogoContainer = styled.div`
+  height: 100%;
+`;
+
+const StyledAppLogo = styled.img`
+  height: 100%;
+  user-select: none;
 `;
 
 const StyledCategoriesContainer = styled.div`
@@ -32,37 +42,32 @@ const StyledAuthContainer = styled.div`
 
 export const Header = (): ReturnComponentType => (
   <StyledContainer>
+    <StyledAppLogoContainer>
+      <StyledAppLogo src={logo} />
+    </StyledAppLogoContainer>
     <StyledCategoriesContainer>
       <div className={style.item}>
         <NavLink
-          to={PATH.FILMS}
+          to={PATH.MOVIES}
           className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
         >
-          films
+          movies
         </NavLink>
       </div>
       <div className={style.item}>
         <NavLink
-          to={PATH.SERIALS}
+          to={PATH.TVSHOWS}
           className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
         >
-          serials
+          TV Shows
         </NavLink>
       </div>
       <div className={style.item}>
         <NavLink
-          to={PATH.CARTOONS}
+          to={PATH.PEOPLE}
           className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
         >
-          cartoons
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink
-          to={PATH.NOVELTIES}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          novelties
+          People
         </NavLink>
       </div>
     </StyledCategoriesContainer>

@@ -1,22 +1,23 @@
 import React, { FC } from 'react';
 
+import moment from 'moment';
 import styled from 'styled-components';
 
 import { imageSource } from 'api/config';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-const StyledMoovie = styled.div`
+const StyledMovie = styled.div`
   width: 150px;
   margin: 0 12px 25px 12px;
 `;
 
-const StyledMoovieInfoContainer = styled.div`
+const StyledMovieInfoContainer = styled.div`
   z-index: 40;
   position: relative;
   transition: 0.22s ease-out;
 `;
 
-const StyledMoovieRate = styled.div`
+const StyledMovieRate = styled.div`
   opacity: 0;
   position: absolute;
   top: 50%;
@@ -28,30 +29,31 @@ const StyledMoovieRate = styled.div`
   transition: 0.22s ease-out;
 `;
 
-const StyledMoovieReleaseDate = styled.div`
+const StyledMovieReleaseDate = styled.div`
   opacity: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 1000%);
+  transform: translate(-50%, 760%);
+  font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
   pointer-events: none;
   transition: 0.22s ease-out;
 `;
 
-const StyledMoovieContainer = styled.div`
+const StyledMovieContainer = styled.div`
   cursor: pointer;
   transition: 0.22s ease-out;
   &:hover {
     transform: scale(1.065) translate(0, -9px) translate(0, 1px);
-    ${StyledMoovieRate}, ${StyledMoovieReleaseDate} {
+    ${StyledMovieRate}, ${StyledMovieReleaseDate} {
       opacity: 1;
     }
   }
 `;
 
-const StyledMooviePosterShadowContainer = styled.div`
+const StyledMoviePosterShadowContainer = styled.div`
   transition: 0.22s ease-out;
   z-index: 20;
   &:before {
@@ -59,7 +61,7 @@ const StyledMooviePosterShadowContainer = styled.div`
     width: 150px;
     height: 230px;
     position: absolute;
-    border-radius: 10px;
+    border-radius: 9px;
     background-color: transparent;
     transition: 0.22s ease-out;
   }
@@ -70,7 +72,7 @@ const StyledMooviePosterShadowContainer = styled.div`
   }
 `;
 
-const StyledMooviePoster = styled.img`
+const StyledMoviePoster = styled.img`
   width: 150px;
   height: 230px;
   border-radius: 10px;
@@ -79,7 +81,7 @@ const StyledMooviePoster = styled.img`
   background-color: var(--primary_almost-medium);
 `;
 
-const StyledMoovieTitle = styled.div`
+const StyledMovieTitle = styled.div`
   margin-top: 10px;
   font-size: 17px;
   white-space: nowrap;
@@ -88,34 +90,36 @@ const StyledMoovieTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-type MoovieCardPropsType = {
+type MovieCardPropsType = {
   title: string;
   posterPath: string;
   voteAverage: number;
   releaseDate: string;
 };
 
-const MoovieCard: FC<MoovieCardPropsType> = ({
+const TVShowCard: FC<MovieCardPropsType> = ({
   posterPath,
   title,
   voteAverage,
   releaseDate,
 }): ReturnComponentType => (
-  <StyledMoovie>
-    <StyledMoovieContainer>
-      <StyledMoovieInfoContainer>
-        <StyledMoovieRate>{voteAverage}</StyledMoovieRate>
-        <StyledMoovieReleaseDate>{releaseDate}</StyledMoovieReleaseDate>
-      </StyledMoovieInfoContainer>
-      <StyledMooviePosterShadowContainer>
-        <StyledMooviePoster
+  <StyledMovie>
+    <StyledMovieContainer>
+      <StyledMovieInfoContainer>
+        <StyledMovieRate>{voteAverage}</StyledMovieRate>
+        <StyledMovieReleaseDate>
+          {moment(releaseDate).format('MMMM DD, YYYY')}
+        </StyledMovieReleaseDate>
+      </StyledMovieInfoContainer>
+      <StyledMoviePosterShadowContainer>
+        <StyledMoviePoster
           src={`${imageSource}${posterPath}`}
           alt={`poster for the movie ${title}`}
         />
-      </StyledMooviePosterShadowContainer>
-    </StyledMoovieContainer>
-    <StyledMoovieTitle>{title}</StyledMoovieTitle>
-  </StyledMoovie>
+      </StyledMoviePosterShadowContainer>
+    </StyledMovieContainer>
+    <StyledMovieTitle>{title}</StyledMovieTitle>
+  </StyledMovie>
 );
 
-export default MoovieCard;
+export default TVShowCard;
