@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/MoovieFind/static/css/main.c726ca39.chunk.css",
-    "main.js": "/MoovieFind/static/js/main.266d540f.chunk.js",
-    "main.js.map": "/MoovieFind/static/js/main.266d540f.chunk.js.map",
-    "runtime-main.js": "/MoovieFind/static/js/runtime-main.73afe3f6.js",
-    "runtime-main.js.map": "/MoovieFind/static/js/runtime-main.73afe3f6.js.map",
-    "static/js/2.c2154aa3.chunk.js": "/MoovieFind/static/js/2.c2154aa3.chunk.js",
-    "static/js/2.c2154aa3.chunk.js.map": "/MoovieFind/static/js/2.c2154aa3.chunk.js.map",
-    "static/js/3.51fd6590.chunk.js": "/MoovieFind/static/js/3.51fd6590.chunk.js",
-    "static/js/3.51fd6590.chunk.js.map": "/MoovieFind/static/js/3.51fd6590.chunk.js.map",
+    "main.css": "/MoovieFind/static/css/main.296b99b3.chunk.css",
+    "main.js": "/MoovieFind/static/js/main.c2bb1152.chunk.js",
+    "main.js.map": "/MoovieFind/static/js/main.c2bb1152.chunk.js.map",
+    "runtime-main.js": "/MoovieFind/static/js/runtime-main.072e8b15.js",
+    "runtime-main.js.map": "/MoovieFind/static/js/runtime-main.072e8b15.js.map",
+    "static/js/2.95ef7a6e.chunk.js": "/MoovieFind/static/js/2.95ef7a6e.chunk.js",
+    "static/js/2.95ef7a6e.chunk.js.map": "/MoovieFind/static/js/2.95ef7a6e.chunk.js.map",
+    "static/js/3.356b6147.chunk.js": "/MoovieFind/static/js/3.356b6147.chunk.js",
+    "static/js/3.356b6147.chunk.js.map": "/MoovieFind/static/js/3.356b6147.chunk.js.map",
     "index.html": "/MoovieFind/index.html",
-    "static/css/main.c726ca39.chunk.css.map": "/MoovieFind/static/css/main.c726ca39.chunk.css.map",
-    "static/js/2.c2154aa3.chunk.js.LICENSE.txt": "/MoovieFind/static/js/2.c2154aa3.chunk.js.LICENSE.txt",
+    "static/css/main.296b99b3.chunk.css.map": "/MoovieFind/static/css/main.296b99b3.chunk.css.map",
+    "static/js/2.95ef7a6e.chunk.js.LICENSE.txt": "/MoovieFind/static/js/2.95ef7a6e.chunk.js.LICENSE.txt",
     "static/media/loader.f412b255.svg": "/MoovieFind/static/media/loader.f412b255.svg",
+    "static/media/logo.0f874455.svg": "/MoovieFind/static/media/logo.0f874455.svg",
     "static/media/tmdb_logo.bb8aa703.svg": "/MoovieFind/static/media/tmdb_logo.bb8aa703.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.73afe3f6.js",
-    "static/js/2.c2154aa3.chunk.js",
-    "static/css/main.c726ca39.chunk.css",
-    "static/js/main.266d540f.chunk.js"
+    "static/js/runtime-main.072e8b15.js",
+    "static/js/2.95ef7a6e.chunk.js",
+    "static/css/main.296b99b3.chunk.css",
+    "static/js/main.c2bb1152.chunk.js"
   ]
 }
