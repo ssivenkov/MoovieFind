@@ -1,20 +1,20 @@
 import { instance } from 'api/instance';
-import { requestObjectType } from 'components/RoutesContainer/RoutesContainer';
+import { RequestObjectType } from 'types/RequestObjectType';
 
 export const TVShowsAPI = {
-  getPopularTVs(requestObject: requestObjectType) {
+  getPopularTVs(requestObject: RequestObjectType) {
     return instance.get(`tv/popular`, { params: requestObject });
   },
 
-  getOnTheAirTVs(requestObject: requestObjectType) {
+  getOnTheAirTVs(requestObject: RequestObjectType) {
     return instance.get(`tv/on_the_air`, { params: requestObject });
   },
 
-  getTopRatedTVs(requestObject: requestObjectType) {
+  getTopRatedTVs(requestObject: RequestObjectType) {
     return instance.get(`tv/top_rated`, { params: requestObject });
   },
 
-  getAiringTodayTVs(requestObject: requestObjectType) {
+  getAiringTodayTVs(requestObject: RequestObjectType) {
     return instance.get(`tv/airing_today`, { params: requestObject });
   },
 };

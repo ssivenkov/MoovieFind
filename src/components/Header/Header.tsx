@@ -22,6 +22,7 @@ const StyledContainer = styled.div`
 
 const StyledAppLogoContainer = styled.div`
   height: 100%;
+  margin-right: 20px;
 `;
 
 const StyledAppLogo = styled.img`
@@ -42,10 +43,12 @@ const StyledAuthContainer = styled.div`
 
 export const Header = (): ReturnComponentType => (
   <StyledContainer>
-    <StyledAppLogoContainer>
-      <StyledAppLogo src={logo} />
-    </StyledAppLogoContainer>
     <StyledCategoriesContainer>
+      <StyledAppLogoContainer>
+        <NavLink to={PATH.MAIN}>
+          <StyledAppLogo src={logo} />
+        </NavLink>
+      </StyledAppLogoContainer>
       <div className={style.item}>
         <NavLink
           to={PATH.MOVIES}

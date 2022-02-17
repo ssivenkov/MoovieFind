@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
 
-import { Nullable } from './Nullable';
+import { NullableType } from './NullableType';
 
-export type ReturnComponentType = Nullable<ReactElement>;
+export type ReturnComponentType = NullableType<ReactElement>;

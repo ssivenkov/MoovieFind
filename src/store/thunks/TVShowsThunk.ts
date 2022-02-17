@@ -1,14 +1,14 @@
 import { ThunkDispatch } from 'redux-thunk';
 
 import { TVShowsAPI } from 'api/TVShowsAPI';
-import { requestObjectType } from 'components/RoutesContainer/RoutesContainer';
 import { ONE, TWO } from 'constants/common';
-import { initializedSuccess } from 'store/actions/appActions';
+import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
 import { setTVShows } from 'store/actions/TVShowActions';
 import { AppRootActionsType, AppRootStateType } from 'store/store';
+import { RequestObjectType } from 'types/RequestObjectType';
 
 export const getTVShows =
-  (tempRequestObj: requestObjectType) =>
+  (tempRequestObj: RequestObjectType) =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
     try {
       const requestObj = { ...tempRequestObj };
@@ -18,10 +18,11 @@ export const getTVShows =
       tempNextPageRequestObj.page += ONE;
       const response2 = await TVShowsAPI.getPopularTVs(tempNextPageRequestObj);
       const resultResponse = [...response1.data.results, ...response2.data.results];
-      dispatch(setTVShows(resultResponse));
+      await dispatch(setTVShows(resultResponse));
+      dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting TWShows. ${error}`);
     } finally {
-      dispatch(initializedSuccess());
+      dispatch(appInitializedTrue());
     }
   };

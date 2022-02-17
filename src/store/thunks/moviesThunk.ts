@@ -1,14 +1,14 @@
 import { ThunkDispatch } from 'redux-thunk';
 
 import { MoviesAPI } from 'api/MoviesAPI';
-import { requestObjectType } from 'components/RoutesContainer/RoutesContainer';
 import { ONE, TWO } from 'constants/common';
-import { initializedSuccess } from 'store/actions/appActions';
+import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
 import { setMovies } from 'store/actions/movieActions';
 import { AppRootActionsType, AppRootStateType } from 'store/store';
+import { RequestObjectType } from 'types/RequestObjectType';
 
 export const getMovies =
-  (tempRequestObj: requestObjectType) =>
+  (tempRequestObj: RequestObjectType) =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
     try {
       const requestObj = { ...tempRequestObj };
@@ -22,6 +22,7 @@ export const getMovies =
     } catch (error) {
       console.log(`Error getting movies. ${error}`);
     } finally {
-      dispatch(initializedSuccess());
+      dispatch(appInitializedTrue());
+      dispatch(appContentInitializedTrue());
     }
   };

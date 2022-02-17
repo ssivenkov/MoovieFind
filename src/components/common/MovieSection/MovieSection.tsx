@@ -3,7 +3,6 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 import MovieCard from 'components/common/MovieCard/MovieCard';
-import { ZERO } from 'constants/common';
 import { MovieType } from 'store/reducers/moviesReducer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -38,24 +37,19 @@ type MoovieSectionPropsType = {
 export const MovieSection: FC<MoovieSectionPropsType> = ({
   moviesList,
   sectionTitle,
-}): ReturnComponentType => {
-  if (moviesList.length !== ZERO) {
-    return (
-      <StyledMain>
-        <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
-        <StyledMoovies>
-          {moviesList.map((moovie: MovieType) => (
-            <MovieCard
-              key={moovie.id}
-              posterPath={moovie.poster_path}
-              title={moovie.title}
-              voteAverage={moovie.vote_average}
-              releaseDate={moovie.release_date}
-            />
-          ))}
-        </StyledMoovies>
-      </StyledMain>
-    );
-  }
-  return <div>{sectionTitle} not found</div>;
-};
+}): ReturnComponentType => (
+  <StyledMain>
+    <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
+    <StyledMoovies>
+      {moviesList.map((moovie: MovieType) => (
+        <MovieCard
+          key={moovie.id}
+          posterPath={moovie.poster_path}
+          title={moovie.title}
+          voteAverage={moovie.vote_average}
+          releaseDate={moovie.release_date}
+        />
+      ))}
+    </StyledMoovies>
+  </StyledMain>
+);

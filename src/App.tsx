@@ -3,10 +3,9 @@ import React, { FC } from 'react';
 import 'Null.scss';
 import styled from 'styled-components';
 
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-import { RoutesContainer } from './components/RoutesContainer/RoutesContainer';
-
+import { Footer } from 'components/Footer/Footer';
+import { Header } from 'components/Header/Header';
+import { RoutesContainer } from 'components/RoutesContainer/RoutesContainer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 const AppContainer = styled.div`

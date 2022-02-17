@@ -1,20 +1,20 @@
 import { instance } from 'api/instance';
-import { requestObjectType } from 'components/RoutesContainer/RoutesContainer';
+import { RequestObjectType } from 'types/RequestObjectType';
 
 export const MoviesAPI = {
-  getPopularMovies(requestObject: requestObjectType) {
+  getPopularMovies(requestObject: RequestObjectType) {
     return instance.get(`movie/popular`, { params: requestObject });
   },
 
-  getNowPlayingMovies(requestObject: requestObjectType) {
+  getNowPlayingMovies(requestObject: RequestObjectType) {
     return instance.get(`movie/now_playing`, { params: requestObject });
   },
 
-  getTopRatedMovies(requestObject: requestObjectType) {
+  getTopRatedMovies(requestObject: RequestObjectType) {
     return instance.get(`movie/top_rated`, { params: requestObject });
   },
 
-  getUpcomingMovies(requestObject: requestObjectType) {
+  getUpcomingMovies(requestObject: RequestObjectType) {
     return instance.get(`movie/upcoming`, { params: requestObject });
   },
 };

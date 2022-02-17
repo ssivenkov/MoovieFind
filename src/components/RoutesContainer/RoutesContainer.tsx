@@ -1,48 +1,37 @@
-import React /* , { useEffect } */ from 'react';
+import React, { useEffect } from 'react';
 
-import { /* useDispatch, */ useSelector } from 'react-redux';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
-/* // eslint-disable-next-line camelcase
-import { api_key } from 'api/config'; */
 import { Error404 } from 'components/common/ErrorPages/Error404';
-import { Loader } from 'components/common/Loader/Loader';
+import { Main } from 'components/Main/Main';
 import { Movies } from 'components/Movies/Movies';
 import { People } from 'components/People/People';
 import { TVShows } from 'components/TVShows/TVShows';
-/* import { ONE } from 'constants/common'; */
 import { PATH } from 'routes/routes';
+import { appInitializedFalse } from 'store/actions/appActions';
 import { AppRootStateType } from 'store/store';
-/* import { getMoovies } from 'store/thunks/filmsThunk'; */
+import { getAuthUserData } from 'store/thunks/authThunk';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
-export type requestObjectType = {
-  // eslint-disable-next-line camelcase
-  api_key: string;
-  language: string;
-  page: number;
-};
-
 export const RoutesContainer = (): ReturnComponentType => {
-  const appInitialized = useSelector<AppRootStateType>(state => state.app.appInitialized);
-  /* const dispatch = useDispatch();
-
-  // eslint-disable-next-line camelcase
-  const page = ONE;
-  const language = useSelector<AppRootStateType, string>(state => state.app.language);
-  const tempRequestObj: requestObjectType = { api_key, language, page };
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const appInitialized = useSelector<AppRootStateType, boolean>(
+    state => state.app.appInitialized,
+  );
 
   useEffect(() => {
-    dispatch(getMoovies(tempRequestObj));
-  }, []); */
+    dispatch(getAuthUserData());
+  }, []);
 
-  if (!appInitialized) {
-    return <Loader />;
-  }
+  useEffect(() => {
+    if (appInitialized) dispatch(appInitializedFalse());
+  }, [location.pathname]);
 
   return (
     <Routes>
-      <Route path={PATH.MAIN} element={<Navigate to={PATH.MOVIES} />} />
+      <Route path={PATH.MAIN} element={<Main />} />
       <Route path={PATH.MOVIES} element={<Movies />} />
       <Route path={PATH.TVSHOWS} element={<TVShows />} />
       <Route path={PATH.PEOPLE} element={<People />} />

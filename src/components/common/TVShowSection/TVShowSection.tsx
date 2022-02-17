@@ -3,7 +3,6 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 import TVShowCard from 'components/common/TVShowCard/TVShowCard';
-import { ZERO } from 'constants/common';
 import { TVShowType } from 'store/reducers/TVShowsReducer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -38,24 +37,19 @@ type TVShowsSectionPropsType = {
 export const TVShowSection: FC<TVShowsSectionPropsType> = ({
   TVShowsList,
   sectionTitle,
-}): ReturnComponentType => {
-  if (TVShowsList.length !== ZERO) {
-    return (
-      <StyledMain>
-        <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
-        <StyledTVShows>
-          {TVShowsList.map((TVShow: TVShowType) => (
-            <TVShowCard
-              key={TVShow.id}
-              posterPath={TVShow.poster_path}
-              title={TVShow.name}
-              voteAverage={TVShow.vote_average}
-              releaseDate={TVShow.first_air_date}
-            />
-          ))}
-        </StyledTVShows>
-      </StyledMain>
-    );
-  }
-  return <div>{sectionTitle} not found</div>;
-};
+}): ReturnComponentType => (
+  <StyledMain>
+    <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
+    <StyledTVShows>
+      {TVShowsList.map((TVShow: TVShowType) => (
+        <TVShowCard
+          key={TVShow.id}
+          posterPath={TVShow.poster_path}
+          title={TVShow.name}
+          voteAverage={TVShow.vote_average}
+          releaseDate={TVShow.first_air_date}
+        />
+      ))}
+    </StyledTVShows>
+  </StyledMain>
+);
