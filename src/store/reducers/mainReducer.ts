@@ -1,10 +1,11 @@
-import { MAIN_ACTIONS, MainActionsType } from '../actions/mainActions';
+import { ZERO } from 'constants/common';
+import { MAIN_ACTIONS, MainActionsType } from 'store/actions/mainActions';
 
 const initialMainState = {
-  WhatsPopularFilter: 0,
-  FreeToWatchFilter: 0,
-  LatestTrailersFilter: 0,
-  TrendingFilter: 0,
+  WhatsPopularFilter: ZERO,
+  LatestTrailersFilter: ZERO,
+  TrendingFilter: ZERO,
+  TrendingTimeFilter: ZERO,
 };
 
 export type InitialMainStateType = typeof initialMainState;
@@ -16,12 +17,12 @@ export const mainReducer = (
   switch (action.type) {
     case MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER:
       return { ...state, WhatsPopularFilter: action.filter };
-    case MAIN_ACTIONS.SET_FREE_TO_WATCH_FILTER:
-      return { ...state, WhatsPopularFilter: action.filter };
-    case MAIN_ACTIONS.SET_LATEST_FILTER:
-      return { ...state, WhatsPopularFilter: action.filter };
+    case MAIN_ACTIONS.SET_LATEST_TRAILERS_FILTER:
+      return { ...state, LatestTrailersFilter: action.filter };
     case MAIN_ACTIONS.SET_TRENDING_FILTER:
-      return { ...state, WhatsPopularFilter: action.filter };
+      return { ...state, TrendingFilter: action.filter };
+    case MAIN_ACTIONS.SET_TRENDING_TIME_FILTER:
+      return { ...state, TrendingTimeFilter: action.filter };
     default:
       return state;
   }

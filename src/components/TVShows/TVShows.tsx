@@ -9,7 +9,7 @@ import { TVShowSection } from 'components/common/TVShowSection/TVShowSection';
 import { ONE, ZERO } from 'constants/common';
 import { TVShowType } from 'store/reducers/TVShowsReducer';
 import { AppRootStateType } from 'store/store';
-import { getTVShows } from 'store/thunks/TVShowsThunk';
+import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
 import { RequestObjectType } from 'types/RequestObjectType';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -27,7 +27,7 @@ export const TVShows = (): ReturnComponentType => {
   );
 
   useEffect(() => {
-    if (TVShowsList.length === ZERO) dispatch(getTVShows(tempRequestObj));
+    if (TVShowsList.length === ZERO) dispatch(getPopularTVShows(tempRequestObj));
   }, []);
 
   if (appContentInitialized && TVShowsList.length === ZERO) {

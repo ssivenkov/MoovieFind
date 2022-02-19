@@ -1,0 +1,48 @@
+import styled from 'styled-components';
+
+export const StyledMainSectionContainer = styled.div`
+  width: 100%;
+  margin-top: 60px;
+`;
+
+export const StyledMainSectionHeader = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+`;
+
+export const StyledMainSectionH2 = styled.h2`
+  font-size: 28px;
+`;
+
+export const StyledMainSectionFiltersWrapper = styled.div`
+  display: flex;
+  margin-left: 45px;
+`;
+
+export const StyledMainSectionFiltersContainer = styled.div`
+  display: flex;
+  margin-left: 20px;
+  border: 1px solid var(--primary);
+  border-radius: 7px;
+  &:first-child {
+    margin-left: 0;
+  }
+`;
+
+export const StyledMainSectionFilterWrapper = styled.div``;
+
+export const StyledMainSectionFilter = styled.h3`
+  display: block;
+  padding: 7px;
+  margin: 3px;
+  border-radius: 7px;
+  background-color: var(--primary);
+`;
+
+export const StyledMainSectionContentContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+`;

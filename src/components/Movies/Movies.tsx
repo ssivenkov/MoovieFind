@@ -9,7 +9,7 @@ import { MovieSection } from 'components/common/MovieSection/MovieSection';
 import { ONE, ZERO } from 'constants/common';
 import { MovieType } from 'store/reducers/moviesReducer';
 import { AppRootStateType } from 'store/store';
-import { getMovies } from 'store/thunks/moviesThunk';
+import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { RequestObjectType } from 'types/RequestObjectType';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -27,7 +27,7 @@ export const Movies = (): ReturnComponentType => {
   );
 
   useEffect(() => {
-    if (moviesList.length === ZERO) dispatch(getMovies(tempRequestObj));
+    if (moviesList.length === ZERO) dispatch(getPopularMovies(tempRequestObj));
   }, []);
 
   if (appContentInitialized && moviesList.length === ZERO) {

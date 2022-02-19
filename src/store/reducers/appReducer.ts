@@ -4,6 +4,7 @@ const initialAppState = {
   appInitialized: false,
   language: 'en-US',
   contentInitialized: false,
+  searchRequest: '',
 };
 
 export type InitialAppStateType = typeof initialAppState;
