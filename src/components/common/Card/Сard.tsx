@@ -4,6 +4,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 
 import { imageSource } from 'api/config';
+import { ZERO } from 'constants/common';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 const StyledMovie = styled.div`
@@ -17,13 +18,19 @@ const StyledMovieInfoContainer = styled.div`
   transition: 0.22s ease-out;
 `;
 
-const StyledMovieRate = styled.div`
+interface StyledMovieRatePropsType {
+  voteAverage: number;
+}
+
+const StyledMovieRate = styled.div<StyledMovieRatePropsType>`
   opacity: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 60%);
-  font-size: 35px;
+  transform: ${props =>
+    props.voteAverage === ZERO ? 'translate(-50%, 135%)' : 'translate(-50%, 60%)'};
+  font-size: ${props => (props.voteAverage === ZERO ? '22px' : '35px')};
+  white-space: nowrap;
   font-weight: 700;
   pointer-events: none;
   transition: 0.22s ease-out;
@@ -97,7 +104,7 @@ type MovieCardPropsType = {
   releaseDate: string;
 };
 
-const TVShowCard: FC<MovieCardPropsType> = ({
+const Card: FC<MovieCardPropsType> = ({
   posterPath,
   title,
   voteAverage,
@@ -106,7 +113,9 @@ const TVShowCard: FC<MovieCardPropsType> = ({
   <StyledMovie>
     <StyledMovieContainer>
       <StyledMovieInfoContainer>
-        <StyledMovieRate>{voteAverage}</StyledMovieRate>
+        <StyledMovieRate voteAverage={voteAverage}>
+          {voteAverage === ZERO ? 'Not rated' : voteAverage}
+        </StyledMovieRate>
         <StyledMovieReleaseDate>
           {moment(releaseDate).format('MMMM DD, YYYY')}
         </StyledMovieReleaseDate>
@@ -122,4 +131,4 @@ const TVShowCard: FC<MovieCardPropsType> = ({
   </StyledMovie>
 );
 
-export default TVShowCard;
+export default Card;

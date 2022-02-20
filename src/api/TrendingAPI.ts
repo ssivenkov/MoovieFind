@@ -2,11 +2,13 @@ import { instance } from 'api/instance';
 import { RequestObjectType } from 'types/RequestObjectType';
 
 export const TrendingAPI = {
-  getTrendingMovies(requestObject: RequestObjectType) {
-    return instance.get(`movie/popular`, { params: requestObject });
+  getTrendingMovies(requestObject: RequestObjectType, timeWindow: string) {
+    return instance.get(`/trending/movie/${timeWindow}`, {
+      params: requestObject,
+    });
   },
 
-  getTrendingTVShows(requestObject: RequestObjectType) {
-    return instance.get(`movie/popular`, { params: requestObject });
+  getTrendingTVShows(requestObject: RequestObjectType, timeWindow: string) {
+    return instance.get(`/trending/tv/${timeWindow}`, { params: requestObject });
   },
 };

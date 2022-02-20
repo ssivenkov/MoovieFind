@@ -4,9 +4,8 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-import style from './Header.module.scss';
-
 import logo from 'assets/images/logo.svg';
+import style from 'components/Header/Header.module.scss';
 import { PATH } from 'routes/routes';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 

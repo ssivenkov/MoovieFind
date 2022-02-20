@@ -1,54 +1,71 @@
 import React, { FC } from 'react';
 
-import MovieCard from 'components/common/MovieCard/MovieCard';
+import { useDispatch } from 'react-redux';
+
+import Card from 'components/common/Card/Сard';
 import {
   StyledMainSectionContainer,
   StyledMainSectionContentContainer,
-  StyledMainSectionFilter,
-  StyledMainSectionFilterWrapper,
   StyledMainSectionFiltersContainer,
   StyledMainSectionFiltersWrapper,
   StyledMainSectionH2,
   StyledMainSectionHeader,
-} from 'components/Main/commonStyles/mainStyles';
+} from 'components/Main/common/StyledComponents/MainStyledComponents';
+import { SwitchButton } from 'components/Main/common/SwitchButton/SwitchButton';
+import { MOVIE, TV } from 'constants/common';
+import { setLatestTrailersFilter } from 'store/actions/mainActions';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 type LatestTrailerSectionPropsType = {
   latestTrailerList: Array<any>;
-  filter: number;
+  filter: string;
 };
 
-export const LatestTrailerSection: FC<LatestTrailerSectionPropsType> = ({
+export const LatestTrailersSections: FC<LatestTrailerSectionPropsType> = ({
   latestTrailerList,
   filter,
-}): ReturnComponentType => (
-  <StyledMainSectionContainer>
-    <StyledMainSectionHeader>
-      <StyledMainSectionH2>What&apos;s popular</StyledMainSectionH2>
-      <StyledMainSectionFiltersWrapper>
-        <StyledMainSectionFiltersContainer>
-          <StyledMainSectionFilterWrapper>
-            <StyledMainSectionFilter>On TV</StyledMainSectionFilter>
-          </StyledMainSectionFilterWrapper>
-          <StyledMainSectionFilterWrapper>
-            <StyledMainSectionFilter>{filter}</StyledMainSectionFilter>
-          </StyledMainSectionFilterWrapper>
-          <StyledMainSectionFilterWrapper>
-            <StyledMainSectionFilter>In Theaters</StyledMainSectionFilter>
-          </StyledMainSectionFilterWrapper>
-        </StyledMainSectionFiltersContainer>
-      </StyledMainSectionFiltersWrapper>
-    </StyledMainSectionHeader>
-    <StyledMainSectionContentContainer>
-      {latestTrailerList.map((latestTrailer: any) => (
-        <MovieCard
-          key={latestTrailer.id}
-          posterPath={latestTrailer.poster_path}
-          title={latestTrailer.title}
-          voteAverage={latestTrailer.vote_average}
-          releaseDate={latestTrailer.release_date}
-        />
-      ))}
-    </StyledMainSectionContentContainer>
-  </StyledMainSectionContainer>
-);
+}): ReturnComponentType => {
+  const dispatch = useDispatch();
+  const onTVFilterClick = (): void => {
+    dispatch(setLatestTrailersFilter(TV));
+  };
+  const onMoviesFilterClick = (): void => {
+    dispatch(setLatestTrailersFilter(MOVIE));
+  };
+  return (
+    <StyledMainSectionContainer>
+      <StyledMainSectionHeader>
+        <StyledMainSectionH2>Latest trailers</StyledMainSectionH2>
+        <StyledMainSectionFiltersWrapper>
+          <StyledMainSectionFiltersContainer>
+            <SwitchButton
+              active={filter === TV}
+              onClick={onTVFilterClick}
+              disabled={filter === TV}
+            >
+              On TV
+            </SwitchButton>
+            <SwitchButton
+              active={filter === MOVIE}
+              onClick={onMoviesFilterClick}
+              disabled={filter === MOVIE}
+            >
+              In Theaters
+            </SwitchButton>
+          </StyledMainSectionFiltersContainer>
+        </StyledMainSectionFiltersWrapper>
+      </StyledMainSectionHeader>
+      <StyledMainSectionContentContainer>
+        {latestTrailerList.map((latestTrailer: any) => (
+          <Card
+            key={latestTrailer.id}
+            posterPath={latestTrailer.poster_path}
+            title={latestTrailer.title}
+            voteAverage={latestTrailer.vote_average}
+            releaseDate={latestTrailer.release_date}
+          />
+        ))}
+      </StyledMainSectionContentContainer>
+    </StyledMainSectionContainer>
+  );
+};

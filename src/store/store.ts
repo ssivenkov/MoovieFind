@@ -1,16 +1,18 @@
 import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
 import thunk, { ThunkAction } from 'redux-thunk';
 
-import { AppActionsType } from './actions/appActions';
-import { LatestTrailersActionsType } from './actions/latestTrailersActions';
-import { MainActionsType } from './actions/mainActions';
-import { MoviesActionsType } from './actions/movieActions';
-import { TVShowsActionsType } from './actions/TVShowActions';
-import { appReducer } from './reducers/appReducer';
-import { latestTrailersReducer } from './reducers/latestTrailersReducer';
-import { mainReducer } from './reducers/mainReducer';
-import { moviesReducer } from './reducers/moviesReducer';
-import { TVShowsReducer } from './reducers/TVShowsReducer';
+import { AppActionsType } from 'store/actions/appActions';
+import { LatestTrailersActionsType } from 'store/actions/latestTrailersActions';
+import { MainActionsType } from 'store/actions/mainActions';
+import { MoviesActionsType } from 'store/actions/movieActions';
+import { TrendingActionsType } from 'store/actions/trendingActions';
+import { TVShowsActionsType } from 'store/actions/TVShowActions';
+import { appReducer } from 'store/reducers/appReducer';
+import { latestTrailersReducer } from 'store/reducers/latestTrailersReducer';
+import { mainReducer } from 'store/reducers/mainReducer';
+import { moviesReducer } from 'store/reducers/moviesReducer';
+import { trendingReducer } from 'store/reducers/trendingReducer';
+import { TVShowsReducer } from 'store/reducers/TVShowsReducer';
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   TVShows: TVShowsReducer,
   main: mainReducer,
   latestTrailers: latestTrailersReducer,
+  trending: trendingReducer,
 });
 
 // @ts-ignore
@@ -29,6 +32,7 @@ export type AppRootActionsType =
   | MoviesActionsType
   | TVShowsActionsType
   | LatestTrailersActionsType
+  | TrendingActionsType
   | MainActionsType;
 
 export type AppThunk<ReturnType = void> = ThunkAction<

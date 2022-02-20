@@ -2,9 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { ContactButton } from './ContactButton';
-
 import tmdbLogo from 'assets/images/tmdb_logo.svg';
+import { ContactButton } from 'components/Footer/ContactButton';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
 const StyledFooter = styled.div`

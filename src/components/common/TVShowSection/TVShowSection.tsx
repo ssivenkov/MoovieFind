@@ -2,7 +2,8 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 
-import TVShowCard from 'components/common/TVShowCard/TVShowCard';
+import Card from '../Card/Сard';
+
 import { TVShowType } from 'store/reducers/TVShowsReducer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -42,7 +43,7 @@ export const TVShowSection: FC<TVShowsSectionPropsType> = ({
     <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
     <StyledTVShows>
       {TVShowsList.map((TVShow: TVShowType) => (
-        <TVShowCard
+        <Card
           key={TVShow.id}
           posterPath={TVShow.poster_path}
           title={TVShow.name}

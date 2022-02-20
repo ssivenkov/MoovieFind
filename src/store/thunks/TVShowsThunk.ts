@@ -4,11 +4,11 @@ import { TVShowsAPI } from 'api/TVShowsAPI';
 import { ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
 import { setTVShows } from 'store/actions/TVShowActions';
-import { AppRootActionsType, AppRootStateType } from 'store/store';
+import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 import { RequestObjectType } from 'types/RequestObjectType';
 
 export const getPopularTVShows =
-  (tempRequestObj: RequestObjectType) =>
+  (tempRequestObj: RequestObjectType): AppThunk =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
     try {
       const requestObj = { ...tempRequestObj };
@@ -26,8 +26,9 @@ export const getPopularTVShows =
       dispatch(appInitializedTrue());
     }
   };
+
 export const getAiringTodayTVShows =
-  (tempRequestObj: RequestObjectType) =>
+  (tempRequestObj: RequestObjectType): AppThunk =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
     try {
       const requestObj = { ...tempRequestObj };
@@ -47,7 +48,7 @@ export const getAiringTodayTVShows =
   };
 
 export const getOnTheAirTVShows =
-  (tempRequestObj: RequestObjectType) =>
+  (tempRequestObj: RequestObjectType): AppThunk =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
     try {
       const requestObj = { ...tempRequestObj };
@@ -67,7 +68,7 @@ export const getOnTheAirTVShows =
   };
 
 export const getTopRatedTVShows =
-  (tempRequestObj: RequestObjectType) =>
+  (tempRequestObj: RequestObjectType): AppThunk =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
     try {
       const requestObj = { ...tempRequestObj };

@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 
-import MovieCard from 'components/common/MovieCard/MovieCard';
+import Card from 'components/common/Card/Сard';
 import { MovieType } from 'store/reducers/moviesReducer';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -42,7 +42,7 @@ export const MovieSection: FC<MoovieSectionPropsType> = ({
     <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
     <StyledMoovies>
       {moviesList.map((moovie: MovieType) => (
-        <MovieCard
+        <Card
           key={moovie.id}
           posterPath={moovie.poster_path}
           title={moovie.title}

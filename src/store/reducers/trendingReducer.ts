@@ -1,40 +1,17 @@
 import { TRENDING_ACTIONS, TrendingActionsType } from 'store/actions/trendingActions';
-
-export type TrendingItemType = {
-  // eslint-disable-next-line camelcase
-  poster_path: string;
-  adult: false;
-  overview: string;
-  // eslint-disable-next-line camelcase
-  release_date: string;
-  // eslint-disable-next-line camelcase
-  genre_ids: Array<number>;
-  id: number;
-  // eslint-disable-next-line camelcase
-  original_title: string;
-  // eslint-disable-next-line camelcase
-  original_language: string;
-  title: string;
-  // eslint-disable-next-line camelcase
-  backdrop_path: string;
-  popularity: number;
-  // eslint-disable-next-line camelcase
-  vote_count: number;
-  video: false;
-  // eslint-disable-next-line camelcase
-  vote_average: number;
-};
+import { MovieType } from 'store/reducers/moviesReducer';
+import { TVShowType } from 'store/reducers/TVShowsReducer';
 
 export type InitialMoviesStateType = {
-  trendingMovies: Array<TrendingItemType>;
-  trendingTVShows: Array<TrendingItemType>;
-  currentPage: number;
+  trendingMovies: Array<MovieType>;
+  trendingTVShows: Array<TVShowType>;
+  sliderPage: number;
 };
 
 const initialTrendingState = {
   trendingMovies: [],
   trendingTVShows: [],
-  currentPage: 1,
+  sliderPage: 1,
 };
 
 export const trendingReducer = (

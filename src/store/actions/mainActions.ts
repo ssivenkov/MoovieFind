@@ -1,3 +1,5 @@
+import { DAY, MOVIE, TV, WEEK } from 'constants/common';
+
 export enum MAIN_ACTIONS {
   SET_WHATS_POPULAR_FILTER = 'mainReducer/SET-WHATS-POPULAR-FILTER',
   SET_LATEST_TRAILERS_FILTER = 'mainReducer/SET-LATEST-TRAILERS-FILTER',
@@ -11,14 +13,17 @@ export type MainActionsType =
   | ReturnType<typeof setTrendingFilter>
   | ReturnType<typeof setTrendingTimeFilter>;
 
-export const setWhatsPopularFilter = (filter: number) =>
+export type MoovieFilterType = typeof TV | typeof MOVIE;
+export type TimeFilterType = typeof DAY | typeof WEEK;
+
+export const setWhatsPopularFilter = (filter: MoovieFilterType) =>
   ({ type: MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER, filter } as const);
 
-export const setLatestTrailersFilter = (filter: number) =>
+export const setLatestTrailersFilter = (filter: MoovieFilterType) =>
   ({ type: MAIN_ACTIONS.SET_LATEST_TRAILERS_FILTER, filter } as const);
 
-export const setTrendingFilter = (filter: number) =>
+export const setTrendingFilter = (filter: MoovieFilterType) =>
   ({ type: MAIN_ACTIONS.SET_TRENDING_FILTER, filter } as const);
 
-export const setTrendingTimeFilter = (filter: number) =>
+export const setTrendingTimeFilter = (filter: TimeFilterType) =>
   ({ type: MAIN_ACTIONS.SET_TRENDING_TIME_FILTER, filter } as const);

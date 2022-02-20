@@ -31,16 +31,6 @@ export const StyledMainSectionFiltersContainer = styled.div`
   }
 `;
 
-export const StyledMainSectionFilterWrapper = styled.div``;
-
-export const StyledMainSectionFilter = styled.h3`
-  display: block;
-  padding: 7px;
-  margin: 3px;
-  border-radius: 7px;
-  background-color: var(--primary);
-`;
-
 export const StyledMainSectionContentContainer = styled.div`
   width: 100%;
   display: flex;

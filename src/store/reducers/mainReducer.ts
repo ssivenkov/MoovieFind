@@ -1,11 +1,11 @@
-import { ZERO } from 'constants/common';
+import { DAY, TV } from 'constants/common';
 import { MAIN_ACTIONS, MainActionsType } from 'store/actions/mainActions';
 
 const initialMainState = {
-  WhatsPopularFilter: ZERO,
-  LatestTrailersFilter: ZERO,
-  TrendingFilter: ZERO,
-  TrendingTimeFilter: ZERO,
+  WhatsPopularFilter: TV,
+  LatestTrailersFilter: TV,
+  TrendingFilter: TV,
+  TrendingTimeFilter: DAY,
 };
 
 export type InitialMainStateType = typeof initialMainState;

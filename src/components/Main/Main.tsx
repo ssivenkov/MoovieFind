@@ -5,17 +5,18 @@ import styled from 'styled-components';
 
 // eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
-import { LatestTrailerSection } from 'components/Main/LatestTrailersSection/LatestTrailerSection';
+import { LatestTrailersSections } from 'components/Main/LatestTrailersSection/LatestTrailerSection';
 import { TrendingSection } from 'components/Main/TrendingSection/TrendingSection';
 import { WhatsPopularSection } from 'components/Main/WhatsPopularSection/WhatsPopularSection';
 import { Search } from 'components/Search/Search';
-import { ONE, ZERO } from 'constants/common';
+import { MOVIE, TV, ONE, DAY, WEEK } from 'constants/common';
 import { LatestTrailerType } from 'store/reducers/latestTrailersReducer';
 import { MovieType } from 'store/reducers/moviesReducer';
 import { TVShowType } from 'store/reducers/TVShowsReducer';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
-import { getPopularTVShows, getTopRatedTVShows } from 'store/thunks/TVShowsThunk';
+import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
+import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
 import { RequestObjectType } from 'types/RequestObjectType';
 import { ReturnComponentType } from 'types/ReturnComponentType';
 
@@ -31,6 +32,8 @@ const StyledIntroWrapper = styled.div`
   background-color: #555;
   // background-image: url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,7D031F,EBE0B8)/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg');
   background-size: cover;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
 `;
 const StyledIntroContainer = styled.div`
   width: 100%;
@@ -61,34 +64,98 @@ export const Main = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
-  const tempRequestObj: RequestObjectType = { api_key, language, page };
-  const moviesList = useSelector<AppRootStateType, Array<MovieType>>(
-    state => state.movies.movies,
-  );
-  const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
+  const requestObj: RequestObjectType = { api_key, language, page };
+  const popularTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
     state => state.TVShows.TVShows,
+  );
+  const popularMoviesList = useSelector<AppRootStateType, Array<MovieType>>(
+    state => state.movies.movies,
   );
   const latestTrailersList = useSelector<AppRootStateType, Array<LatestTrailerType>>(
     state => state.latestTrailers.latestTrailers,
   );
-  const WhatsPopularFilter = useSelector<AppRootStateType, number>(
+  const trendingTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
+    state => state.trending.trendingTVShows,
+  );
+  const trendingMoviesList = useSelector<AppRootStateType, Array<MovieType>>(
+    state => state.trending.trendingMovies,
+  );
+  const whatsPopularFilter = useSelector<AppRootStateType, string>(
     state => state.main.WhatsPopularFilter,
   );
-  const LatestTrailersFilter = useSelector<AppRootStateType, number>(
+  const latestTrailersFilter = useSelector<AppRootStateType, string>(
     state => state.main.LatestTrailersFilter,
   );
-  const TrendingFilter = useSelector<AppRootStateType, number>(
+  const trendingFilter = useSelector<AppRootStateType, string>(
     state => state.main.TrendingFilter,
   );
-  const TrendingTimeFilter = useSelector<AppRootStateType, number>(
+  const trendingTimeFilter = useSelector<AppRootStateType, string>(
     state => state.main.TrendingTimeFilter,
   );
 
   useEffect(() => {
-    if (moviesList.length === ZERO) dispatch(getPopularMovies(tempRequestObj));
-    if (TVShowsList.length === ZERO) dispatch(getPopularTVShows(tempRequestObj));
-    if (latestTrailersList.length === ZERO) dispatch(getTopRatedTVShows(tempRequestObj));
-  }, []);
+    switch (whatsPopularFilter) {
+      case TV: {
+        dispatch(getPopularTVShows(requestObj));
+        break;
+      }
+      case MOVIE: {
+        dispatch(getPopularMovies(requestObj));
+        break;
+      }
+      default:
+    }
+  }, [whatsPopularFilter]);
+
+  /* useEffect(() => {
+    switch (latestTrailersFilter) {
+      case TV: {
+        dispatch(getPopularTVShows(requestObj));
+        break;
+      }
+      case MOVIE: {
+        dispatch(getPopularMovies(requestObj));
+        break;
+      }
+      default:
+    }
+  }, [latestTrailersFilter]); */
+
+  useEffect(() => {
+    switch (trendingFilter) {
+      case TV: {
+        dispatch(getTrendingTVShows(requestObj, trendingTimeFilter));
+        break;
+      }
+      case MOVIE: {
+        dispatch(getTrendingMovies(requestObj, trendingTimeFilter));
+        break;
+      }
+      default:
+    }
+  }, [trendingFilter]);
+
+  useEffect(() => {
+    switch (trendingTimeFilter) {
+      case DAY: {
+        dispatch(
+          trendingFilter === TV
+            ? getTrendingTVShows(requestObj, trendingTimeFilter)
+            : getTrendingMovies(requestObj, trendingTimeFilter),
+        );
+        break;
+      }
+      case WEEK: {
+        dispatch(
+          trendingFilter === TV
+            ? getTrendingTVShows(requestObj, trendingTimeFilter)
+            : getTrendingMovies(requestObj, trendingTimeFilter),
+        );
+        break;
+      }
+      default:
+    }
+  }, [trendingTimeFilter]);
 
   return (
     <StyledMainContainer>
@@ -106,15 +173,18 @@ export const Main = (): ReturnComponentType => {
         </StyledIntroContainer>
       </StyledIntroWrapper>
       <StyledSectionsContainer>
-        <WhatsPopularSection popularList={TVShowsList} filter={WhatsPopularFilter} />
-        <LatestTrailerSection
+        <WhatsPopularSection
+          popularList={whatsPopularFilter === TV ? popularTVShowsList : popularMoviesList}
+          filter={whatsPopularFilter}
+        />
+        <LatestTrailersSections
           latestTrailerList={latestTrailersList}
-          filter={LatestTrailersFilter}
+          filter={latestTrailersFilter}
         />
         <TrendingSection
-          trendingList={TVShowsList}
-          filter={TrendingFilter}
-          timeFilter={TrendingTimeFilter}
+          trendingList={trendingFilter === TV ? trendingTVShowsList : trendingMoviesList}
+          filter={trendingFilter}
+          timeFilter={trendingTimeFilter}
         />
       </StyledSectionsContainer>
     </StyledMainContainer>
