@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import tmdbLogo from 'assets/images/tmdb_logo.svg';
 import { ContactButton } from 'components/Footer/ContactButton';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
 const StyledFooter = styled.div`
   width: 100%;

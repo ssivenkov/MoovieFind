@@ -5,7 +5,7 @@ import { ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
 import { setTrendingMovies, setTrendingTVShows } from 'store/actions/trendingActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { RequestObjectType } from 'types/RequestObjectType';
+import { RequestObjectType } from 'types/common/RequestObjectType';
 
 export const getTrendingTVShows =
   (tempRequestObj: RequestObjectType, timeWindow: string): AppThunk =>

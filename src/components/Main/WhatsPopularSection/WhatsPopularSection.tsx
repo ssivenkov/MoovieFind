@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { TVShowType } from '../../../store/reducers/TVShowsReducer';
+import { MovieType } from '../../../types/reducers/movieReducerType';
 
 import Card from 'components/common/Card/Сard';
 import {
@@ -16,12 +16,9 @@ import {
 import { SwitchButton } from 'components/Main/common/SwitchButton/SwitchButton';
 import { MOVIE, TV } from 'constants/common';
 import { setWhatsPopularFilter } from 'store/actions/mainActions';
-import { ReturnComponentType } from 'types/ReturnComponentType';
-
-type WhatsPopularSectionPropsType = {
-  popularList: Array<any>;
-  filter: string;
-};
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { WhatsPopularSectionPropsType } from 'types/components/Main/WhatsPopularSection/WhatsPopularSectionType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
   popularList,
@@ -58,15 +55,26 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
         </StyledMainSectionFiltersWrapper>
       </StyledMainSectionHeader>
       <StyledMainSectionContentContainer>
-        {popularList.map((popularItem: TVShowType) => (
-          <Card
-            key={popularItem.id}
-            posterPath={popularItem.poster_path}
-            title={popularItem.name}
-            voteAverage={popularItem.vote_average}
-            releaseDate={popularItem.first_air_date}
-          />
-        ))}
+        {filter === TV &&
+          popularList.map((popularTVShow: TVShowType) => (
+            <Card
+              key={popularTVShow.id}
+              posterPath={popularTVShow.poster_path}
+              title={popularTVShow.name}
+              voteAverage={popularTVShow.vote_average}
+              releaseDate={popularTVShow.first_air_date}
+            />
+          ))}
+        {filter === MOVIE &&
+          popularList.map((popularMovie: MovieType) => (
+            <Card
+              key={popularMovie.id}
+              posterPath={popularMovie.poster_path}
+              title={popularMovie.title}
+              voteAverage={popularMovie.vote_average}
+              releaseDate={popularMovie.release_date}
+            />
+          ))}
       </StyledMainSectionContentContainer>
     </StyledMainSectionContainer>
   );

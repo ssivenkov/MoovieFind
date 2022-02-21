@@ -1,29 +1,33 @@
-import { DAY, MOVIE, TV, WEEK } from 'constants/common';
+import {
+  MovieFilterType,
+  setLatestTrailersFilterActionType,
+  setTrendingFilterActionType,
+  setTrendingTimeFilterActionType,
+  setWhatsPopularFilterActionType,
+  TimeFilterType,
+} from 'types/actions/mainActionsTypes';
 
 export enum MAIN_ACTIONS {
-  SET_WHATS_POPULAR_FILTER = 'mainReducer/SET-WHATS-POPULAR-FILTER',
-  SET_LATEST_TRAILERS_FILTER = 'mainReducer/SET-LATEST-TRAILERS-FILTER',
-  SET_TRENDING_FILTER = 'mainReducer/SET-TRENDING-FILTER',
-  SET_TRENDING_TIME_FILTER = 'mainReducer/SET-TRENDING-TIME-FILTER',
+  SET_WHATS_POPULAR_FILTER = 'mainReducer/SET_WHATS_POPULAR_FILTER',
+  SET_LATEST_TRAILERS_FILTER = 'mainReducer/SET_LATEST_TRAILERS_FILTER',
+  SET_TRENDING_FILTER = 'mainReducer/SET_TRENDING_FILTER',
+  SET_TRENDING_TIME_FILTER = 'mainReducer/SET_TRENDING_TIME_FILTER',
 }
 
-export type MainActionsType =
-  | ReturnType<typeof setWhatsPopularFilter>
-  | ReturnType<typeof setLatestTrailersFilter>
-  | ReturnType<typeof setTrendingFilter>
-  | ReturnType<typeof setTrendingTimeFilter>;
-
-export type MoovieFilterType = typeof TV | typeof MOVIE;
-export type TimeFilterType = typeof DAY | typeof WEEK;
-
-export const setWhatsPopularFilter = (filter: MoovieFilterType) =>
+export const setWhatsPopularFilter = (
+  filter: MovieFilterType,
+): setWhatsPopularFilterActionType =>
   ({ type: MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER, filter } as const);
 
-export const setLatestTrailersFilter = (filter: MoovieFilterType) =>
+export const setLatestTrailersFilter = (
+  filter: MovieFilterType,
+): setLatestTrailersFilterActionType =>
   ({ type: MAIN_ACTIONS.SET_LATEST_TRAILERS_FILTER, filter } as const);
 
-export const setTrendingFilter = (filter: MoovieFilterType) =>
+export const setTrendingFilter = (filter: MovieFilterType): setTrendingFilterActionType =>
   ({ type: MAIN_ACTIONS.SET_TRENDING_FILTER, filter } as const);
 
-export const setTrendingTimeFilter = (filter: TimeFilterType) =>
+export const setTrendingTimeFilter = (
+  filter: TimeFilterType,
+): setTrendingTimeFilterActionType =>
   ({ type: MAIN_ACTIONS.SET_TRENDING_TIME_FILTER, filter } as const);

@@ -12,7 +12,7 @@ import { PATH } from 'routes/routes';
 import { appInitializedFalse } from 'store/actions/appActions';
 import { AppRootStateType } from 'store/store';
 import { getAuthUserData } from 'store/thunks/authThunk';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
 export const RoutesContainer = (): ReturnComponentType => {
   const dispatch = useDispatch();

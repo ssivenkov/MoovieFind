@@ -1,19 +1,26 @@
+import {
+  setTrendingMoviesActionType,
+  setTrendingTVShowsActionType,
+} from 'types/actions/trendingActionsTypes';
+import { MovieType } from 'types/reducers/movieReducerType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
+
 export enum TRENDING_ACTIONS {
-  SET_TRENDING_MOVIES = 'trendingReducer/SET-TRENDING-MOVIES',
-  SET_TRENDING_TVSHOWS = 'trendingReducer/SET-TRENDING-TVSHOWS',
+  SET_TRENDING_MOVIES = 'trendingReducer/SET_TRENDING_MOVIES',
+  SET_TRENDING_TVSHOWS = 'trendingReducer/SET_TRENDING_TVSHOWS',
 }
 
-export type TrendingActionsType =
-  | ReturnType<typeof setTrendingMovies>
-  | ReturnType<typeof setTrendingTVShows>;
-
-export const setTrendingMovies = (trendingMovies: Array<any>) =>
+export const setTrendingMovies = (
+  trendingMovies: Array<MovieType>,
+): setTrendingMoviesActionType =>
   ({
     type: TRENDING_ACTIONS.SET_TRENDING_MOVIES,
     trendingMovies,
   } as const);
 
-export const setTrendingTVShows = (trendingTVShows: Array<any>) =>
+export const setTrendingTVShows = (
+  trendingTVShows: Array<TVShowType>,
+): setTrendingTVShowsActionType =>
   ({
     type: TRENDING_ACTIONS.SET_TRENDING_TVSHOWS,
     trendingTVShows,

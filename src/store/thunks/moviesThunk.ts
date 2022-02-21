@@ -5,7 +5,7 @@ import { ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
 import { setMovies } from 'store/actions/movieActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { RequestObjectType } from 'types/RequestObjectType';
+import { RequestObjectType } from 'types/common/RequestObjectType';
 
 export const getPopularMovies =
   (tempRequestObj: RequestObjectType): AppThunk =>

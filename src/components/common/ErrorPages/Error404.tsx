@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 
 import { PATH } from 'routes/routes';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
 export const Error404 = (): ReturnComponentType => (
   <div>

@@ -1,18 +1,19 @@
-import { DAY, TV } from 'constants/common';
-import { MAIN_ACTIONS, MainActionsType } from 'store/actions/mainActions';
+import { TV, DAY } from 'constants/common';
+import { MAIN_ACTIONS } from 'store/actions/mainActions';
+import { MainActionsTypes } from 'types/actions/mainActionsTypes';
+import { MovieFilterType, TimeFilterType } from 'types/common/FilterTypes';
+import { InitialMainStateType } from 'types/reducers/mainReducerType';
 
 const initialMainState = {
-  WhatsPopularFilter: TV,
-  LatestTrailersFilter: TV,
-  TrendingFilter: TV,
-  TrendingTimeFilter: DAY,
+  WhatsPopularFilter: TV as MovieFilterType,
+  LatestTrailersFilter: TV as MovieFilterType,
+  TrendingFilter: TV as MovieFilterType,
+  TrendingTimeFilter: DAY as TimeFilterType,
 };
-
-export type InitialMainStateType = typeof initialMainState;
 
 export const mainReducer = (
   state: InitialMainStateType = initialMainState,
-  action: MainActionsType,
+  action: MainActionsTypes,
 ): InitialMainStateType => {
   switch (action.type) {
     case MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER:

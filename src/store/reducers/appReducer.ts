@@ -1,4 +1,6 @@
-import { APP_ACTIONS, AppActionsType } from 'store/actions/appActions';
+import { APP_ACTIONS } from 'store/actions/appActions';
+import { AppActionsTypes } from 'types/actions/appActionsTypes';
+import { InitialAppStateType } from 'types/reducers/appReducerType';
 
 const initialAppState = {
   appInitialized: false,
@@ -7,11 +9,9 @@ const initialAppState = {
   searchRequest: '',
 };
 
-export type InitialAppStateType = typeof initialAppState;
-
 export const appReducer = (
   state: InitialAppStateType = initialAppState,
-  action: AppActionsType,
+  action: AppActionsTypes,
 ): InitialAppStateType => {
   switch (action.type) {
     case APP_ACTIONS.SET_APP_INITIALIZED_TRUE:

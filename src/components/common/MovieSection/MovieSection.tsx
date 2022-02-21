@@ -3,8 +3,9 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 import Card from 'components/common/Card/Сard';
-import { MovieType } from 'store/reducers/moviesReducer';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { MoovieSectionPropsType } from 'types/components/common/MovieSection/MovieSectionType';
+import { MovieType } from 'types/reducers/movieReducerType';
 
 const StyledMain = styled.div`
   width: var(--content-width);
@@ -28,11 +29,6 @@ const StyledMoovies = styled.div`
     }
   }
 `;
-
-type MoovieSectionPropsType = {
-  moviesList: Array<MovieType>;
-  sectionTitle: string;
-};
 
 export const MovieSection: FC<MoovieSectionPropsType> = ({
   moviesList,

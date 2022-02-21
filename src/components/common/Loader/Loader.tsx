@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import loader from 'assets/images/loader.svg';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
 const StyledLoader = styled.img`
   user-select: none;

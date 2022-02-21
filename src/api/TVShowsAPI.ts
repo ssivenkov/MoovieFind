@@ -1,5 +1,5 @@
 import { instance } from 'api/instance';
-import { RequestObjectType } from 'types/RequestObjectType';
+import { RequestObjectType } from 'types/common/RequestObjectType';
 
 export const TVShowsAPI = {
   getPopularTVs(requestObject: RequestObjectType) {

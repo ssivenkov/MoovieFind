@@ -1,16 +1,16 @@
-import { MovieType } from 'store/reducers/moviesReducer';
+import {
+  setCurrentPageActionType,
+  setMoviesActionType,
+} from 'types/actions/moviesActionsTypes';
+import { MovieType } from 'types/reducers/movieReducerType';
 
 export enum MOVIES_ACTIONS {
-  SET_MOVIES = 'moviesReducer/SET-MOVIES',
-  SET_CURRENT_PAGE = 'moviesReducer/SET-CURRENT-PAGE',
+  SET_MOVIES = 'moviesReducer/SET_MOVIES',
+  SET_CURRENT_PAGE = 'moviesReducer/SET_CURRENT_PAGE',
 }
 
-export type MoviesActionsType =
-  | ReturnType<typeof setMovies>
-  | ReturnType<typeof setCurrentPage>;
-
-export const setMovies = (movies: Array<MovieType>) =>
+export const setMovies = (movies: Array<MovieType>): setMoviesActionType =>
   ({ type: MOVIES_ACTIONS.SET_MOVIES, movies } as const);
 
-export const setCurrentPage = (currentPage: number) =>
+export const setCurrentPage = (currentPage: number): setCurrentPageActionType =>
   ({ type: MOVIES_ACTIONS.SET_CURRENT_PAGE, currentPage } as const);

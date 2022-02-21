@@ -2,6 +2,9 @@ import React, { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { MovieType } from '../../../types/reducers/movieReducerType';
+import { TVShowType } from '../../../types/reducers/TVShowsReducerType';
+
 import Card from 'components/common/Card/Сard';
 import {
   StyledMainSectionContainer,
@@ -14,13 +17,8 @@ import {
 import { SwitchButton } from 'components/Main/common/SwitchButton/SwitchButton';
 import { DAY, MOVIE, TV, WEEK } from 'constants/common';
 import { setTrendingFilter, setTrendingTimeFilter } from 'store/actions/mainActions';
-import { ReturnComponentType } from 'types/ReturnComponentType';
-
-type TrendingSectionPropsType = {
-  trendingList: Array<any>;
-  filter: string;
-  timeFilter: string;
-};
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { TrendingSectionPropsType } from 'types/components/Main/TrendingSection/TrendingSectionType';
 
 export const TrendingSection: FC<TrendingSectionPropsType> = ({
   trendingList,
@@ -81,15 +79,26 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
         </StyledMainSectionFiltersWrapper>
       </StyledMainSectionHeader>
       <StyledMainSectionContentContainer>
-        {trendingList.map((trendingItem: any) => (
-          <Card
-            key={trendingItem.id}
-            posterPath={trendingItem.poster_path}
-            title={trendingItem.name}
-            voteAverage={trendingItem.vote_average}
-            releaseDate={trendingItem.first_air_date}
-          />
-        ))}
+        {filter === TV &&
+          trendingList.map((trendingTVShow: TVShowType) => (
+            <Card
+              key={trendingTVShow.id}
+              posterPath={trendingTVShow.poster_path}
+              title={trendingTVShow.name}
+              voteAverage={trendingTVShow.vote_average}
+              releaseDate={trendingTVShow.first_air_date}
+            />
+          ))}
+        {filter === MOVIE &&
+          trendingList.map((trendingMovie: MovieType) => (
+            <Card
+              key={trendingMovie.id}
+              posterPath={trendingMovie.poster_path}
+              title={trendingMovie.title}
+              voteAverage={trendingMovie.vote_average}
+              releaseDate={trendingMovie.release_date}
+            />
+          ))}
       </StyledMainSectionContentContainer>
     </StyledMainSectionContainer>
   );

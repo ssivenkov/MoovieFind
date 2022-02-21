@@ -1,20 +1,9 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 
-import { ReturnComponentType } from 'types/ReturnComponentType';
-
-type DefaultButtonPropsType = DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
-
-export type ButtonType = DefaultButtonPropsType & {
-  title?: string;
-  className?: string;
-  condition?: boolean;
-  id?: string;
-};
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ButtonType } from 'types/components/common/ButtonTypes/ButtonTypes';
 
 const StyledButton = styled.button`
   padding: 10px 20px;

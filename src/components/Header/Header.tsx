@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import logo from 'assets/images/logo.svg';
 import style from 'components/Header/Header.module.scss';
 import { PATH } from 'routes/routes';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
 const StyledContainer = styled.div`
   width: 100%;

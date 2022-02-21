@@ -1,12 +1,6 @@
-import { TRENDING_ACTIONS, TrendingActionsType } from 'store/actions/trendingActions';
-import { MovieType } from 'store/reducers/moviesReducer';
-import { TVShowType } from 'store/reducers/TVShowsReducer';
-
-export type InitialMoviesStateType = {
-  trendingMovies: Array<MovieType>;
-  trendingTVShows: Array<TVShowType>;
-  sliderPage: number;
-};
+import { TRENDING_ACTIONS } from 'store/actions/trendingActions';
+import { TrendingActionsType } from 'types/actions/trendingActionsTypes';
+import { InitialMoviesStateType } from 'types/reducers/trendingReducerType';
 
 const initialTrendingState = {
   trendingMovies: [],

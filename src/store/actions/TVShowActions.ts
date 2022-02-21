@@ -1,16 +1,16 @@
-import { TVShowType } from 'store/reducers/TVShowsReducer';
+import {
+  setCurrentPageActionType,
+  setTVShowsActionType,
+} from 'types/actions/TVShowActionsTypes';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 export enum TVSHOWS_ACTIONS {
-  SET_TVSHOWS = 'TWShowsReducer/SET-TVSHOWS',
-  SET_CURRENT_PAGE = 'TWShowsReducer/SET-CURRENT-PAGE',
+  SET_TVSHOWS = 'TWShowsReducer/SET_TVSHOWS',
+  SET_CURRENT_PAGE = 'TWShowsReducer/SET_CURRENT_PAGE',
 }
 
-export type TVShowsActionsType =
-  | ReturnType<typeof setTVShows>
-  | ReturnType<typeof setCurrentPage>;
-
-export const setTVShows = (TVShows: Array<TVShowType>) =>
+export const setTVShows = (TVShows: Array<TVShowType>): setTVShowsActionType =>
   ({ type: TVSHOWS_ACTIONS.SET_TVSHOWS, TVShows } as const);
 
-export const setCurrentPage = (currentPage: number) =>
+export const setCurrentPage = (currentPage: number): setCurrentPageActionType =>
   ({ type: TVSHOWS_ACTIONS.SET_CURRENT_PAGE, currentPage } as const);

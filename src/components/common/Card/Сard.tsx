@@ -5,7 +5,11 @@ import styled from 'styled-components';
 
 import { imageSource } from 'api/config';
 import { ZERO } from 'constants/common';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import {
+  MovieCardPropsType,
+  StyledMovieRatePropsType,
+} from 'types/components/common/CardTypes/CardTypes';
 
 const StyledMovie = styled.div`
   width: 150px;
@@ -17,10 +21,6 @@ const StyledMovieInfoContainer = styled.div`
   position: relative;
   transition: 0.22s ease-out;
 `;
-
-interface StyledMovieRatePropsType {
-  voteAverage: number;
-}
 
 const StyledMovieRate = styled.div<StyledMovieRatePropsType>`
   opacity: 0;
@@ -96,13 +96,6 @@ const StyledMovieTitle = styled.div`
   height: 1.2em;
   text-overflow: ellipsis;
 `;
-
-type MovieCardPropsType = {
-  title: string;
-  posterPath: string;
-  voteAverage: number;
-  releaseDate: string;
-};
 
 const Card: FC<MovieCardPropsType> = ({
   posterPath,

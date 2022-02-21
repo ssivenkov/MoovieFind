@@ -14,12 +14,8 @@ import {
 import { SwitchButton } from 'components/Main/common/SwitchButton/SwitchButton';
 import { MOVIE, TV } from 'constants/common';
 import { setLatestTrailersFilter } from 'store/actions/mainActions';
-import { ReturnComponentType } from 'types/ReturnComponentType';
-
-type LatestTrailerSectionPropsType = {
-  latestTrailerList: Array<any>;
-  filter: string;
-};
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { LatestTrailerSectionPropsType } from 'types/components/Main/LatestTrailersSection/LatestTrailersSectionType';
 
 export const LatestTrailersSections: FC<LatestTrailerSectionPropsType> = ({
   latestTrailerList,

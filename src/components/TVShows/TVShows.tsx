@@ -7,11 +7,11 @@ import { api_key } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
 import { TVShowSection } from 'components/common/TVShowSection/TVShowSection';
 import { ONE, ZERO } from 'constants/common';
-import { TVShowType } from 'store/reducers/TVShowsReducer';
 import { AppRootStateType } from 'store/store';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
-import { RequestObjectType } from 'types/RequestObjectType';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { RequestObjectType } from 'types/common/RequestObjectType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 export const TVShows = (): ReturnComponentType => {
   const dispatch = useDispatch();

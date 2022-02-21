@@ -2,10 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-type ContactButtonType = {
-  link: string;
-  iconClass: string;
-};
+import { ContactButtonType } from 'types/components/FooterType/ContactButtonType/ContactButtonType';
 
 const StyledContactButton = styled.a`
   display: flex !important;

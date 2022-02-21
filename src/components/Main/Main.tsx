@@ -10,15 +10,15 @@ import { TrendingSection } from 'components/Main/TrendingSection/TrendingSection
 import { WhatsPopularSection } from 'components/Main/WhatsPopularSection/WhatsPopularSection';
 import { Search } from 'components/Search/Search';
 import { MOVIE, TV, ONE, DAY, WEEK } from 'constants/common';
-import { LatestTrailerType } from 'store/reducers/latestTrailersReducer';
-import { MovieType } from 'store/reducers/moviesReducer';
-import { TVShowType } from 'store/reducers/TVShowsReducer';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
-import { RequestObjectType } from 'types/RequestObjectType';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { RequestObjectType } from 'types/common/RequestObjectType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { LatestTrailerType } from 'types/reducers/latestTrailersReducerType';
+import { MovieType } from 'types/reducers/movieReducerType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 const StyledMainContainer = styled.div`
   width: 100%;

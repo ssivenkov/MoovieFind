@@ -2,10 +2,10 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 
-import Card from '../Card/Сard';
-
-import { TVShowType } from 'store/reducers/TVShowsReducer';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import Card from 'components/common/Card/Сard';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { TVShowsSectionPropsType } from 'types/components/common/TVShowSection/TVShowSectionType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 const StyledMain = styled.div`
   width: var(--content-width);
@@ -29,11 +29,6 @@ const StyledTVShows = styled.div`
     }
   }
 `;
-
-type TVShowsSectionPropsType = {
-  TVShowsList: Array<TVShowType>;
-  sectionTitle: string;
-};
 
 export const TVShowSection: FC<TVShowsSectionPropsType> = ({
   TVShowsList,

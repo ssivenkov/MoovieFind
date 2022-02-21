@@ -7,11 +7,11 @@ import { api_key } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
 import { MovieSection } from 'components/common/MovieSection/MovieSection';
 import { ONE, ZERO } from 'constants/common';
-import { MovieType } from 'store/reducers/moviesReducer';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
-import { RequestObjectType } from 'types/RequestObjectType';
-import { ReturnComponentType } from 'types/ReturnComponentType';
+import { RequestObjectType } from 'types/common/RequestObjectType';
+import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { MovieType } from 'types/reducers/movieReducerType';
 
 export const Movies = (): ReturnComponentType => {
   const dispatch = useDispatch();
