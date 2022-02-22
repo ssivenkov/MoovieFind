@@ -12,6 +12,7 @@ const StyledFooter = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 40px;
   border-top: 1px solid #505050;
 `;
 
@@ -20,6 +21,7 @@ const StyledContactsContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: space-around;
+  margin-top: 8px;
 `;
 
 const StyledTmdbContainer = styled.div`
@@ -30,6 +32,9 @@ const StyledTmdbLogo = styled.img`
   display: block;
   margin-top: 10px;
   user-select: none;
+  &:hover {
+    filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.7));
+  }
 `;
 
 export const Footer = (): ReturnComponentType => (

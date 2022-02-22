@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { MovieType } from '../../../types/reducers/movieReducerType';
-import { TVShowType } from '../../../types/reducers/TVShowsReducerType';
-
 import Card from 'components/common/Card/Сard';
+import { Loader } from 'components/common/Loader/Loader';
+import { SliderContainer } from 'components/common/Slider/Slider';
 import {
+  LoaderContainer,
   StyledMainSectionContainer,
   StyledMainSectionContentContainer,
   StyledMainSectionFiltersContainer,
@@ -19,6 +19,8 @@ import { DAY, MOVIE, TV, WEEK } from 'constants/common';
 import { setTrendingFilter, setTrendingTimeFilter } from 'store/actions/mainActions';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
 import { TrendingSectionPropsType } from 'types/components/Main/TrendingSection/TrendingSectionType';
+import { MovieType } from 'types/reducers/movieReducerType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 export const TrendingSection: FC<TrendingSectionPropsType> = ({
   trendingList,
@@ -26,16 +28,21 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
   timeFilter,
 }): ReturnComponentType => {
   const dispatch = useDispatch();
+  const [initialization, setInitialization] = useState<boolean>(false);
   const onTVFilterClick = (): void => {
+    setInitialization(true);
     dispatch(setTrendingFilter(TV));
   };
   const onMoviesFilterClick = (): void => {
+    setInitialization(true);
     dispatch(setTrendingFilter(MOVIE));
   };
   const onDayClick = (): void => {
+    setInitialization(true);
     dispatch(setTrendingTimeFilter(DAY));
   };
   const onWeekClick = (): void => {
+    setInitialization(true);
     dispatch(setTrendingTimeFilter(WEEK));
   };
 
@@ -79,26 +86,34 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
         </StyledMainSectionFiltersWrapper>
       </StyledMainSectionHeader>
       <StyledMainSectionContentContainer>
-        {filter === TV &&
-          trendingList.map((trendingTVShow: TVShowType) => (
-            <Card
-              key={trendingTVShow.id}
-              posterPath={trendingTVShow.poster_path}
-              title={trendingTVShow.name}
-              voteAverage={trendingTVShow.vote_average}
-              releaseDate={trendingTVShow.first_air_date}
-            />
-          ))}
-        {filter === MOVIE &&
-          trendingList.map((trendingMovie: MovieType) => (
-            <Card
-              key={trendingMovie.id}
-              posterPath={trendingMovie.poster_path}
-              title={trendingMovie.title}
-              voteAverage={trendingMovie.vote_average}
-              releaseDate={trendingMovie.release_date}
-            />
-          ))}
+        {initialization ? (
+          <LoaderContainer>
+            <Loader />
+          </LoaderContainer>
+        ) : (
+          <SliderContainer>
+            {filter === TV &&
+              trendingList.map((trendingTVShow: TVShowType) => (
+                <Card
+                  key={trendingTVShow.id}
+                  posterPath={trendingTVShow.poster_path}
+                  title={trendingTVShow.name}
+                  voteAverage={trendingTVShow.vote_average}
+                  releaseDate={trendingTVShow.first_air_date}
+                />
+              ))}
+            {filter === MOVIE &&
+              trendingList.map((trendingMovie: MovieType) => (
+                <Card
+                  key={trendingMovie.id}
+                  posterPath={trendingMovie.poster_path}
+                  title={trendingMovie.title}
+                  voteAverage={trendingMovie.vote_average}
+                  releaseDate={trendingMovie.release_date}
+                />
+              ))}
+          </SliderContainer>
+        )}
       </StyledMainSectionContentContainer>
     </StyledMainSectionContainer>
   );

@@ -72,6 +72,14 @@ export const Header = (): ReturnComponentType => (
           People
         </NavLink>
       </div>
+      <div className={style.item}>
+        <NavLink
+          to={PATH.SEARCH}
+          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
+        >
+          Search
+        </NavLink>
+      </div>
     </StyledCategoriesContainer>
     <StyledAuthContainer>
       <NavLink

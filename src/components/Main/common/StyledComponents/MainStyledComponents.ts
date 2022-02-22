@@ -5,6 +5,12 @@ export const StyledMainSectionContainer = styled.div`
   margin-top: 60px;
 `;
 
+export const LoaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 export const StyledMainSectionHeader = styled.div`
   width: 100%;
   display: flex;
@@ -33,6 +39,4 @@ export const StyledMainSectionFiltersContainer = styled.div`
 
 export const StyledMainSectionContentContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
 `;

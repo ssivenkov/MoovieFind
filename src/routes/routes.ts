@@ -5,6 +5,7 @@ export enum PATH {
   MOVIES = 'movies',
   TVSHOWS = 'tvshows',
   PEOPLE = 'people',
+  SEARCH = 'search',
   ERROR = '404',
   WRONG_PAGE = '*',
 }

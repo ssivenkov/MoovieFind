@@ -1,22 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { RefObject, useEffect, useLayoutEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
-import { LatestTrailersSections } from 'components/Main/LatestTrailersSection/LatestTrailerSection';
 import { TrendingSection } from 'components/Main/TrendingSection/TrendingSection';
 import { WhatsPopularSection } from 'components/Main/WhatsPopularSection/WhatsPopularSection';
 import { Search } from 'components/Search/Search';
-import { MOVIE, TV, ONE, DAY, WEEK } from 'constants/common';
+import { MOVIE, TV, ONE, DAY, WEEK, ZERO } from 'constants/common';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
 import { RequestObjectType } from 'types/common/RequestObjectType';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { LatestTrailerType } from 'types/reducers/latestTrailersReducerType';
 import { MovieType } from 'types/reducers/movieReducerType';
 import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
@@ -65,14 +63,31 @@ export const Main = (): ReturnComponentType => {
   const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
   const requestObj: RequestObjectType = { api_key, language, page };
+  const refDiv: Array<any> = [];
+  const fixSliderAfterSwitching = (sliderRef: RefObject<HTMLDivElement>): void => {
+    refDiv[ZERO] = sliderRef.current as HTMLDivElement;
+    console.log(refDiv[ZERO]);
+    // eslint-disable-next-line no-debugger
+    debugger;
+    /* const slider = sliderRef.current as HTMLDivElement;
+    const slickTrack = slider.querySelector('.slick-track') as HTMLDivElement;
+    slickTrack.setAttribute('style', 'transform: translate3d(0px, 0px, 0px)'); */
+  };
+
+  useLayoutEffect(() => {
+    console.log(`useLayoutEffect: ${refDiv[ZERO]}`);
+    if (refDiv[ZERO] !== undefined) {
+      console.log('if');
+      const slickTrack = refDiv[ZERO].querySelector('.slick-track') as HTMLDivElement;
+      slickTrack.setAttribute('style', 'transform: translate3d(0px, 0px, 0px)');
+    }
+  }, [refDiv[ZERO]]);
+
   const popularTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
     state => state.TVShows.TVShows,
   );
   const popularMoviesList = useSelector<AppRootStateType, Array<MovieType>>(
     state => state.movies.movies,
-  );
-  const latestTrailersList = useSelector<AppRootStateType, Array<LatestTrailerType>>(
-    state => state.latestTrailers.latestTrailers,
   );
   const trendingTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
     state => state.trending.trendingTVShows,
@@ -82,9 +97,6 @@ export const Main = (): ReturnComponentType => {
   );
   const whatsPopularFilter = useSelector<AppRootStateType, string>(
     state => state.main.WhatsPopularFilter,
-  );
-  const latestTrailersFilter = useSelector<AppRootStateType, string>(
-    state => state.main.LatestTrailersFilter,
   );
   const trendingFilter = useSelector<AppRootStateType, string>(
     state => state.main.TrendingFilter,
@@ -106,20 +118,6 @@ export const Main = (): ReturnComponentType => {
       default:
     }
   }, [whatsPopularFilter]);
-
-  /* useEffect(() => {
-    switch (latestTrailersFilter) {
-      case TV: {
-        dispatch(getPopularTVShows(requestObj));
-        break;
-      }
-      case MOVIE: {
-        dispatch(getPopularMovies(requestObj));
-        break;
-      }
-      default:
-    }
-  }, [latestTrailersFilter]); */
 
   useEffect(() => {
     switch (trendingFilter) {
@@ -176,10 +174,7 @@ export const Main = (): ReturnComponentType => {
         <WhatsPopularSection
           popularList={whatsPopularFilter === TV ? popularTVShowsList : popularMoviesList}
           filter={whatsPopularFilter}
-        />
-        <LatestTrailersSections
-          latestTrailerList={latestTrailersList}
-          filter={latestTrailersFilter}
+          fixSlider={fixSliderAfterSwitching}
         />
         <TrendingSection
           trendingList={trendingFilter === TV ? trendingTVShowsList : trendingMoviesList}

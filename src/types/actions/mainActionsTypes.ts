@@ -8,11 +8,6 @@ export type setWhatsPopularFilterActionType = {
   filter: MovieFilterType;
 };
 
-export type setLatestTrailersFilterActionType = {
-  type: string;
-  filter: MovieFilterType;
-};
-
 export type setTrendingFilterActionType = {
   type: string;
   filter: MovieFilterType;
@@ -25,6 +20,5 @@ export type setTrendingTimeFilterActionType = {
 
 export type MainActionsTypes =
   | setWhatsPopularFilterActionType
-  | setLatestTrailersFilterActionType
   | setTrendingFilterActionType
   | setTrendingTimeFilterActionType;

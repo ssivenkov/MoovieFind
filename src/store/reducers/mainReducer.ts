@@ -6,7 +6,6 @@ import { InitialMainStateType } from 'types/reducers/mainReducerType';
 
 const initialMainState = {
   WhatsPopularFilter: TV as MovieFilterType,
-  LatestTrailersFilter: TV as MovieFilterType,
   TrendingFilter: TV as MovieFilterType,
   TrendingTimeFilter: DAY as TimeFilterType,
 };
@@ -18,8 +17,6 @@ export const mainReducer = (
   switch (action.type) {
     case MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER:
       return { ...state, WhatsPopularFilter: action.filter };
-    case MAIN_ACTIONS.SET_LATEST_TRAILERS_FILTER:
-      return { ...state, LatestTrailersFilter: action.filter };
     case MAIN_ACTIONS.SET_TRENDING_FILTER:
       return { ...state, TrendingFilter: action.filter };
     case MAIN_ACTIONS.SET_TRENDING_TIME_FILTER:

@@ -13,7 +13,7 @@ import {
 
 const StyledMovie = styled.div`
   width: 150px;
-  margin: 0 12px 25px 12px;
+  margin: 18px 12px 15px 12px;
 `;
 
 const StyledMovieInfoContainer = styled.div`
