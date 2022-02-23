@@ -1,34 +1,35 @@
-import React, { RefObject, useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // eslint-disable-next-line camelcase
-import { api_key } from 'api/config';
+import { api_key, imageOriginalSource } from 'api/config';
 import { TrendingSection } from 'components/Main/TrendingSection/TrendingSection';
 import { WhatsPopularSection } from 'components/Main/WhatsPopularSection/WhatsPopularSection';
 import { Search } from 'components/Search/Search';
-import { MOVIE, TV, ONE, DAY, WEEK, ZERO } from 'constants/common';
+import { MOVIE, TV, ONE, DAY, WEEK } from 'constants/common';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
 import { RequestObjectType } from 'types/common/RequestObjectType';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { StyledIntroWrapperPropsType } from 'types/components/Main/MainType';
 import { MovieType } from 'types/reducers/movieReducerType';
 import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 const StyledMainContainer = styled.div`
   width: 100%;
 `;
-const StyledIntroWrapper = styled.div`
+const StyledIntroWrapper = styled.div<StyledIntroWrapperPropsType>`
   height: calc(100vh / 2.5);
   min-height: 300px;
   max-height: 360px;
   display: flex;
   align-items: center;
   background-color: #555;
-  // background-image: url('https://www.themoviedb.org/t/p/w1920_and_h600_multi_faces_filter(duotone,7D031F,EBE0B8)/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg');
+  background-image: url(${imageOriginalSource}${props => props.imageLink});
   background-size: cover;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -63,25 +64,6 @@ export const Main = (): ReturnComponentType => {
   const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
   const requestObj: RequestObjectType = { api_key, language, page };
-  const refDiv: Array<any> = [];
-  const fixSliderAfterSwitching = (sliderRef: RefObject<HTMLDivElement>): void => {
-    refDiv[ZERO] = sliderRef.current as HTMLDivElement;
-    console.log(refDiv[ZERO]);
-    // eslint-disable-next-line no-debugger
-    debugger;
-    /* const slider = sliderRef.current as HTMLDivElement;
-    const slickTrack = slider.querySelector('.slick-track') as HTMLDivElement;
-    slickTrack.setAttribute('style', 'transform: translate3d(0px, 0px, 0px)'); */
-  };
-
-  useLayoutEffect(() => {
-    console.log(`useLayoutEffect: ${refDiv[ZERO]}`);
-    if (refDiv[ZERO] !== undefined) {
-      console.log('if');
-      const slickTrack = refDiv[ZERO].querySelector('.slick-track') as HTMLDivElement;
-      slickTrack.setAttribute('style', 'transform: translate3d(0px, 0px, 0px)');
-    }
-  }, [refDiv[ZERO]]);
 
   const popularTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
     state => state.TVShows.TVShows,
@@ -103,6 +85,9 @@ export const Main = (): ReturnComponentType => {
   );
   const trendingTimeFilter = useSelector<AppRootStateType, string>(
     state => state.main.TrendingTimeFilter,
+  );
+  const searchImageLink = useSelector<AppRootStateType, string>(
+    state => state.main.SearchImageLink,
   );
 
   useEffect(() => {
@@ -155,9 +140,13 @@ export const Main = (): ReturnComponentType => {
     }
   }, [trendingTimeFilter]);
 
+  /* useEffect(() => {
+    dispatch(getRandomImage());
+  }, []); */
+
   return (
     <StyledMainContainer>
-      <StyledIntroWrapper>
+      <StyledIntroWrapper imageLink={searchImageLink}>
         <StyledIntroContainer>
           <StyledWelcomeContainer>
             <StyledH2>Welcome.</StyledH2>
@@ -174,7 +163,6 @@ export const Main = (): ReturnComponentType => {
         <WhatsPopularSection
           popularList={whatsPopularFilter === TV ? popularTVShowsList : popularMoviesList}
           filter={whatsPopularFilter}
-          fixSlider={fixSliderAfterSwitching}
         />
         <TrendingSection
           trendingList={trendingFilter === TV ? trendingTVShowsList : trendingMoviesList}

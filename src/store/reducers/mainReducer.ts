@@ -1,13 +1,13 @@
 import { TV, DAY } from 'constants/common';
-import { MAIN_ACTIONS } from 'store/actions/mainActions';
+import { MAIN_ACTIONS } from 'enums/mainEnum';
 import { MainActionsTypes } from 'types/actions/mainActionsTypes';
-import { MovieFilterType, TimeFilterType } from 'types/common/FilterTypes';
 import { InitialMainStateType } from 'types/reducers/mainReducerType';
 
-const initialMainState = {
-  WhatsPopularFilter: TV as MovieFilterType,
-  TrendingFilter: TV as MovieFilterType,
-  TrendingTimeFilter: DAY as TimeFilterType,
+const initialMainState: InitialMainStateType = {
+  WhatsPopularFilter: TV,
+  TrendingFilter: TV,
+  TrendingTimeFilter: DAY,
+  SearchImageLink: '',
 };
 
 export const mainReducer = (
@@ -21,6 +21,8 @@ export const mainReducer = (
       return { ...state, TrendingFilter: action.filter };
     case MAIN_ACTIONS.SET_TRENDING_TIME_FILTER:
       return { ...state, TrendingTimeFilter: action.filter };
+    case MAIN_ACTIONS.SET_SEARCH_IMAGE_LINK:
+      return { ...state, SearchImageLink: action.link };
     default:
       return state;
   }

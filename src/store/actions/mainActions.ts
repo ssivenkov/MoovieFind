@@ -1,16 +1,11 @@
+import { MAIN_ACTIONS } from 'enums/mainEnum';
 import {
-  MovieFilterType,
+  setSearchImageLinkActionType,
   setTrendingFilterActionType,
   setTrendingTimeFilterActionType,
   setWhatsPopularFilterActionType,
-  TimeFilterType,
 } from 'types/actions/mainActionsTypes';
-
-export enum MAIN_ACTIONS {
-  SET_WHATS_POPULAR_FILTER = 'mainReducer/SET_WHATS_POPULAR_FILTER',
-  SET_TRENDING_FILTER = 'mainReducer/SET_TRENDING_FILTER',
-  SET_TRENDING_TIME_FILTER = 'mainReducer/SET_TRENDING_TIME_FILTER',
-}
+import { MovieFilterType, TimeFilterType } from 'types/common/FilterTypes';
 
 export const setWhatsPopularFilter = (
   filter: MovieFilterType,
@@ -24,3 +19,6 @@ export const setTrendingTimeFilter = (
   filter: TimeFilterType,
 ): setTrendingTimeFilterActionType =>
   ({ type: MAIN_ACTIONS.SET_TRENDING_TIME_FILTER, filter } as const);
+
+export const setSearchImageLink = (link: string): setSearchImageLinkActionType =>
+  ({ type: MAIN_ACTIONS.SET_SEARCH_IMAGE_LINK, link } as const);

@@ -33,7 +33,7 @@ const StyledTmdbLogo = styled.img`
   margin-top: 10px;
   user-select: none;
   &:hover {
-    filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.7));
+    filter: drop-shadow(0 0 10px rgba(0, 100, 255, 1));
   }
 `;
 
