@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/MoovieFind/static/css/main.dd81f676.chunk.css",
-    "main.js": "/MoovieFind/static/js/main.376ac7d0.chunk.js",
-    "main.js.map": "/MoovieFind/static/js/main.376ac7d0.chunk.js.map",
+    "main.css": "/MoovieFind/static/css/main.4c97c156.chunk.css",
+    "main.js": "/MoovieFind/static/js/main.e9d642c5.chunk.js",
+    "main.js.map": "/MoovieFind/static/js/main.e9d642c5.chunk.js.map",
     "runtime-main.js": "/MoovieFind/static/js/runtime-main.cf1952b0.js",
     "runtime-main.js.map": "/MoovieFind/static/js/runtime-main.cf1952b0.js.map",
     "static/css/2.cc1d49f5.chunk.css": "/MoovieFind/static/css/2.cc1d49f5.chunk.css",
-    "static/js/2.adb4c35f.chunk.js": "/MoovieFind/static/js/2.adb4c35f.chunk.js",
-    "static/js/2.adb4c35f.chunk.js.map": "/MoovieFind/static/js/2.adb4c35f.chunk.js.map",
+    "static/js/2.2790f282.chunk.js": "/MoovieFind/static/js/2.2790f282.chunk.js",
+    "static/js/2.2790f282.chunk.js.map": "/MoovieFind/static/js/2.2790f282.chunk.js.map",
     "static/js/3.c719460a.chunk.js": "/MoovieFind/static/js/3.c719460a.chunk.js",
     "static/js/3.c719460a.chunk.js.map": "/MoovieFind/static/js/3.c719460a.chunk.js.map",
     "index.html": "/MoovieFind/index.html",
     "static/css/2.cc1d49f5.chunk.css.map": "/MoovieFind/static/css/2.cc1d49f5.chunk.css.map",
-    "static/css/main.dd81f676.chunk.css.map": "/MoovieFind/static/css/main.dd81f676.chunk.css.map",
-    "static/js/2.adb4c35f.chunk.js.LICENSE.txt": "/MoovieFind/static/js/2.adb4c35f.chunk.js.LICENSE.txt",
+    "static/css/main.4c97c156.chunk.css.map": "/MoovieFind/static/css/main.4c97c156.chunk.css.map",
+    "static/js/2.2790f282.chunk.js.LICENSE.txt": "/MoovieFind/static/js/2.2790f282.chunk.js.LICENSE.txt",
     "static/media/loader.f412b255.svg": "/MoovieFind/static/media/loader.f412b255.svg",
     "static/media/logo.0f874455.svg": "/MoovieFind/static/media/logo.0f874455.svg",
     "static/media/slick-theme.css": "/MoovieFind/static/media/slick.c94f7671.ttf",
@@ -22,8 +22,8 @@
   "entrypoints": [
     "static/js/runtime-main.cf1952b0.js",
     "static/css/2.cc1d49f5.chunk.css",
-    "static/js/2.adb4c35f.chunk.js",
-    "static/css/main.dd81f676.chunk.css",
-    "static/js/main.376ac7d0.chunk.js"
+    "static/js/2.2790f282.chunk.js",
+    "static/css/main.4c97c156.chunk.css",
+    "static/js/main.e9d642c5.chunk.js"
   ]
 }
