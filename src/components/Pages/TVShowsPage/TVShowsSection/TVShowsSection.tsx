@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import Card from 'components/common/Card/Сard';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { MoovieSectionPropsType } from 'types/components/common/MovieSection/MovieSectionType';
-import { MovieType } from 'types/reducers/movieReducerType';
+import { TVShowsSectionPropsType } from 'types/components/common/TVShowSection/TVShowSectionType';
+import { TVShowType } from 'types/reducers/TVShowsReducerType';
 
 const StyledMain = styled.div`
   width: var(--content-width);
@@ -19,7 +19,7 @@ const StyledSectionTitle = styled.div`
   font-weight: 500;
 `;
 
-const StyledMoovies = styled.div`
+const StyledTVShows = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -30,22 +30,22 @@ const StyledMoovies = styled.div`
   }
 `;
 
-export const MovieSection: FC<MoovieSectionPropsType> = ({
-  moviesList,
+export const TVShowsSection: FC<TVShowsSectionPropsType> = ({
+  TVShowsList,
   sectionTitle,
 }): ReturnComponentType => (
   <StyledMain>
     <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
-    <StyledMoovies>
-      {moviesList.map((moovie: MovieType) => (
+    <StyledTVShows>
+      {TVShowsList.map((TVShow: TVShowType) => (
         <Card
-          key={moovie.id}
-          posterPath={moovie.poster_path}
-          title={moovie.title}
-          voteAverage={moovie.vote_average}
-          releaseDate={moovie.release_date}
+          key={TVShow.id}
+          posterPath={TVShow.poster_path}
+          title={TVShow.name}
+          voteAverage={TVShow.vote_average}
+          releaseDate={TVShow.first_air_date}
         />
       ))}
-    </StyledMoovies>
+    </StyledTVShows>
   </StyledMain>
 );

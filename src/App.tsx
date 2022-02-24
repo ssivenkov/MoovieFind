@@ -22,12 +22,12 @@ const AppWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1450px) {
+  @media (max-width: 1500px) {
     & {
       --content-width: 900px;
     }
   }
-  @media (max-width: 950px) {
+  @media (max-width: 1000px) {
     & {
       --content-width: 350px;
     }

@@ -4,7 +4,7 @@ import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 
 import { Button } from 'components/common/Button/Button';
-import style from 'components/Search/Search.module.scss';
+import style from 'components/Pages/MainPage/SearchSection/SearchSection.module.scss';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
 const StyledSearchContainer = styled.div`
@@ -16,7 +16,7 @@ interface onSubmitType {
   search: string;
 }
 
-export const Search = (): ReturnComponentType => {
+export const SearchSection = (): ReturnComponentType => {
   const initialValues = {
     search: '',
   };

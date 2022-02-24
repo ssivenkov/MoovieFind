@@ -1,13 +1,9 @@
+import { MOVIES_ACTIONS } from 'enums/moviesEnums';
 import {
   setCurrentPageActionType,
   setMoviesActionType,
 } from 'types/actions/moviesActionsTypes';
 import { MovieType } from 'types/reducers/movieReducerType';
-
-export enum MOVIES_ACTIONS {
-  SET_MOVIES = 'moviesReducer/SET_MOVIES',
-  SET_CURRENT_PAGE = 'moviesReducer/SET_CURRENT_PAGE',
-}
 
 export const setMovies = (movies: Array<MovieType>): setMoviesActionType =>
   ({ type: MOVIES_ACTIONS.SET_MOVIES, movies } as const);

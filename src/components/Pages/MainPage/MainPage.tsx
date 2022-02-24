@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // eslint-disable-next-line camelcase
-import { api_key, imageOriginalSource } from 'api/config';
-import { TrendingSection } from 'components/Main/TrendingSection/TrendingSection';
-import { WhatsPopularSection } from 'components/Main/WhatsPopularSection/WhatsPopularSection';
-import { Search } from 'components/Search/Search';
-import { MOVIE, TV, ONE, DAY, WEEK } from 'constants/common';
+import { api_key, originalImageSource } from 'api/config';
+import { SearchSection } from 'components/Pages/MainPage/SearchSection/SearchSection';
+import { TrendingSection } from 'components/Pages/MainPage/TrendingSection/TrendingSection';
+import { WhatsPopularSection } from 'components/Pages/MainPage/WhatsPopularSection/WhatsPopularSection';
+import { MOVIE, TV, ONE, DAY, WEEK, ZERO } from 'constants/common';
 import { AppRootStateType } from 'store/store';
+import { setRandomSearchBackgroundImage } from 'store/thunks/mainThunk';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
@@ -29,7 +30,13 @@ const StyledIntroWrapper = styled.div<StyledIntroWrapperPropsType>`
   display: flex;
   align-items: center;
   background-color: #555;
-  background-image: url(${imageOriginalSource}${props => props.imageLink});
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.7) 100%
+    ),
+    ${props =>
+      props.imageLink.length > ZERO && `url(${originalImageSource}${props.imageLink})`};
   background-size: cover;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -59,7 +66,7 @@ const StyledSearchContainer = styled.div`
 `;
 const StyledSectionsContainer = styled.div``;
 
-export const Main = (): ReturnComponentType => {
+export const MainPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
@@ -140,9 +147,11 @@ export const Main = (): ReturnComponentType => {
     }
   }, [trendingTimeFilter]);
 
-  /* useEffect(() => {
-    dispatch(getRandomImage());
-  }, []); */
+  useEffect(() => {
+    if (popularTVShowsList.length !== ZERO && trendingTVShowsList.length !== ZERO) {
+      dispatch(setRandomSearchBackgroundImage([popularTVShowsList, trendingTVShowsList]));
+    }
+  }, [popularTVShowsList, trendingTVShowsList]);
 
   return (
     <StyledMainContainer>
@@ -155,7 +164,7 @@ export const Main = (): ReturnComponentType => {
             </StyledH3>
           </StyledWelcomeContainer>
           <StyledSearchContainer>
-            <Search />
+            <SearchSection />
           </StyledSearchContainer>
         </StyledIntroContainer>
       </StyledIntroWrapper>

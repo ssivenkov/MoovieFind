@@ -1,14 +1,10 @@
+import { TRENDING_ACTIONS } from 'enums/trendingEnums';
 import {
   setTrendingMoviesActionType,
   setTrendingTVShowsActionType,
 } from 'types/actions/trendingActionsTypes';
 import { MovieType } from 'types/reducers/movieReducerType';
 import { TVShowType } from 'types/reducers/TVShowsReducerType';
-
-export enum TRENDING_ACTIONS {
-  SET_TRENDING_MOVIES = 'trendingReducer/SET_TRENDING_MOVIES',
-  SET_TRENDING_TVSHOWS = 'trendingReducer/SET_TRENDING_TVSHOWS',
-}
 
 export const setTrendingMovies = (
   trendingMovies: Array<MovieType>,

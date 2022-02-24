@@ -1,4 +1,4 @@
-import { TRENDING_ACTIONS } from 'store/actions/trendingActions';
+import { TRENDING_ACTIONS } from 'enums/trendingEnums';
 import { TrendingActionsType } from 'types/actions/trendingActionsTypes';
 import { InitialMoviesStateType } from 'types/reducers/trendingReducerType';
 

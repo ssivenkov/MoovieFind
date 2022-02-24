@@ -1,4 +1,4 @@
-import { APP_ACTIONS } from 'store/actions/appActions';
+import { APP_ACTIONS } from 'enums/appEnums';
 import { AppActionsTypes } from 'types/actions/appActionsTypes';
 import { InitialAppStateType } from 'types/reducers/appReducerType';
 

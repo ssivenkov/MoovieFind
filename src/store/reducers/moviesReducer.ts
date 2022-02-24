@@ -1,4 +1,4 @@
-import { MOVIES_ACTIONS } from 'store/actions/movieActions';
+import { MOVIES_ACTIONS } from 'enums/moviesEnums';
 import { MoviesActionsTypes } from 'types/actions/moviesActionsTypes';
 import { InitialMoviesStateType } from 'types/reducers/movieReducerType';
 

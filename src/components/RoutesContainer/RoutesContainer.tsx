@@ -3,11 +3,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
-import { Error404 } from 'components/common/ErrorPages/Error404';
-import { Main } from 'components/Main/Main';
-import { Movies } from 'components/Movies/Movies';
-import { People } from 'components/People/People';
-import { TVShows } from 'components/TVShows/TVShows';
+import { Error404Page } from 'components/Pages/ErrorPages/Error404Page';
+import { MainPage } from 'components/Pages/MainPage/MainPage';
+import { MoviesPage } from 'components/Pages/MoviesPage/MoviesPage';
+import { PeoplePage } from 'components/Pages/PeoplePage/PeoplePage';
+import { SearchPage } from 'components/Pages/SearchPage/SearchPage';
+import { TVShowsPage } from 'components/Pages/TVShowsPage/TVShowsPage';
 import { PATH } from 'routes/routes';
 import { appInitializedFalse } from 'store/actions/appActions';
 import { AppRootStateType } from 'store/store';
@@ -31,11 +32,12 @@ export const RoutesContainer = (): ReturnComponentType => {
 
   return (
     <Routes>
-      <Route path={PATH.MAIN} element={<Main />} />
-      <Route path={PATH.MOVIES} element={<Movies />} />
-      <Route path={PATH.TVSHOWS} element={<TVShows />} />
-      <Route path={PATH.PEOPLE} element={<People />} />
-      <Route path={PATH.ERROR} element={<Error404 />} />
+      <Route path={PATH.MAIN} element={<MainPage />} />
+      <Route path={PATH.MOVIES} element={<MoviesPage />} />
+      <Route path={PATH.TVSHOWS} element={<TVShowsPage />} />
+      <Route path={PATH.PEOPLE} element={<PeoplePage />} />
+      <Route path={PATH.SEARCH} element={<SearchPage />} />
+      <Route path={PATH.ERROR} element={<Error404Page />} />
       <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
     </Routes>
   );

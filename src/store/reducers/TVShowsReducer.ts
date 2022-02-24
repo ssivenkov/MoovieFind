@@ -1,4 +1,4 @@
-import { TVSHOWS_ACTIONS } from 'store/actions/TVShowActions';
+import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnums';
 import { TVShowsActionsType } from 'types/actions/TVShowActionsTypes';
 import { InitialTVShowsStateType } from 'types/reducers/TVShowsReducerType';
 

@@ -5,37 +5,37 @@ import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
-import { TVShowSection } from 'components/common/TVShowSection/TVShowSection';
+import { MoviesSection } from 'components/Pages/MoviesPage/MoviesSection/MoviesSection';
 import { ONE, ZERO } from 'constants/common';
 import { AppRootStateType } from 'store/store';
-import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
+import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { RequestObjectType } from 'types/common/RequestObjectType';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { MovieType } from 'types/reducers/movieReducerType';
 
-export const TVShows = (): ReturnComponentType => {
+export const MoviesPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const page = ONE;
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
   const tempRequestObj: RequestObjectType = { api_key, language, page };
-  const sectionTitle = 'TV Shows';
-  const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
-    state => state.TVShows.TVShows,
+  const sectionTitle = 'Movies';
+  const moviesList = useSelector<AppRootStateType, Array<MovieType>>(
+    state => state.movies.movies,
   );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
     state => state.app.contentInitialized,
   );
 
   useEffect(() => {
-    if (TVShowsList.length === ZERO) dispatch(getPopularTVShows(tempRequestObj));
+    if (moviesList.length === ZERO) dispatch(getPopularMovies(tempRequestObj));
   }, []);
 
-  if (appContentInitialized && TVShowsList.length === ZERO) {
+  if (appContentInitialized && moviesList.length === ZERO) {
     return <div>{sectionTitle} not found</div>;
   }
 
-  if (TVShowsList.length !== ZERO) {
-    return <TVShowSection TVShowsList={TVShowsList} sectionTitle={sectionTitle} />;
+  if (moviesList.length !== ZERO) {
+    return <MoviesSection moviesList={moviesList} sectionTitle={sectionTitle} />;
   }
 
   return <Loader />;

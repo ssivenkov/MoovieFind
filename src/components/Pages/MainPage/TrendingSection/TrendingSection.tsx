@@ -12,8 +12,8 @@ import {
   StyledMainSectionFiltersWrapper,
   StyledMainSectionH2,
   StyledMainSectionHeader,
-} from 'components/Main/common/StyledComponents/MainStyledComponents';
-import { SwitchButton } from 'components/Main/common/SwitchButton/SwitchButton';
+} from 'components/Pages/MainPage/common/StyledComponents/MainStyledComponents';
+import { SwitchButton } from 'components/Pages/MainPage/common/SwitchButton/SwitchButton';
 import { DAY, MOVIE, TV, WEEK, ZERO } from 'constants/common';
 import { tempList } from 'constants/lists';
 import { setTrendingFilter, setTrendingTimeFilter } from 'store/actions/mainActions';

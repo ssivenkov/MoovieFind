@@ -1,0 +1,4 @@
+export enum TVSHOWS_ACTIONS {
+  SET_TVSHOWS = 'TWShowsReducer/SET_TVSHOWS',
+  SET_CURRENT_PAGE = 'TWShowsReducer/SET_CURRENT_PAGE',
+}
