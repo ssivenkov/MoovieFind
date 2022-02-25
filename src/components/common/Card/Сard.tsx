@@ -97,7 +97,7 @@ const StyledMovieTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-const Card: FC<MovieCardPropsType> = ({
+export const Card: FC<MovieCardPropsType> = ({
   posterPath,
   title,
   voteAverage,
@@ -123,5 +123,3 @@ const Card: FC<MovieCardPropsType> = ({
     <StyledMovieTitle>{title}</StyledMovieTitle>
   </StyledMovie>
 );
-
-export default Card;

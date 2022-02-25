@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import TempEmptyCard from 'components/common/Card/TempEmptyCard';
-import Card from 'components/common/Card/Сard';
+import { TempEmptyCard } from 'components/common/Card/TempEmptyCard';
+import { Card } from 'components/common/Card/Сard';
 import { SliderContainer } from 'components/common/Slider/Slider';
 import {
   StyledMainSectionContainer,

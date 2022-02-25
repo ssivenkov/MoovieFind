@@ -1,5 +1,6 @@
 import { MAIN_ACTIONS } from 'enums/mainEnum';
 import {
+  clearSearchImageLinkActionType,
   setSearchImageLinkActionType,
   setTrendingFilterActionType,
   setTrendingTimeFilterActionType,
@@ -22,3 +23,6 @@ export const setTrendingTimeFilter = (
 
 export const setSearchImageLink = (link: string): setSearchImageLinkActionType =>
   ({ type: MAIN_ACTIONS.SET_SEARCH_IMAGE_LINK, link } as const);
+
+export const clearSearchImageLink = (): clearSearchImageLinkActionType =>
+  ({ type: MAIN_ACTIONS.CLEAR_SEARCH_IMAGE_LINK } as const);

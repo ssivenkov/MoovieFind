@@ -1,10 +1,11 @@
+import { ONE } from 'constants/common';
 import { MOVIES_ACTIONS } from 'enums/moviesEnums';
 import { MoviesActionsTypes } from 'types/actions/moviesActionsTypes';
 import { InitialMoviesStateType } from 'types/reducers/movieReducerType';
 
 const initialMoviesState = {
   movies: [],
-  currentPage: 1,
+  currentPage: ONE,
 };
 
 export const moviesReducer = (

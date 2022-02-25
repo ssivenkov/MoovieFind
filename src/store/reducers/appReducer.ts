@@ -1,3 +1,4 @@
+import { EMPTY_STRING } from 'constants/common';
 import { APP_ACTIONS } from 'enums/appEnums';
 import { AppActionsTypes } from 'types/actions/appActionsTypes';
 import { InitialAppStateType } from 'types/reducers/appReducerType';
@@ -6,7 +7,7 @@ const initialAppState = {
   appInitialized: false,
   language: 'en-US',
   contentInitialized: false,
-  searchRequest: '',
+  searchRequest: EMPTY_STRING,
 };
 
 export const appReducer = (

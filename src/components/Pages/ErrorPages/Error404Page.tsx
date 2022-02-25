@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { PATH } from 'routes/routes';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
@@ -7,7 +7,7 @@ export const Error404Page = (): ReturnComponentType => (
   <div>
     <div>Error 404</div>
     <div>
-      <NavLink to={PATH.MAIN}>Back to home</NavLink>
+      <Link to={PATH.MAIN}>Back to home</Link>
     </div>
   </div>
 );

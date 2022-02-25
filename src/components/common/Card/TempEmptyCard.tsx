@@ -27,11 +27,9 @@ const StyledMovieTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-const TempEmptyCard = (): ReturnComponentType => (
+export const TempEmptyCard = (): ReturnComponentType => (
   <StyledMovie>
     <StyledMovieContainer />
     <StyledMovieTitle>Movie</StyledMovieTitle>
   </StyledMovie>
 );
-
-export default TempEmptyCard;

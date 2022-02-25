@@ -9,6 +9,7 @@ import { SearchSection } from 'components/Pages/MainPage/SearchSection/SearchSec
 import { TrendingSection } from 'components/Pages/MainPage/TrendingSection/TrendingSection';
 import { WhatsPopularSection } from 'components/Pages/MainPage/WhatsPopularSection/WhatsPopularSection';
 import { MOVIE, TV, ONE, DAY, WEEK, ZERO } from 'constants/common';
+import { clearSearchImageLink } from 'store/actions/mainActions';
 import { AppRootStateType } from 'store/store';
 import { setRandomSearchBackgroundImage } from 'store/thunks/mainThunk';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
@@ -148,10 +149,22 @@ export const MainPage = (): ReturnComponentType => {
   }, [trendingTimeFilter]);
 
   useEffect(() => {
-    if (popularTVShowsList.length !== ZERO && trendingTVShowsList.length !== ZERO) {
+    if (
+      popularTVShowsList.length !== ZERO &&
+      trendingTVShowsList.length !== ZERO &&
+      searchImageLink.length === ZERO
+    ) {
       dispatch(setRandomSearchBackgroundImage([popularTVShowsList, trendingTVShowsList]));
     }
-  }, [popularTVShowsList, trendingTVShowsList]);
+  }, [popularTVShowsList, trendingTVShowsList, searchImageLink]);
+
+  useEffect(
+    () =>
+      function clearSearchBackgroundImage() {
+        dispatch(clearSearchImageLink());
+      },
+    [],
+  );
 
   return (
     <StyledMainContainer>

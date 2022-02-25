@@ -21,8 +21,13 @@ export type setSearchImageLinkActionType = {
   link: string;
 };
 
+export type clearSearchImageLinkActionType = {
+  type: typeof MAIN_ACTIONS.CLEAR_SEARCH_IMAGE_LINK;
+};
+
 export type MainActionsTypes =
   | setWhatsPopularFilterActionType
   | setTrendingFilterActionType
   | setTrendingTimeFilterActionType
-  | setSearchImageLinkActionType;
+  | setSearchImageLinkActionType
+  | clearSearchImageLinkActionType;

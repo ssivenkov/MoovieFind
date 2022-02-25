@@ -1,10 +1,11 @@
+import { ONE } from 'constants/common';
 import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnums';
 import { TVShowsActionsType } from 'types/actions/TVShowActionsTypes';
 import { InitialTVShowsStateType } from 'types/reducers/TVShowsReducerType';
 
 const initialTVShowState = {
   TVShows: [],
-  currentPage: 1,
+  currentPage: ONE,
 };
 export const TVShowsReducer = (
   state: InitialTVShowsStateType = initialTVShowState,

@@ -1,4 +1,4 @@
-import { TV, DAY } from 'constants/common';
+import { TV, DAY, EMPTY_STRING } from 'constants/common';
 import { MAIN_ACTIONS } from 'enums/mainEnum';
 import { MainActionsTypes } from 'types/actions/mainActionsTypes';
 import { InitialMainStateType } from 'types/reducers/mainReducerType';
@@ -7,7 +7,7 @@ const initialMainState: InitialMainStateType = {
   WhatsPopularFilter: TV,
   TrendingFilter: TV,
   TrendingTimeFilter: DAY,
-  SearchImageLink: '',
+  SearchImageLink: EMPTY_STRING,
 };
 
 export const mainReducer = (
@@ -23,6 +23,8 @@ export const mainReducer = (
       return { ...state, TrendingTimeFilter: action.filter };
     case MAIN_ACTIONS.SET_SEARCH_IMAGE_LINK:
       return { ...state, SearchImageLink: action.link };
+    case MAIN_ACTIONS.CLEAR_SEARCH_IMAGE_LINK:
+      return { ...state, SearchImageLink: EMPTY_STRING };
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 
-import Card from 'components/common/Card/Сard';
+import { Card } from 'components/common/Card/Сard';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
 import { TVShowsSectionPropsType } from 'types/components/common/TVShowSection/TVShowSectionType';
 import { TVShowType } from 'types/reducers/TVShowsReducerType';

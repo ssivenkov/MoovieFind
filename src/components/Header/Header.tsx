@@ -1,11 +1,10 @@
 import React from 'react';
 
-import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from 'assets/images/logo.svg';
-import style from 'components/Header/Header.module.scss';
+import { Dropdown } from 'components/common/Dropdown/Dropdown';
 import { PATH } from 'routes/routes';
 import { ReturnComponentType } from 'types/common/ReturnComponentType';
 
@@ -21,6 +20,19 @@ const StyledContainer = styled.div`
 const StyledAppLogoContainer = styled.div`
   height: 100%;
   margin-right: 20px;
+`;
+
+const StyledHeaderLink = styled(Link)`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  font-weight: 500;
+  line-height: 1.08;
+  text-align: center;
+  color: var(--white);
+  border-radius: 7px;
 `;
 
 const StyledAppLogo = styled.img`
@@ -39,64 +51,37 @@ const StyledAuthContainer = styled.div`
   display: flex;
 `;
 
+const StyledAuthLink = styled(Link)`
+  color: var(--white);
+  margin: 0 10px;
+`;
+
 export const Header = (): ReturnComponentType => (
   <StyledContainer>
     <StyledCategoriesContainer>
       <StyledAppLogoContainer>
-        <NavLink to={PATH.MAIN}>
+        <Link to={PATH.MAIN}>
           <StyledAppLogo src={logo} />
-        </NavLink>
+        </Link>
       </StyledAppLogoContainer>
-      <div className={style.item}>
-        <NavLink
-          to={PATH.MOVIES}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          movies
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink
-          to={PATH.TVSHOWS}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          TV Shows
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink
-          to={PATH.PEOPLE}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          People
-        </NavLink>
-      </div>
-      <div className={style.item}>
-        <NavLink
-          to={PATH.SEARCH}
-          className={({ isActive }) => cn(style.item, { [style.active]: isActive })}
-        >
-          Search
-        </NavLink>
-      </div>
+      <Dropdown title="Movies">
+        {[
+          ['Popular', `${PATH.MOVIES}/${PATH.POPULAR}`],
+          ['Trending', `${PATH.MOVIES}/${PATH.TRENDING}`],
+        ]}
+      </Dropdown>
+      <Dropdown title="TV Shows">
+        {[
+          ['Popular', `${PATH.TVSHOWS}/${PATH.POPULAR}`],
+          ['Trending', `${PATH.TVSHOWS}/${PATH.TRENDING}`],
+        ]}
+      </Dropdown>
+      <StyledHeaderLink to={PATH.PEOPLE}>People</StyledHeaderLink>
+      <StyledHeaderLink to={PATH.SEARCH}>Search</StyledHeaderLink>
     </StyledCategoriesContainer>
     <StyledAuthContainer>
-      <NavLink
-        to={PATH.LOGIN}
-        className={({ isActive }) =>
-          cn(style.item, style.authLink, { [style.active]: isActive })
-        }
-      >
-        Login
-      </NavLink>
-      <NavLink
-        to={PATH.REGISTRATION}
-        className={({ isActive }) =>
-          cn(style.item, style.authLink, { [style.active]: isActive })
-        }
-      >
-        Registration
-      </NavLink>
+      <StyledAuthLink to={PATH.LOGIN}>Login</StyledAuthLink>
+      <StyledAuthLink to={PATH.REGISTRATION}>Registration</StyledAuthLink>
     </StyledAuthContainer>
   </StyledContainer>
 );

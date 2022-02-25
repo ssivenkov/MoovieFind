@@ -1,3 +1,4 @@
+import { ONE } from 'constants/common';
 import { TRENDING_ACTIONS } from 'enums/trendingEnums';
 import { TrendingActionsType } from 'types/actions/trendingActionsTypes';
 import { InitialMoviesStateType } from 'types/reducers/trendingReducerType';
@@ -5,7 +6,7 @@ import { InitialMoviesStateType } from 'types/reducers/trendingReducerType';
 const initialTrendingState = {
   trendingMovies: [],
   trendingTVShows: [],
-  sliderPage: 1,
+  sliderPage: ONE,
 };
 
 export const trendingReducer = (
