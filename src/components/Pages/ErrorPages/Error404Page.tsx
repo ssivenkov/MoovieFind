@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { PATH } from 'routes/routes';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 export const Error404Page = (): ReturnComponentType => (
   <div>

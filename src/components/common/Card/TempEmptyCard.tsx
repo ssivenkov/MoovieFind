@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 const StyledMovie = styled.div`
   width: 150px;
@@ -10,7 +10,6 @@ const StyledMovie = styled.div`
 `;
 
 const StyledMovieContainer = styled.div`
-  cursor: pointer;
   transition: 0.22s ease-out;
   width: 150px;
   height: 230px;

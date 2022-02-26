@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ONE, ZERO } from 'constants/common';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { DropdownPropsType } from 'types/components/common/DropdownTypes/DropdownTypes';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { DropdownPropsType } from 'types/components/commonTypes/DropdownTypes/DropdownTypes';
 
 const DropdownCommonBorderRadius = '10px';
 

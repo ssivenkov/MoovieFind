@@ -2,25 +2,27 @@ import React, { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { ExtraCard } from 'components/common/Card/ExtraCard';
+import { Card } from 'components/common/Card/MovieСard';
 import { TempEmptyCard } from 'components/common/Card/TempEmptyCard';
-import { Card } from 'components/common/Card/Сard';
 import { SliderContainer } from 'components/common/Slider/Slider';
 import {
   StyledMainSectionContainer,
   StyledMainSectionContentContainer,
   StyledMainSectionFiltersContainer,
   StyledMainSectionFiltersWrapper,
-  StyledMainSectionH2,
+  StyledMainSectionLinkTitle,
   StyledMainSectionHeader,
 } from 'components/Pages/MainPage/common/StyledComponents/MainStyledComponents';
 import { SwitchButton } from 'components/Pages/MainPage/common/SwitchButton/SwitchButton';
 import { DAY, MOVIE, TV, WEEK, ZERO } from 'constants/common';
 import { tempList } from 'constants/lists';
+import { PATH } from 'routes/routes';
 import { setTrendingFilter, setTrendingTimeFilter } from 'store/actions/mainActions';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { TrendingSectionPropsType } from 'types/components/Main/TrendingSection/TrendingSectionType';
-import { MovieType } from 'types/reducers/movieReducerType';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { TrendingSectionPropsType } from 'types/components/MainTypes/TrendingSectionSypes/TrendingSectionType';
+import { MovieType } from 'types/reducers/movieReducerTypes';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const TrendingSection: FC<TrendingSectionPropsType> = ({
   trendingList,
@@ -44,7 +46,11 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
   return (
     <StyledMainSectionContainer>
       <StyledMainSectionHeader>
-        <StyledMainSectionH2>Trending</StyledMainSectionH2>
+        <StyledMainSectionLinkTitle
+          to={`${filter === TV ? PATH.TVSHOWS : PATH.MOVIES}/${PATH.TRENDING}`}
+        >
+          Trending
+        </StyledMainSectionLinkTitle>
         <StyledMainSectionFiltersWrapper>
           <StyledMainSectionFiltersContainer>
             <SwitchButton
@@ -104,6 +110,10 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
                 releaseDate={trendingMovie.release_date}
               />
             ))}
+          <ExtraCard
+            link={`${filter === TV ? PATH.TVSHOWS : PATH.MOVIES}/${PATH.TRENDING}`}
+            title="See all"
+          />
         </SliderContainer>
       </StyledMainSectionContentContainer>
     </StyledMainSectionContainer>

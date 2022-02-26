@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import logo from 'assets/images/logo.svg';
 import { Dropdown } from 'components/common/Dropdown/Dropdown';
 import { PATH } from 'routes/routes';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 const StyledContainer = styled.div`
   width: 100%;

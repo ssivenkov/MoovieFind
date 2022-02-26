@@ -1,7 +1,7 @@
 import { TV, DAY, EMPTY_STRING } from 'constants/common';
 import { MAIN_ACTIONS } from 'enums/mainEnum';
 import { MainActionsTypes } from 'types/actions/mainActionsTypes';
-import { InitialMainStateType } from 'types/reducers/mainReducerType';
+import { InitialMainStateType } from 'types/reducers/mainReducerTypes';
 
 const initialMainState: InitialMainStateType = {
   WhatsPopularFilter: TV,

@@ -1,7 +1,7 @@
 import { ONE } from 'constants/common';
-import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnums';
+import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnum';
 import { TVShowsActionsType } from 'types/actions/TVShowActionsTypes';
-import { InitialTVShowsStateType } from 'types/reducers/TVShowsReducerType';
+import { InitialTVShowsStateType } from 'types/reducers/TVShowsReducerTypes';
 
 const initialTVShowState = {
   TVShows: [],

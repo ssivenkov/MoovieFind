@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 import styled from 'styled-components';
 
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 type DefaultButtonPropsType = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,

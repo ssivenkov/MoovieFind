@@ -6,7 +6,7 @@ import {
   setTrendingTimeFilterActionType,
   setWhatsPopularFilterActionType,
 } from 'types/actions/mainActionsTypes';
-import { MovieFilterType, TimeFilterType } from 'types/common/FilterTypes';
+import { MovieFilterType, TimeFilterType } from 'types/commonTypes/FilterTypes';
 
 export const setWhatsPopularFilter = (
   filter: MovieFilterType,

@@ -1,5 +1,5 @@
-import { MovieType } from './movieReducerType';
-import { TVShowType } from './TVShowsReducerType';
+import { MovieType } from './movieReducerTypes';
+import { TVShowType } from './TVShowsReducerTypes';
 
 export type InitialMoviesStateType = {
   trendingMovies: Array<MovieType>;

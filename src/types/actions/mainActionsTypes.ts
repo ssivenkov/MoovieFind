@@ -1,5 +1,5 @@
 import { MAIN_ACTIONS } from 'enums/mainEnum';
-import { MovieFilterType, TimeFilterType } from 'types/common/FilterTypes';
+import { MovieFilterType, TimeFilterType } from 'types/commonTypes/FilterTypes';
 
 export type setWhatsPopularFilterActionType = {
   type: typeof MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER;

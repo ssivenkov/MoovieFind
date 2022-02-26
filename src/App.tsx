@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Footer } from 'components/Footer/Footer';
 import { Header } from 'components/Header/Header';
 import { RoutesContainer } from 'components/RoutesContainer/RoutesContainer';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 const AppContainer = styled.div`
   width: 100%;

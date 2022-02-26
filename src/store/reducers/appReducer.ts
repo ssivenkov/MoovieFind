@@ -1,7 +1,7 @@
 import { EMPTY_STRING } from 'constants/common';
-import { APP_ACTIONS } from 'enums/appEnums';
+import { APP_ACTIONS } from 'enums/appEnum';
 import { AppActionsTypes } from 'types/actions/appActionsTypes';
-import { InitialAppStateType } from 'types/reducers/appReducerType';
+import { InitialAppStateType } from 'types/reducers/appReducerTypes';
 
 const initialAppState = {
   appInitialized: false,

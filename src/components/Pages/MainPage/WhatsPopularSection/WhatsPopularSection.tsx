@@ -2,25 +2,27 @@ import React, { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { ExtraCard } from 'components/common/Card/ExtraCard';
+import { Card } from 'components/common/Card/MovieСard';
 import { TempEmptyCard } from 'components/common/Card/TempEmptyCard';
-import { Card } from 'components/common/Card/Сard';
 import { SliderContainer } from 'components/common/Slider/Slider';
 import {
   StyledMainSectionContainer,
   StyledMainSectionContentContainer,
   StyledMainSectionFiltersContainer,
   StyledMainSectionFiltersWrapper,
-  StyledMainSectionH2,
+  StyledMainSectionLinkTitle,
   StyledMainSectionHeader,
 } from 'components/Pages/MainPage/common/StyledComponents/MainStyledComponents';
 import { SwitchButton } from 'components/Pages/MainPage/common/SwitchButton/SwitchButton';
 import { MOVIE, TV, ZERO } from 'constants/common';
 import { tempList } from 'constants/lists';
+import { PATH } from 'routes/routes';
 import { setWhatsPopularFilter } from 'store/actions/mainActions';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { WhatsPopularSectionPropsType } from 'types/components/Main/WhatsPopularSection/WhatsPopularSectionType';
-import { MovieType } from 'types/reducers/movieReducerType';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { WhatsPopularSectionPropsType } from 'types/components/MainTypes/WhatsPopularSectionTypes/WhatsPopularSectionType';
+import { MovieType } from 'types/reducers/movieReducerTypes';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
   popularList,
@@ -37,7 +39,11 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
   return (
     <StyledMainSectionContainer>
       <StyledMainSectionHeader>
-        <StyledMainSectionH2>What&apos;s popular</StyledMainSectionH2>
+        <StyledMainSectionLinkTitle
+          to={`${filter === TV ? PATH.TVSHOWS : PATH.MOVIES}/${PATH.POPULAR}`}
+        >
+          What&apos;s popular
+        </StyledMainSectionLinkTitle>
         <StyledMainSectionFiltersWrapper>
           <StyledMainSectionFiltersContainer>
             <SwitchButton
@@ -81,6 +87,12 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
                 releaseDate={popularMovie.release_date}
               />
             ))}
+          {popularList.length !== ZERO && (
+            <ExtraCard
+              link={`${filter === TV ? PATH.TVSHOWS : PATH.MOVIES}/${PATH.POPULAR}`}
+              title="See all"
+            />
+          )}
         </SliderContainer>
       </StyledMainSectionContentContainer>
     </StyledMainSectionContainer>

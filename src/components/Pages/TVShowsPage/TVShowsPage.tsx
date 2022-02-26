@@ -9,9 +9,9 @@ import { TVShowsSection } from 'components/Pages/TVShowsPage/TVShowsSection/TVSh
 import { ONE, ZERO } from 'constants/common';
 import { AppRootStateType } from 'store/store';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
-import { RequestObjectType } from 'types/common/RequestObjectType';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const TVShowsPage = (): ReturnComponentType => {
   const dispatch = useDispatch();

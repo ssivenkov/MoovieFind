@@ -2,10 +2,10 @@ import { FC } from 'react';
 
 import styled from 'styled-components';
 
-import { Card } from 'components/common/Card/Сard';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { MoovieSectionPropsType } from 'types/components/common/MovieSection/MovieSectionType';
-import { MovieType } from 'types/reducers/movieReducerType';
+import { Card } from 'components/common/Card/MovieСard';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { MoovieSectionPropsType } from 'types/components/commonTypes/MovieSectionTypes/MovieSectionTypes';
+import { MovieType } from 'types/reducers/movieReducerTypes';
 
 const StyledMain = styled.div`
   width: var(--content-width);
@@ -19,7 +19,7 @@ const StyledSectionTitle = styled.div`
   font-weight: 500;
 `;
 
-const StyledMoovies = styled.div`
+const StyledMovies = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -36,16 +36,16 @@ export const MoviesSection: FC<MoovieSectionPropsType> = ({
 }): ReturnComponentType => (
   <StyledMain>
     <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
-    <StyledMoovies>
-      {moviesList.map((moovie: MovieType) => (
+    <StyledMovies>
+      {moviesList.map((movie: MovieType) => (
         <Card
-          key={moovie.id}
-          posterPath={moovie.poster_path}
-          title={moovie.title}
-          voteAverage={moovie.vote_average}
-          releaseDate={moovie.release_date}
+          key={movie.id}
+          posterPath={movie.poster_path}
+          title={movie.title}
+          voteAverage={movie.vote_average}
+          releaseDate={movie.release_date}
         />
       ))}
-    </StyledMoovies>
+    </StyledMovies>
   </StyledMain>
 );

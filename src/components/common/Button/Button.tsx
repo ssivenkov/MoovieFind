@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { ButtonType } from 'types/components/common/ButtonTypes/ButtonTypes';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ButtonType } from 'types/components/commonTypes/ButtonTypes/ButtonTypes';
 
 const StyledButton = styled.button`
   padding: 10px 20px;

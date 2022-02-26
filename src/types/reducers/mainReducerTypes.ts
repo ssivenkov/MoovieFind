@@ -1,4 +1,4 @@
-import { MovieFilterType, TimeFilterType } from 'types/common/FilterTypes';
+import { MovieFilterType, TimeFilterType } from 'types/commonTypes/FilterTypes';
 
 export type InitialMainStateType = {
   WhatsPopularFilter: MovieFilterType;

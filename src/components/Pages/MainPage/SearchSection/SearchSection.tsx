@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { Button } from 'components/common/Button/Button';
 import style from 'components/Pages/MainPage/SearchSection/SearchSection.module.scss';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 const StyledSearchContainer = styled.div`
   width: 100%;

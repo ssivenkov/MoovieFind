@@ -1,7 +1,7 @@
 import { ONE } from 'constants/common';
-import { MOVIES_ACTIONS } from 'enums/moviesEnums';
+import { MOVIES_ACTIONS } from 'enums/moviesEnum';
 import { MoviesActionsTypes } from 'types/actions/moviesActionsTypes';
-import { InitialMoviesStateType } from 'types/reducers/movieReducerType';
+import { InitialMoviesStateType } from 'types/reducers/movieReducerTypes';
 
 const initialMoviesState = {
   movies: [],

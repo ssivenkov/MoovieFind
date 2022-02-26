@@ -1,4 +1,4 @@
-import { MovieType } from 'types/reducers/movieReducerType';
+import { MovieType } from 'types/reducers/movieReducerTypes';
 
 export type setMoviesActionType = {
   type: string;

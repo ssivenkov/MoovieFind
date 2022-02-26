@@ -1,5 +1,5 @@
-import { MovieType } from 'types/reducers/movieReducerType';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { MovieType } from 'types/reducers/movieReducerTypes';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export type setTrendingMoviesActionType = {
   type: string;

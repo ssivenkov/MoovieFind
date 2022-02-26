@@ -1,4 +1,4 @@
-import { APP_ACTIONS } from 'enums/appEnums';
+import { APP_ACTIONS } from 'enums/appEnum';
 import {
   appContentInitializedFalseActionType,
   appContentInitializedTrueActionType,

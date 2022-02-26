@@ -1,14 +1,9 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledMainSectionContainer = styled.div`
   width: 100%;
   margin-top: 60px;
-`;
-
-export const LoaderContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
 `;
 
 export const StyledMainSectionHeader = styled.div`
@@ -18,8 +13,9 @@ export const StyledMainSectionHeader = styled.div`
   margin-bottom: 30px;
 `;
 
-export const StyledMainSectionH2 = styled.h2`
+export const StyledMainSectionLinkTitle = styled(Link)`
   font-size: 28px;
+  color: var(--white);
 `;
 
 export const StyledMainSectionFiltersWrapper = styled.div`

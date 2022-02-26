@@ -9,9 +9,9 @@ import { MoviesSection } from 'components/Pages/MoviesPage/MoviesSection/MoviesS
 import { ONE, ZERO } from 'constants/common';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
-import { RequestObjectType } from 'types/common/RequestObjectType';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { MovieType } from 'types/reducers/movieReducerType';
+import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { MovieType } from 'types/reducers/movieReducerTypes';
 
 export const MoviesPage = (): ReturnComponentType => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import { instance } from 'api/instance';
-import { RequestObjectType } from 'types/common/RequestObjectType';
+import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
 export const TrendingAPI = {
   getTrendingMovies(requestObject: RequestObjectType, timeWindow: string) {

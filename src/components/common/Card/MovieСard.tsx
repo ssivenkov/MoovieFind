@@ -3,13 +3,13 @@ import React, { FC } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
 
-import { imageSource } from 'api/config';
+import { image300x450 } from 'api/config';
 import { ZERO } from 'constants/common';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import {
   MovieCardPropsType,
   StyledMovieRatePropsType,
-} from 'types/components/common/CardTypes/CardTypes';
+} from 'types/components/commonTypes/CardTypes/CardTypes';
 
 const StyledMovie = styled.div`
   width: 150px;
@@ -115,7 +115,7 @@ export const Card: FC<MovieCardPropsType> = ({
       </StyledMovieInfoContainer>
       <StyledMoviePosterShadowContainer>
         <StyledMoviePoster
-          src={`${imageSource}${posterPath}`}
+          src={`${image300x450}${posterPath}`}
           alt={`poster for the movie ${title}`}
         />
       </StyledMoviePosterShadowContainer>

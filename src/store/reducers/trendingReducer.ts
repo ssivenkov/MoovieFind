@@ -1,7 +1,7 @@
 import { ONE } from 'constants/common';
-import { TRENDING_ACTIONS } from 'enums/trendingEnums';
+import { TRENDING_ACTIONS } from 'enums/trendingEnum';
 import { TrendingActionsType } from 'types/actions/trendingActionsTypes';
-import { InitialMoviesStateType } from 'types/reducers/trendingReducerType';
+import { InitialMoviesStateType } from 'types/reducers/trendingReducerTypes';
 
 const initialTrendingState = {
   trendingMovies: [],

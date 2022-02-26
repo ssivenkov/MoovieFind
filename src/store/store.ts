@@ -4,20 +4,23 @@ import thunk, { ThunkAction } from 'redux-thunk';
 import { appReducer } from 'store/reducers/appReducer';
 import { mainReducer } from 'store/reducers/mainReducer';
 import { moviesReducer } from 'store/reducers/moviesReducer';
+import { peopleReducer } from 'store/reducers/peopleReducer';
 import { trendingReducer } from 'store/reducers/trendingReducer';
 import { TVShowsReducer } from 'store/reducers/TVShowsReducer';
 import { AppActionsTypes } from 'types/actions/appActionsTypes';
 import { MainActionsTypes } from 'types/actions/mainActionsTypes';
 import { MoviesActionsTypes } from 'types/actions/moviesActionsTypes';
+import { PeopleActionsType } from 'types/actions/peopleActionsTypes';
 import { TrendingActionsType } from 'types/actions/trendingActionsTypes';
 import { TVShowsActionsType } from 'types/actions/TVShowActionsTypes';
 
 const rootReducer = combineReducers({
   app: appReducer,
+  main: mainReducer,
   movies: moviesReducer,
   TVShows: TVShowsReducer,
-  main: mainReducer,
   trending: trendingReducer,
+  people: peopleReducer,
 });
 
 // @ts-ignore
@@ -26,10 +29,11 @@ export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(t
 export type AppRootStateType = ReturnType<typeof rootReducer>;
 export type AppRootActionsType =
   | AppActionsTypes
+  | MainActionsTypes
   | MoviesActionsTypes
   | TrendingActionsType
-  | MainActionsTypes
-  | TVShowsActionsType;
+  | TVShowsActionsType
+  | PeopleActionsType;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

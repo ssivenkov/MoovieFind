@@ -1,4 +1,4 @@
-export type ContactButtonType = {
+export type ContactButtonTypes = {
   link: string;
   iconClass: string;
 };

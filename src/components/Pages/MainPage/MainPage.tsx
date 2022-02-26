@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // eslint-disable-next-line camelcase
-import { api_key, originalImageSource } from 'api/config';
+import { api_key, originalImage } from 'api/config';
 import { SearchSection } from 'components/Pages/MainPage/SearchSection/SearchSection';
 import { TrendingSection } from 'components/Pages/MainPage/TrendingSection/TrendingSection';
 import { WhatsPopularSection } from 'components/Pages/MainPage/WhatsPopularSection/WhatsPopularSection';
@@ -15,11 +15,11 @@ import { setRandomSearchBackgroundImage } from 'store/thunks/mainThunk';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
-import { RequestObjectType } from 'types/common/RequestObjectType';
-import { ReturnComponentType } from 'types/common/ReturnComponentType';
-import { StyledIntroWrapperPropsType } from 'types/components/Main/MainType';
-import { MovieType } from 'types/reducers/movieReducerType';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
+import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { StyledIntroWrapperPropsType } from 'types/components/MainTypes/MainTypes';
+import { MovieType } from 'types/reducers/movieReducerTypes';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 const StyledMainContainer = styled.div`
   width: 100%;
@@ -36,8 +36,7 @@ const StyledIntroWrapper = styled.div<StyledIntroWrapperPropsType>`
       rgba(0, 0, 0, 0.7) 0%,
       rgba(0, 0, 0, 0.7) 100%
     ),
-    ${props =>
-      props.imageLink.length > ZERO && `url(${originalImageSource}${props.imageLink})`};
+    ${props => props.imageLink.length > ZERO && `url(${originalImage}${props.imageLink})`};
   background-size: cover;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;

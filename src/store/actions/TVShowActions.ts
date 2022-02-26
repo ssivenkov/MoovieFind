@@ -1,9 +1,9 @@
-import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnums';
+import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnum';
 import {
   setCurrentPageActionType,
   setTVShowsActionType,
 } from 'types/actions/TVShowActionsTypes';
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const setTVShows = (TVShows: Array<TVShowType>): setTVShowsActionType =>
   ({ type: TVSHOWS_ACTIONS.SET_TVSHOWS, TVShows } as const);

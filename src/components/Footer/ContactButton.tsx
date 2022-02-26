@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { ContactButtonType } from 'types/components/FooterType/ContactButtonType/ContactButtonType';
+import { ContactButtonTypes } from 'types/components/FooterTypes/ContactButtonTypes/ContactButtonTypes';
 
 const StyledContactButton = styled.a`
   display: flex !important;
@@ -34,7 +34,7 @@ const StyledContactButton = styled.a`
   }
 `;
 
-export const ContactButton: React.FC<ContactButtonType> = ({ link, iconClass }) => (
+export const ContactButton: React.FC<ContactButtonTypes> = ({ link, iconClass }) => (
   <StyledContactButton href={link} target="_blank" rel="noreferrer">
     <span className={`fab ${iconClass}`} />
   </StyledContactButton>

@@ -1,4 +1,4 @@
-import { TVShowType } from 'types/reducers/TVShowsReducerType';
+import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export type TVShowsSectionPropsType = {
   TVShowsList: Array<TVShowType>;
