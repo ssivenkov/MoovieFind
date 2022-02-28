@@ -41,7 +41,7 @@ export const PeopleSection: FC<PeopleSectionPropsType> = ({
         <PeopleCard
           key={human.id}
           name={human.name}
-          profile_path={human.profile_path}
+          profilePath={human.profile_path}
           popularity={human.popularity}
         />
       ))}

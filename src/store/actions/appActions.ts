@@ -1,19 +1,19 @@
 import { APP_ACTIONS } from 'enums/appEnum';
 import {
-  appContentInitializedFalseActionType,
-  appContentInitializedTrueActionType,
-  appInitializedFalseActionType,
-  appInitializedTrueActionType,
+  AppContentInitializedFalseActionType,
+  AppContentInitializedTrueActionType,
+  AppInitializedFalseActionType,
+  AppInitializedTrueActionType,
 } from 'types/actions/appActionsTypes';
 
-export const appInitializedTrue = (): appInitializedTrueActionType =>
+export const appInitializedTrue = (): AppInitializedTrueActionType =>
   ({ type: APP_ACTIONS.SET_APP_INITIALIZED_TRUE } as const);
 
-export const appInitializedFalse = (): appInitializedFalseActionType =>
+export const appInitializedFalse = (): AppInitializedFalseActionType =>
   ({ type: APP_ACTIONS.SET_APP_INITIALIZED_FALSE } as const);
 
-export const appContentInitializedTrue = (): appContentInitializedTrueActionType =>
+export const appContentInitializedTrue = (): AppContentInitializedTrueActionType =>
   ({ type: APP_ACTIONS.SET_APP_CONTENT_INITIALIZED_TRUE } as const);
 
-export const appContentInitializedFalse = (): appContentInitializedFalseActionType =>
+export const appContentInitializedFalse = (): AppContentInitializedFalseActionType =>
   ({ type: APP_ACTIONS.SET_APP_CONTENT_INITIALIZED_FALSE } as const);

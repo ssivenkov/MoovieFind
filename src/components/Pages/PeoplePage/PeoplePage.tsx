@@ -2,32 +2,43 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-// eslint-disable-next-line camelcase
-import { api_key } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
+import { Pagination } from 'components/common/Pagination/Pagination';
 import { PeopleSection } from 'components/Pages/PeoplePage/PeopleSection/PeopleSection';
-import { ONE, ZERO } from 'constants/common';
+import { ZERO, TWENTY } from 'constants/common';
+import { appContentInitializedFalse } from 'store/actions/appActions';
+import { setCurrentPage } from 'store/actions/peopleActions';
 import { AppRootStateType } from 'store/store';
 import { getPeople } from 'store/thunks/peopleThunk';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { PeopleType } from 'types/reducers/peopleReducerTypes';
 
 export const PeoplePage = (): ReturnComponentType => {
-  const dispatch = useDispatch();
-  const page = ONE;
-  const language = useSelector<AppRootStateType, string>(state => state.app.language);
-  const tempRequestObj: RequestObjectType = { api_key, language, page };
   const sectionTitle = 'People';
+  const dispatch = useDispatch();
   const peopleList = useSelector<AppRootStateType, Array<PeopleType>>(
-    state => state.people.people,
+    state => state.people.peopleList,
   );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
     state => state.app.contentInitialized,
   );
+  const currentPage = useSelector<AppRootStateType, number>(
+    state => state.people.currentPage,
+  );
+  const peopleCountInOnePage = useSelector<AppRootStateType, number>(
+    state => state.people.peopleCountInOnePage,
+  );
+  const totalPeopleCount = useSelector<AppRootStateType, number>(
+    state => state.people.totalPeopleCount,
+  );
+  const onPeoplePageChanged = (pageNumber: number): void => {
+    dispatch(appContentInitializedFalse());
+    dispatch(setCurrentPage(pageNumber));
+    dispatch(getPeople());
+  };
 
   useEffect(() => {
-    if (peopleList.length === ZERO) dispatch(getPeople(tempRequestObj));
+    if (peopleList.length === ZERO) dispatch(getPeople());
   }, []);
 
   if (appContentInitialized && peopleList.length === ZERO) {
@@ -35,7 +46,18 @@ export const PeoplePage = (): ReturnComponentType => {
   }
 
   if (peopleList.length !== ZERO) {
-    return <PeopleSection peopleList={peopleList} sectionTitle={sectionTitle} />;
+    return (
+      <>
+        <PeopleSection peopleList={peopleList} sectionTitle={sectionTitle} />
+        <Pagination
+          totalItemsCount={totalPeopleCount}
+          currentPage={currentPage}
+          onPageChanged={onPeoplePageChanged}
+          pageSize={peopleCountInOnePage}
+          pageLinkCountInOnePage={TWENTY}
+        />
+      </>
+    );
   }
 
   return <Loader />;

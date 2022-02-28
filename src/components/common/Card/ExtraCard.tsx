@@ -3,30 +3,32 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import {
+  StyledContainer,
+  StyledContentContainer,
+  StyledInfoContainer,
+  StyledLightHover,
+  StyledNoContent,
+  StyledText,
+} from 'components/common/Card/commonStyles';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { ExtraCardPropsType } from 'types/components/commonTypes/CardTypes/CardTypes';
 
-const StyledExtraCard = styled(Link)``;
+const StyledExtraCardLink = styled(Link)``;
 
 const StyledTitle = styled.div`
+  ${StyledText}
   opacity: 0.6;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  white-space: nowrap;
   color: var(--white);
   font-size: 20px;
-  transform: translate(-50%, 480%);
+  transform: translate(-50%, 490%);
   font-weight: 500;
-  pointer-events: none;
-  transition: 0.22s ease-out;
 `;
 
-const StyledContainer = styled.div`
+const StyledExtraCardContainer = styled.div`
+  ${StyledContainer}
   cursor: pointer;
   transition: 0.22s ease-out;
-  width: 150px;
-  margin: 18px 12px 15px 12px;
   &:hover {
     transform: scale(1.065) translate(0, -9px) translate(0, 1px);
     ${StyledTitle} {
@@ -35,52 +37,31 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledTitleContainer = styled.div`
-  z-index: 40;
-  position: relative;
-  transition: 0.22s ease-out;
+const StyledExtraCardInfoContainer = styled.div`
+  ${StyledInfoContainer}
 `;
 
 const StyledBackgroundContentContainer = styled.div`
-  transition: 0.22s ease-out;
-  z-index: 20;
-  &:before {
-    content: '';
-    width: 150px;
-    height: 230px;
-    position: absolute;
-    border-radius: 9px;
-    background-color: transparent;
-    transition: 0.22s ease-out;
-  }
-  &:hover {
-    &:before {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
-  }
+  ${StyledContentContainer}
+  ${StyledLightHover}
 `;
 
-const StyledBackgroundContent = styled.div`
-  width: 150px;
-  height: 230px;
-  border-radius: 10px;
-  user-select: none;
-  object-fit: cover;
-  background-color: rgba(255, 255, 255, 0.1);
+const StyledContent = styled.div`
+  ${StyledNoContent}
 `;
 
 export const ExtraCard: FC<ExtraCardPropsType> = ({
   title,
   link,
 }): ReturnComponentType => (
-  <StyledExtraCard to={link}>
-    <StyledContainer>
-      <StyledTitleContainer>
+  <StyledExtraCardLink to={link}>
+    <StyledExtraCardContainer>
+      <StyledExtraCardInfoContainer>
         <StyledTitle>{title}</StyledTitle>
-      </StyledTitleContainer>
+      </StyledExtraCardInfoContainer>
       <StyledBackgroundContentContainer>
-        <StyledBackgroundContent />
+        <StyledContent />
       </StyledBackgroundContentContainer>
-    </StyledContainer>
-  </StyledExtraCard>
+    </StyledExtraCardContainer>
+  </StyledExtraCardLink>
 );

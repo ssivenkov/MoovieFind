@@ -1,13 +1,13 @@
 import { MovieType } from 'types/reducers/movieReducerTypes';
 
-export type setMoviesActionType = {
+export type SetMoviesActionType = {
   type: string;
   movies: Array<MovieType>;
 };
 
-export type setCurrentPageActionType = {
+export type SetCurrentPageActionType = {
   type: string;
   currentPage: number;
 };
 
-export type MoviesActionsTypes = setMoviesActionType & setCurrentPageActionType;
+export type MoviesActionsTypes = SetMoviesActionType & SetCurrentPageActionType;

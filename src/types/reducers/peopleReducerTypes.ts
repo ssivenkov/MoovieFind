@@ -13,6 +13,8 @@ export type PeopleType = {
 };
 
 export type InitialPeopleStateType = {
-  people: Array<PeopleType>;
+  peopleList: Array<PeopleType>;
   currentPage: number;
+  peopleCountInOnePage: number;
+  totalPeopleCount: number;
 };

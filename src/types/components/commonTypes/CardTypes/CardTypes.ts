@@ -6,6 +6,10 @@ export interface StyledPeopleRatePropsType {
   popularity: number;
 }
 
+export interface StyledHumanPhotoContentContainerPropsType {
+  nullContent: boolean;
+}
+
 export type MovieCardPropsType = {
   title: string;
   posterPath: string;
@@ -20,7 +24,6 @@ export type ExtraCardPropsType = {
 
 export type PeopleCardPropsType = {
   name: string;
-  // eslint-disable-next-line camelcase
-  profile_path: string;
+  profilePath: string;
   popularity: number;
 };

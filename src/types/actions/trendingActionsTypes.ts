@@ -1,15 +1,15 @@
 import { MovieType } from 'types/reducers/movieReducerTypes';
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
-export type setTrendingMoviesActionType = {
+export type SetTrendingMoviesActionType = {
   type: string;
   trendingMovies: Array<MovieType>;
 };
 
-export type setTrendingTVShowsActionType = {
+export type SetTrendingTVShowsActionType = {
   type: string;
   trendingTVShows: Array<TVShowType>;
 };
 
-export type TrendingActionsType = setTrendingMoviesActionType &
-  setTrendingTVShowsActionType;
+export type TrendingActionsType = SetTrendingMoviesActionType &
+  SetTrendingTVShowsActionType;

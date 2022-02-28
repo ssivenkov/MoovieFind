@@ -19,6 +19,10 @@ export const appReducer = (
       return { ...state, appInitialized: true };
     case APP_ACTIONS.SET_APP_INITIALIZED_FALSE:
       return { ...state, appInitialized: false };
+    case APP_ACTIONS.SET_APP_CONTENT_INITIALIZED_TRUE:
+      return { ...state, contentInitialized: true };
+    case APP_ACTIONS.SET_APP_CONTENT_INITIALIZED_FALSE:
+      return { ...state, contentInitialized: false };
     default:
       return state;
   }

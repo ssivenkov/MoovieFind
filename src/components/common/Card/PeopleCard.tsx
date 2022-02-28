@@ -3,49 +3,44 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { image300x450 } from 'api/config';
+import {
+  StyledCardTitle,
+  StyledContainer,
+  StyledContentContainer,
+  StyledInfoContainer,
+  StyledLightHover,
+  StyledNoContent,
+  StyledText,
+} from 'components/common/Card/commonStyles';
 import { ZERO } from 'constants/common';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import {
   PeopleCardPropsType,
+  StyledHumanPhotoContentContainerPropsType,
   StyledPeopleRatePropsType,
 } from 'types/components/commonTypes/CardTypes/CardTypes';
 
 const StyledHuman = styled.div`
-  width: 150px;
-  margin: 18px 12px 15px 12px;
+  ${StyledContainer}
 `;
 
 const StyledHumanInfoContainer = styled.div`
-  z-index: 40;
-  position: relative;
-  transition: 0.22s ease-out;
+  ${StyledInfoContainer}
 `;
 
 const StyledHumanRate = styled.div<StyledPeopleRatePropsType>`
+  ${StyledText}
   opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
   transform: ${props =>
     props.popularity === ZERO ? 'translate(-50%, 135%)' : 'translate(-50%, 60%)'};
   font-size: ${props => (props.popularity === ZERO ? '22px' : '35px')};
-  white-space: nowrap;
-  font-weight: 700;
-  pointer-events: none;
-  transition: 0.22s ease-out;
 `;
 
 const StyledMovieReleaseDate = styled.div`
+  ${StyledText}
   opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, 760%);
   font-size: 14px;
-  font-weight: 700;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: 0.22s ease-out;
 `;
 
 const StyledHumanContainerContainer = styled.div`
@@ -59,47 +54,33 @@ const StyledHumanContainerContainer = styled.div`
   }
 `;
 
-const StyledHumanPhotoShadowContainer = styled.div`
-  transition: 0.22s ease-out;
-  z-index: 20;
-  &:before {
-    content: '';
-    width: 150px;
-    height: 230px;
-    position: absolute;
-    border-radius: 9px;
-    background-color: transparent;
-    transition: 0.22s ease-out;
-  }
-  &:hover {
-    &:before {
-      // background-color: rgba(7, 5, 14, 0.8);
-    }
-  }
+const StyledHumanPhotoContentContainer = styled.div<StyledHumanPhotoContentContainerPropsType>`
+  ${StyledContentContainer}
+  ${props => props.nullContent && StyledLightHover}
 `;
 
 const StyledHumanPhoto = styled.img`
-  width: 150px;
-  height: 230px;
-  border-radius: 10px;
-  user-select: none;
-  object-fit: cover;
-  background-color: var(--primary_almost-medium);
+  ${StyledNoContent}
+`;
+
+const StyledHumanNoPhotoContainer = styled.div`
+  ${StyledNoContent}
+`;
+
+const StyledHumanNoPhotoTitle = styled.span`
+  ${StyledText}
+  transform: translate(-50%, -65%);
+  font-size: 22px;
+  font-weight: 500;
 `;
 
 const StyledHumanName = styled.div`
-  margin-top: 10px;
-  font-size: 17px;
-  white-space: nowrap;
-  overflow: hidden;
-  height: 1.2em;
-  text-overflow: ellipsis;
+  ${StyledCardTitle}
 `;
 
 export const PeopleCard: FC<PeopleCardPropsType> = ({
   name,
-  // eslint-disable-next-line camelcase
-  profile_path,
+  profilePath,
   popularity,
 }): ReturnComponentType => (
   <StyledHuman>
@@ -109,10 +90,15 @@ export const PeopleCard: FC<PeopleCardPropsType> = ({
           {popularity === ZERO ? 'Not rated' : popularity}
         </StyledHumanRate>
       </StyledHumanInfoContainer>
-      <StyledHumanPhotoShadowContainer>
-        {/* eslint-disable-next-line camelcase */}
-        <StyledHumanPhoto src={`${image300x450}${profile_path}`} alt={`${name} photo`} />
-      </StyledHumanPhotoShadowContainer>
+      <StyledHumanPhotoContentContainer nullContent={profilePath === null}>
+        {profilePath === null ? (
+          <StyledHumanNoPhotoContainer>
+            <StyledHumanNoPhotoTitle>No photo</StyledHumanNoPhotoTitle>
+          </StyledHumanNoPhotoContainer>
+        ) : (
+          <StyledHumanPhoto src={`${image300x450}${profilePath}`} alt={`${name} photo`} />
+        )}
+      </StyledHumanPhotoContentContainer>
     </StyledHumanContainerContainer>
     <StyledHumanName>{name}</StyledHumanName>
   </StyledHuman>

@@ -1,13 +1,13 @@
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
-export type setTVShowsActionType = {
+export type SetTVShowsActionType = {
   type: string;
   TVShows: Array<TVShowType>;
 };
 
-export type setCurrentPageActionType = {
+export type SetCurrentPageActionType = {
   type: string;
   currentPage: number;
 };
 
-export type TVShowsActionsType = setTVShowsActionType & setCurrentPageActionType;
+export type TVShowsActionsType = SetTVShowsActionType & SetCurrentPageActionType;

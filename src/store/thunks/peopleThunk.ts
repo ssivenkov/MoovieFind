@@ -1,24 +1,35 @@
 import { ThunkDispatch } from 'redux-thunk';
 
+// eslint-disable-next-line camelcase
+import { api_key } from 'api/config';
 import { PeopleAPI } from 'api/PeopleAPI';
 import { ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setPeople } from 'store/actions/peopleActions';
+import { setPeopleData } from 'store/actions/peopleActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
 export const getPeople =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().people.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await PeopleAPI.getPeople(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await PeopleAPI.getPeople(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setPeople(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const peopleListResponse1 = await PeopleAPI.getPeopleData(pageOneRequestObject);
+      const resultPeopleData = peopleListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const peopleListResponse2 = await PeopleAPI.getPeopleData(pageTwoRequestObject);
+      resultPeopleData.results = [
+        ...peopleListResponse1.data.results,
+        ...peopleListResponse2.data.results,
+      ];
+      await dispatch(setPeopleData(resultPeopleData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting people. ${error}`);

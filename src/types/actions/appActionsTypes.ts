@@ -1,21 +1,21 @@
-export type appInitializedTrueActionType = {
+export type AppInitializedTrueActionType = {
   type: string;
 };
 
-export type appInitializedFalseActionType = {
+export type AppInitializedFalseActionType = {
   type: string;
 };
 
-export type appContentInitializedTrueActionType = {
+export type AppContentInitializedTrueActionType = {
   type: string;
 };
 
-export type appContentInitializedFalseActionType = {
+export type AppContentInitializedFalseActionType = {
   type: string;
 };
 
 export type AppActionsTypes =
-  | appInitializedTrueActionType
-  | appInitializedFalseActionType
-  | appContentInitializedTrueActionType
-  | appContentInitializedFalseActionType;
+  | AppInitializedTrueActionType
+  | AppInitializedFalseActionType
+  | AppContentInitializedTrueActionType
+  | AppContentInitializedFalseActionType;

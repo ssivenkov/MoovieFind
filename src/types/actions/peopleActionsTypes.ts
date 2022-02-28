@@ -1,13 +1,22 @@
 import { PeopleType } from 'types/reducers/peopleReducerTypes';
 
-export type setPeopleActionType = {
-  type: string;
-  people: Array<PeopleType>;
+export type PeopleDataResponseType = {
+  results: Array<PeopleType>;
+  page: number;
+  // eslint-disable-next-line camelcase
+  total_pages: number;
+  // eslint-disable-next-line camelcase
+  total_results: number;
 };
 
-export type setCurrentPageActionType = {
+export type SetPeopleActionType = {
+  type: string;
+  peopleData: PeopleDataResponseType;
+};
+
+export type SetCurrentPageActionType = {
   type: string;
   currentPage: number;
 };
 
-export type PeopleActionsType = setPeopleActionType & setCurrentPageActionType;
+export type PeopleActionsType = SetPeopleActionType & SetCurrentPageActionType;

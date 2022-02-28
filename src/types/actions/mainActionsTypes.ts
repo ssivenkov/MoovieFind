@@ -1,33 +1,33 @@
 import { MAIN_ACTIONS } from 'enums/mainEnum';
 import { MovieFilterType, TimeFilterType } from 'types/commonTypes/FilterTypes';
 
-export type setWhatsPopularFilterActionType = {
+export type SetWhatsPopularFilterActionType = {
   type: typeof MAIN_ACTIONS.SET_WHATS_POPULAR_FILTER;
   filter: MovieFilterType;
 };
 
-export type setTrendingFilterActionType = {
+export type SetTrendingFilterActionType = {
   type: typeof MAIN_ACTIONS.SET_TRENDING_FILTER;
   filter: MovieFilterType;
 };
 
-export type setTrendingTimeFilterActionType = {
+export type SetTrendingTimeFilterActionType = {
   type: typeof MAIN_ACTIONS.SET_TRENDING_TIME_FILTER;
   filter: TimeFilterType;
 };
 
-export type setSearchImageLinkActionType = {
+export type SetSearchImageLinkActionType = {
   type: typeof MAIN_ACTIONS.SET_SEARCH_IMAGE_LINK;
   link: string;
 };
 
-export type clearSearchImageLinkActionType = {
+export type ClearSearchImageLinkActionType = {
   type: typeof MAIN_ACTIONS.CLEAR_SEARCH_IMAGE_LINK;
 };
 
 export type MainActionsTypes =
-  | setWhatsPopularFilterActionType
-  | setTrendingFilterActionType
-  | setTrendingTimeFilterActionType
-  | setSearchImageLinkActionType
-  | clearSearchImageLinkActionType;
+  | SetWhatsPopularFilterActionType
+  | SetTrendingFilterActionType
+  | SetTrendingTimeFilterActionType
+  | SetSearchImageLinkActionType
+  | ClearSearchImageLinkActionType;
