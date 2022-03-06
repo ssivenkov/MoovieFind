@@ -2,32 +2,43 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-// eslint-disable-next-line camelcase
-import { api_key } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
+import { Pagination } from 'components/common/Pagination/Pagination';
 import { TVShowsSection } from 'components/Pages/TVShowsPage/TVShowsSection/TVShowsSection';
-import { ONE, ZERO } from 'constants/common';
+import { VisiblePaginationLinkCount, ZERO } from 'constants/common';
+import { appContentInitializedFalse } from 'store/actions/appActions';
+import { setCurrentPage } from 'store/actions/TVShowActions';
 import { AppRootStateType } from 'store/store';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const TVShowsPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
-  const page = ONE;
-  const language = useSelector<AppRootStateType, string>(state => state.app.language);
-  const tempRequestObj: RequestObjectType = { api_key, language, page };
   const sectionTitle = 'TV Shows';
   const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
-    state => state.TVShows.TVShows,
+    state => state.TVShows.TVShowsList,
   );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
     state => state.app.contentInitialized,
   );
+  const currentPage = useSelector<AppRootStateType, number>(
+    state => state.TVShows.currentPage,
+  );
+  const TVShowsCountInOnePage = useSelector<AppRootStateType, number>(
+    state => state.TVShows.TVShowsCountInOnePage,
+  );
+  const totalTVShowsCount = useSelector<AppRootStateType, number>(
+    state => state.TVShows.totalTVShowsCount,
+  );
+  const onTVShowPageChanged = (pageNumber: number): void => {
+    dispatch(appContentInitializedFalse());
+    dispatch(setCurrentPage(pageNumber));
+    dispatch(getPopularTVShows());
+  };
 
   useEffect(() => {
-    if (TVShowsList.length === ZERO) dispatch(getPopularTVShows(tempRequestObj));
+    if (TVShowsList.length === ZERO) dispatch(getPopularTVShows());
   }, []);
 
   if (appContentInitialized && TVShowsList.length === ZERO) {
@@ -35,7 +46,18 @@ export const TVShowsPage = (): ReturnComponentType => {
   }
 
   if (TVShowsList.length !== ZERO) {
-    return <TVShowsSection TVShowsList={TVShowsList} sectionTitle={sectionTitle} />;
+    return (
+      <>
+        <TVShowsSection TVShowsList={TVShowsList} sectionTitle={sectionTitle} />
+        <Pagination
+          totalItemsCount={totalTVShowsCount}
+          currentPage={currentPage}
+          onPageChanged={onTVShowPageChanged}
+          pageSize={TVShowsCountInOnePage}
+          visiblePaginationLinkCount={VisiblePaginationLinkCount}
+        />
+      </>
+    );
   }
 
   return <Loader />;

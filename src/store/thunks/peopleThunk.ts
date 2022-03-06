@@ -3,7 +3,7 @@ import { ThunkDispatch } from 'redux-thunk';
 // eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
 import { PeopleAPI } from 'api/PeopleAPI';
-import { ONE, TWO } from 'constants/common';
+import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
 import { setPeopleData } from 'store/actions/peopleActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
@@ -21,6 +21,12 @@ export const getPeople =
       const pageOneRequestObject = { ...requestObj };
       pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
       const peopleListResponse1 = await PeopleAPI.getPeopleData(pageOneRequestObject);
+      if (peopleListResponse1.data.total_pages > MaxPagesCount) {
+        peopleListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (peopleListResponse1.data.total_results > MaxItemsCount) {
+        peopleListResponse1.data.total_results = MaxItemsCount;
+      }
       const resultPeopleData = peopleListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
       pageTwoRequestObject.page = pageOneRequestObject.page + ONE;

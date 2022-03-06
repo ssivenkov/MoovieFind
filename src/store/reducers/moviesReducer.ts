@@ -1,11 +1,13 @@
-import { ONE } from 'constants/common';
+import { CardsCountInOnePage, ONE, ZERO } from 'constants/common';
 import { MOVIES_ACTIONS } from 'enums/moviesEnum';
 import { MoviesActionsTypes } from 'types/actions/moviesActionsTypes';
 import { InitialMoviesStateType } from 'types/reducers/movieReducerTypes';
 
 const initialMoviesState = {
-  movies: [],
+  moviesList: [],
   currentPage: ONE,
+  moviesCountInOnePage: CardsCountInOnePage,
+  totalMoviesCount: ZERO,
 };
 
 export const moviesReducer = (
@@ -13,8 +15,14 @@ export const moviesReducer = (
   action: MoviesActionsTypes,
 ): InitialMoviesStateType => {
   switch (action.type) {
-    case MOVIES_ACTIONS.SET_MOVIES:
-      return { ...state, movies: action.movies };
+    case MOVIES_ACTIONS.SET_MOVIES_DATA:
+      return {
+        ...state,
+        moviesList: action.moviesData.results,
+        totalMoviesCount: action.moviesData.total_results,
+      };
+    case MOVIES_ACTIONS.SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.currentPage };
     default:
       return state;
   }

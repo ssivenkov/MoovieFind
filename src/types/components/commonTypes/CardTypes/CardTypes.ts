@@ -12,7 +12,7 @@ export interface StyledHumanPhotoContentContainerPropsType {
 
 export type MovieCardPropsType = {
   title: string;
-  posterPath: string;
+  posterPath: string | null;
   voteAverage: number;
   releaseDate: string;
 };

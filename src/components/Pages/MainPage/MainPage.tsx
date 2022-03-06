@@ -72,16 +72,16 @@ export const MainPage = (): ReturnComponentType => {
   const language = useSelector<AppRootStateType, string>(state => state.app.language);
   const requestObj: RequestObjectType = { api_key, language, page };
 
-  const popularTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
-    state => state.TVShows.TVShows,
+  const popularTVShowsList = useSelector<AppRootStateType, TVShowType[]>(
+    state => state.TVShows.TVShowsList,
   );
-  const popularMoviesList = useSelector<AppRootStateType, Array<MovieType>>(
-    state => state.movies.movies,
+  const popularMoviesList = useSelector<AppRootStateType, MovieType[]>(
+    state => state.movies.moviesList,
   );
-  const trendingTVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
+  const trendingTVShowsList = useSelector<AppRootStateType, TVShowType[]>(
     state => state.trending.trendingTVShows,
   );
-  const trendingMoviesList = useSelector<AppRootStateType, Array<MovieType>>(
+  const trendingMoviesList = useSelector<AppRootStateType, MovieType[]>(
     state => state.trending.trendingMovies,
   );
   const whatsPopularFilter = useSelector<AppRootStateType, string>(
@@ -100,11 +100,11 @@ export const MainPage = (): ReturnComponentType => {
   useEffect(() => {
     switch (whatsPopularFilter) {
       case TV: {
-        dispatch(getPopularTVShows(requestObj));
+        dispatch(getPopularTVShows());
         break;
       }
       case MOVIE: {
-        dispatch(getPopularMovies(requestObj));
+        dispatch(getPopularMovies());
         break;
       }
       default:

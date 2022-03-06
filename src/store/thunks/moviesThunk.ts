@@ -1,24 +1,41 @@
 import { ThunkDispatch } from 'redux-thunk';
 
+// eslint-disable-next-line camelcase
+import { api_key } from 'api/config';
 import { MoviesAPI } from 'api/MoviesAPI';
-import { ONE, TWO } from 'constants/common';
+import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setMovies } from 'store/actions/movieActions';
+import { setMoviesData } from 'store/actions/movieActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
 export const getPopularMovies =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().movies.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await MoviesAPI.getPopularMovies(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await MoviesAPI.getPopularMovies(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setMovies(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const moviesListResponse1 = await MoviesAPI.getPopularMovies(pageOneRequestObject);
+      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
+        moviesListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (moviesListResponse1.data.total_results > MaxItemsCount) {
+        moviesListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultMoviesData = moviesListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const moviesListResponse2 = await MoviesAPI.getPopularMovies(pageTwoRequestObject);
+      resultMoviesData.results = [
+        ...moviesListResponse1.data.results,
+        ...moviesListResponse2.data.results,
+      ];
+      await dispatch(setMoviesData(resultMoviesData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting popular movies. ${error}`);
@@ -28,17 +45,37 @@ export const getPopularMovies =
   };
 
 export const getNowPlayingMovies =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().movies.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await MoviesAPI.getNowPlayingMovies(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await MoviesAPI.getNowPlayingMovies(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setMovies(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const moviesListResponse1 = await MoviesAPI.getNowPlayingMovies(
+        pageOneRequestObject,
+      );
+      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
+        moviesListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (moviesListResponse1.data.total_results > MaxItemsCount) {
+        moviesListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultMoviesData = moviesListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const moviesListResponse2 = await MoviesAPI.getNowPlayingMovies(
+        pageTwoRequestObject,
+      );
+      resultMoviesData.results = [
+        ...moviesListResponse1.data.results,
+        ...moviesListResponse2.data.results,
+      ];
+      await dispatch(setMoviesData(resultMoviesData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting now playing movies. ${error}`);
@@ -48,17 +85,33 @@ export const getNowPlayingMovies =
   };
 
 export const getUpcomingMovies =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().movies.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await MoviesAPI.getUpcomingMovies(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await MoviesAPI.getUpcomingMovies(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setMovies(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const moviesListResponse1 = await MoviesAPI.getUpcomingMovies(pageOneRequestObject);
+      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
+        moviesListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (moviesListResponse1.data.total_results > MaxItemsCount) {
+        moviesListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultMoviesData = moviesListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const moviesListResponse2 = await MoviesAPI.getUpcomingMovies(pageTwoRequestObject);
+      resultMoviesData.results = [
+        ...moviesListResponse1.data.results,
+        ...moviesListResponse2.data.results,
+      ];
+      await dispatch(setMoviesData(resultMoviesData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting upcoming movies. ${error}`);
@@ -68,17 +121,33 @@ export const getUpcomingMovies =
   };
 
 export const getTopRatedMovies =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().movies.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await MoviesAPI.getTopRatedMovies(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await MoviesAPI.getTopRatedMovies(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setMovies(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const moviesListResponse1 = await MoviesAPI.getTopRatedMovies(pageOneRequestObject);
+      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
+        moviesListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (moviesListResponse1.data.total_results > MaxItemsCount) {
+        moviesListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultMoviesData = moviesListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const moviesListResponse2 = await MoviesAPI.getTopRatedMovies(pageTwoRequestObject);
+      resultMoviesData.results = [
+        ...moviesListResponse1.data.results,
+        ...moviesListResponse2.data.results,
+      ];
+      await dispatch(setMoviesData(resultMoviesData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting top rated movies. ${error}`);

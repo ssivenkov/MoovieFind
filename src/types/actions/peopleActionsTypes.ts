@@ -1,7 +1,7 @@
 import { PeopleType } from 'types/reducers/peopleReducerTypes';
 
 export type PeopleDataResponseType = {
-  results: Array<PeopleType>;
+  results: PeopleType[];
   page: number;
   // eslint-disable-next-line camelcase
   total_pages: number;

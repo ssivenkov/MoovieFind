@@ -1,87 +1,156 @@
 import { ThunkDispatch } from 'redux-thunk';
 
+// eslint-disable-next-line camelcase
+import { api_key } from 'api/config';
 import { TVShowsAPI } from 'api/TVShowsAPI';
-import { ONE, TWO } from 'constants/common';
+import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setTVShows } from 'store/actions/TVShowActions';
+import { setTVShowsData } from 'store/actions/TVShowActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
 export const getPopularTVShows =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().TVShows.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await TVShowsAPI.getPopularTVs(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await TVShowsAPI.getPopularTVs(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setTVShows(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const TVShowsListResponse1 = await TVShowsAPI.getPopularTVs(pageOneRequestObject);
+      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
+        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
+        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultTVShowsData = TVShowsListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const TVShowsListResponse2 = await TVShowsAPI.getPopularTVs(pageTwoRequestObject);
+      resultTVShowsData.results = [
+        ...TVShowsListResponse1.data.results,
+        ...TVShowsListResponse2.data.results,
+      ];
+      await dispatch(setTVShowsData(resultTVShowsData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
-      console.log(`Error getting popular TWShows. ${error}`);
+      console.log(`Error getting popular TVShows. ${error}`);
     } finally {
       dispatch(appInitializedTrue());
     }
   };
 
 export const getAiringTodayTVShows =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().TVShows.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await TVShowsAPI.getAiringTodayTVs(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await TVShowsAPI.getAiringTodayTVs(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setTVShows(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const TVShowsListResponse1 = await TVShowsAPI.getAiringTodayTVs(
+        pageOneRequestObject,
+      );
+      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
+        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
+        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultTVShowsData = TVShowsListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const TVShowsListResponse2 = await TVShowsAPI.getAiringTodayTVs(
+        pageTwoRequestObject,
+      );
+      resultTVShowsData.results = [
+        ...TVShowsListResponse1.data.results,
+        ...TVShowsListResponse2.data.results,
+      ];
+      await dispatch(setTVShowsData(resultTVShowsData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
-      console.log(`Error getting airing today TWShows. ${error}`);
+      console.log(`Error getting airing today TVShows. ${error}`);
     } finally {
       dispatch(appInitializedTrue());
     }
   };
 
 export const getOnTheAirTVShows =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().TVShows.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await TVShowsAPI.getOnTheAirTVs(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await TVShowsAPI.getOnTheAirTVs(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setTVShows(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const TVShowsListResponse1 = await TVShowsAPI.getOnTheAirTVs(pageOneRequestObject);
+      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
+        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
+        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultTVShowsData = TVShowsListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const TVShowsListResponse2 = await TVShowsAPI.getOnTheAirTVs(pageTwoRequestObject);
+      resultTVShowsData.results = [
+        ...TVShowsListResponse1.data.results,
+        ...TVShowsListResponse2.data.results,
+      ];
+      await dispatch(setTVShowsData(resultTVShowsData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
-      console.log(`Error getting on the air TWShows. ${error}`);
+      console.log(`Error getting on the air TVShows. ${error}`);
     } finally {
       dispatch(appInitializedTrue());
     }
   };
 
 export const getTopRatedTVShows =
-  (tempRequestObj: RequestObjectType): AppThunk =>
-  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+  (): AppThunk =>
+  async (
+    dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
+    getState,
+  ) => {
+    const { language } = getState().app;
+    const page = getState().TVShows.currentPage;
+    const requestObj = { api_key, language, page };
     try {
-      const requestObj = { ...tempRequestObj };
-      requestObj.page = tempRequestObj.page * TWO - ONE;
-      const response1 = await TVShowsAPI.getTopRatedTVs(tempRequestObj);
-      const tempNextPageRequestObj = { ...tempRequestObj };
-      tempNextPageRequestObj.page += ONE;
-      const response2 = await TVShowsAPI.getTopRatedTVs(tempNextPageRequestObj);
-      const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setTVShows(resultResponse));
+      const pageOneRequestObject = { ...requestObj };
+      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
+      const TVShowsListResponse1 = await TVShowsAPI.getTopRatedTVs(pageOneRequestObject);
+      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
+        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+      }
+      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
+        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      }
+      const resultTVShowsData = TVShowsListResponse1.data;
+      const pageTwoRequestObject = { ...requestObj };
+      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+      const TVShowsListResponse2 = await TVShowsAPI.getTopRatedTVs(pageTwoRequestObject);
+      resultTVShowsData.results = [
+        ...TVShowsListResponse1.data.results,
+        ...TVShowsListResponse2.data.results,
+      ];
+      await dispatch(setTVShowsData(resultTVShowsData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
-      console.log(`Error getting top rated TWShows. ${error}`);
+      console.log(`Error getting top rated TVShows. ${error}`);
     } finally {
       dispatch(appInitializedTrue());
     }

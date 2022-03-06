@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'components/common/Loader/Loader';
 import { Pagination } from 'components/common/Pagination/Pagination';
 import { PeopleSection } from 'components/Pages/PeoplePage/PeopleSection/PeopleSection';
-import { ZERO, TWENTY } from 'constants/common';
+import { ZERO, VisiblePaginationLinkCount } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
 import { setCurrentPage } from 'store/actions/peopleActions';
 import { AppRootStateType } from 'store/store';
@@ -16,7 +16,7 @@ import { PeopleType } from 'types/reducers/peopleReducerTypes';
 export const PeoplePage = (): ReturnComponentType => {
   const sectionTitle = 'People';
   const dispatch = useDispatch();
-  const peopleList = useSelector<AppRootStateType, Array<PeopleType>>(
+  const peopleList = useSelector<AppRootStateType, PeopleType[]>(
     state => state.people.peopleList,
   );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
@@ -54,7 +54,7 @@ export const PeoplePage = (): ReturnComponentType => {
           currentPage={currentPage}
           onPageChanged={onPeoplePageChanged}
           pageSize={peopleCountInOnePage}
-          pageLinkCountInOnePage={TWENTY}
+          visiblePaginationLinkCount={VisiblePaginationLinkCount}
         />
       </>
     );

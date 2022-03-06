@@ -27,6 +27,7 @@ html {
     --background1: #c27481;
     --background2: #ffb8bc;
     --white: #fff;
+    --gray: #444;
     --dark: #4f626c;
     --black: #000;
 }

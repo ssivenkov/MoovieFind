@@ -10,6 +10,7 @@ import {
   StyledContentContainer,
   StyledDarkHover,
   StyledInfoContainer,
+  StyledNoContent,
   StyledSize,
   StyledText,
 } from 'components/common/Card/commonStyles';
@@ -64,11 +65,15 @@ const StyledMoviePoster = styled.img`
   background-color: var(--primary_almost-medium);
 `;
 
+const StyledMovieNoPoster = styled.div`
+  ${StyledNoContent}
+`;
+
 const StyledMovieTitle = styled.div`
   ${StyledCardTitle}
 `;
 
-export const Card: FC<MovieCardPropsType> = ({
+export const MovieCard: FC<MovieCardPropsType> = ({
   posterPath,
   title,
   voteAverage,
@@ -81,14 +86,18 @@ export const Card: FC<MovieCardPropsType> = ({
           {voteAverage === ZERO ? 'Not rated' : voteAverage}
         </StyledMovieRate>
         <StyledMovieReleaseDate>
-          {moment(releaseDate).format('MMMM DD, YYYY')}
+          {releaseDate ? moment(releaseDate).format('MMMM DD, YYYY') : 'No date'}
         </StyledMovieReleaseDate>
       </StyledMovieInfoContainer>
       <StyledMoviePosterShadowContainer>
-        <StyledMoviePoster
-          src={`${image300x450}${posterPath}`}
-          alt={`poster for the movie ${title}`}
-        />
+        {posterPath ? (
+          <StyledMoviePoster
+            src={`${image300x450}${posterPath}`}
+            alt={`poster for the ${title}`}
+          />
+        ) : (
+          <StyledMovieNoPoster />
+        )}
       </StyledMoviePosterShadowContainer>
     </StyledMovieContainer>
     <StyledMovieTitle>{title}</StyledMovieTitle>

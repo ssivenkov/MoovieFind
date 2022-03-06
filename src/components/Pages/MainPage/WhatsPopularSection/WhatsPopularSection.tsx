@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ExtraCard } from 'components/common/Card/ExtraCard';
-import { Card } from 'components/common/Card/MovieСard';
+import { MovieCard } from 'components/common/Card/MovieСard';
 import { TempEmptyCard } from 'components/common/Card/TempEmptyCard';
 import { SliderContainer } from 'components/common/Slider/Slider';
 import {
@@ -69,9 +69,9 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
             tempList.map(tempEmptyCard => <TempEmptyCard key={tempEmptyCard} />)}
           {filter === TV &&
             popularList.map((popularTVShow: TVShowType) => (
-              <Card
+              <MovieCard
                 key={popularTVShow.id}
-                posterPath={popularTVShow.poster_path}
+                posterPath={popularTVShow.poster_path ? popularTVShow.poster_path : ''}
                 title={popularTVShow.name}
                 voteAverage={popularTVShow.vote_average}
                 releaseDate={popularTVShow.first_air_date}
@@ -79,9 +79,9 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
             ))}
           {filter === MOVIE &&
             popularList.map((popularMovie: MovieType) => (
-              <Card
+              <MovieCard
                 key={popularMovie.id}
-                posterPath={popularMovie.poster_path}
+                posterPath={popularMovie.poster_path ? popularMovie.poster_path : ''}
                 title={popularMovie.title}
                 voteAverage={popularMovie.vote_average}
                 releaseDate={popularMovie.release_date}

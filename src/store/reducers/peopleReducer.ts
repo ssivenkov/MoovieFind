@@ -1,12 +1,12 @@
-import { ZERO, ONE, FORTY } from 'constants/common';
+import { ZERO, ONE, CardsCountInOnePage } from 'constants/common';
 import { PEOPLE_ACTIONS } from 'enums/peopleEnum';
 import { PeopleActionsType } from 'types/actions/peopleActionsTypes';
-import { InitialPeopleStateType, PeopleType } from 'types/reducers/peopleReducerTypes';
+import { InitialPeopleStateType } from 'types/reducers/peopleReducerTypes';
 
 const initialPeopleState = {
-  peopleList: [] as PeopleType[],
+  peopleList: [],
   currentPage: ONE,
-  peopleCountInOnePage: FORTY,
+  peopleCountInOnePage: CardsCountInOnePage,
   totalPeopleCount: ZERO,
 };
 
