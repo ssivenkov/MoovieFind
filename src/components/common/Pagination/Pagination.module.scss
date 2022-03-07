@@ -6,8 +6,13 @@
     margin-top: 20px;
 }
 
-.buttonBlock {
+.buttonsBlock {
+    display: flex;
     margin-bottom: 20px;
+}
+
+.buttonContainer {
+    margin: 0 10px;
 }
 
 .pageBlock {
@@ -58,26 +63,4 @@
     background-color: var(--primary_half-medium);
     border: 2px solid var(--primary);
     cursor: default;
-}
-
-.button {
-    color: #fff;
-    font-size: 14px;
-    background-color: rgb(79, 98, 108);
-    padding: 3px;
-    margin: 0 10px;
-    border-radius: 8px;
-    white-space: nowrap;
-    &:hover {
-        background-color: rgb(79, 98, 108);
-        color: #fff;
-        text-shadow: #fff 0 0 4px;
-        box-shadow:rgb(79, 98, 108) 0 0 5px;
-    }
-    &:disabled {
-        background-color: #555;
-        text-shadow: none;
-        box-shadow: none;
-        cursor: auto;
-    }
 }

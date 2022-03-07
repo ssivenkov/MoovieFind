@@ -8,6 +8,13 @@ import { TVShowsSection } from 'components/Pages/TVShowsPage/TVShowsSection/TVSh
 import { VisiblePaginationLinkCount, ZERO } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
 import { setCurrentPage } from 'store/actions/TVShowActions';
+import { getAppInitialized, getContentInitialized } from 'store/selectors/appSelectors';
+import {
+  getCurrentPage,
+  getTotalTVShowsCount,
+  getTVShowsCountInOnePage,
+  getTVShowsList,
+} from 'store/selectors/TVShowsSelectors';
 import { AppRootStateType } from 'store/store';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
@@ -16,21 +23,16 @@ import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 export const TVShowsPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const sectionTitle = 'TV Shows';
-  const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
-    state => state.TVShows.TVShowsList,
-  );
+  const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(getTVShowsList);
+  const appInitialized = useSelector<AppRootStateType, boolean>(getAppInitialized);
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
-    state => state.app.contentInitialized,
+    getContentInitialized,
   );
-  const currentPage = useSelector<AppRootStateType, number>(
-    state => state.TVShows.currentPage,
-  );
+  const currentPage = useSelector<AppRootStateType, number>(getCurrentPage);
   const TVShowsCountInOnePage = useSelector<AppRootStateType, number>(
-    state => state.TVShows.TVShowsCountInOnePage,
+    getTVShowsCountInOnePage,
   );
-  const totalTVShowsCount = useSelector<AppRootStateType, number>(
-    state => state.TVShows.totalTVShowsCount,
-  );
+  const totalTVShowsCount = useSelector<AppRootStateType, number>(getTotalTVShowsCount);
   const onTVShowPageChanged = (pageNumber: number): void => {
     dispatch(appContentInitializedFalse());
     dispatch(setCurrentPage(pageNumber));
@@ -41,11 +43,11 @@ export const TVShowsPage = (): ReturnComponentType => {
     if (TVShowsList.length === ZERO) dispatch(getPopularTVShows());
   }, []);
 
-  if (appContentInitialized && TVShowsList.length === ZERO) {
+  if (appInitialized && appContentInitialized && TVShowsList.length === ZERO) {
     return <div>{sectionTitle} not found</div>;
   }
 
-  if (TVShowsList.length !== ZERO) {
+  if (appContentInitialized && TVShowsList.length !== ZERO) {
     return (
       <>
         <TVShowsSection TVShowsList={TVShowsList} sectionTitle={sectionTitle} />

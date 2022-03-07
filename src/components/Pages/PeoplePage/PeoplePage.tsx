@@ -8,6 +8,13 @@ import { PeopleSection } from 'components/Pages/PeoplePage/PeopleSection/PeopleS
 import { ZERO, VisiblePaginationLinkCount } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
 import { setCurrentPage } from 'store/actions/peopleActions';
+import { getAppInitialized, getContentInitialized } from 'store/selectors/appSelectors';
+import {
+  getCurrentPage,
+  getPeopleCountInOnePage,
+  getPeopleList,
+  getTotalPeopleCount,
+} from 'store/selectors/peopleSelectors';
 import { AppRootStateType } from 'store/store';
 import { getPeople } from 'store/thunks/peopleThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
@@ -16,21 +23,16 @@ import { PeopleType } from 'types/reducers/peopleReducerTypes';
 export const PeoplePage = (): ReturnComponentType => {
   const sectionTitle = 'People';
   const dispatch = useDispatch();
-  const peopleList = useSelector<AppRootStateType, PeopleType[]>(
-    state => state.people.peopleList,
-  );
+  const peopleList = useSelector<AppRootStateType, PeopleType[]>(getPeopleList);
+  const appInitialized = useSelector<AppRootStateType, boolean>(getAppInitialized);
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
-    state => state.app.contentInitialized,
+    getContentInitialized,
   );
-  const currentPage = useSelector<AppRootStateType, number>(
-    state => state.people.currentPage,
-  );
+  const currentPage = useSelector<AppRootStateType, number>(getCurrentPage);
   const peopleCountInOnePage = useSelector<AppRootStateType, number>(
-    state => state.people.peopleCountInOnePage,
+    getPeopleCountInOnePage,
   );
-  const totalPeopleCount = useSelector<AppRootStateType, number>(
-    state => state.people.totalPeopleCount,
-  );
+  const totalPeopleCount = useSelector<AppRootStateType, number>(getTotalPeopleCount);
   const onPeoplePageChanged = (pageNumber: number): void => {
     dispatch(appContentInitializedFalse());
     dispatch(setCurrentPage(pageNumber));
@@ -41,11 +43,11 @@ export const PeoplePage = (): ReturnComponentType => {
     if (peopleList.length === ZERO) dispatch(getPeople());
   }, []);
 
-  if (appContentInitialized && peopleList.length === ZERO) {
+  if (appInitialized && appContentInitialized && peopleList.length === ZERO) {
     return <div>{sectionTitle} not found</div>;
   }
 
-  if (peopleList.length !== ZERO) {
+  if (appContentInitialized && peopleList.length !== ZERO) {
     return (
       <>
         <PeopleSection peopleList={peopleList} sectionTitle={sectionTitle} />

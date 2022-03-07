@@ -12,7 +12,6 @@ type StyledButtonPropsType = {
 const StyledButton = styled.button<StyledButtonPropsType>`
   padding: 10px 20px;
   border-radius: 7px;
-  margin: 0 10px;
   font-size: 18px;
   font-weight: 500;
   background-color: ${props => (props.disabled ? 'var(--gray)' : 'var(--primary)')};

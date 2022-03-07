@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Button } from 'components/common/Button/Button';
 import style from 'components/common/Pagination/Pagination.module.scss';
 import { ZERO, ONE } from 'constants/common';
+import { getContentInitialized } from 'store/selectors/appSelectors';
 import { AppRootStateType } from 'store/store';
 
 type PaginationPropsType = {
@@ -28,7 +29,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
     pages.push(index);
   }
   const contentInitialized = useSelector<AppRootStateType, boolean>(
-    state => state.app.contentInitialized,
+    getContentInitialized,
   );
   const portionCount = Math.ceil(pagesCount / visiblePaginationLinkCount);
   const [portionPageNumber, setPortionPageNumber] = useState<number>(ONE);
@@ -76,38 +77,46 @@ export const Pagination: React.FC<PaginationPropsType> = ({
 
   return (
     <div className={style.pagination}>
-      <div className={style.buttonBlock}>
-        <Button
-          disabled={portionPageNumber <= ONE}
-          className={style.button}
-          onClick={() => setPortionPageNumber(portionPageNumber - ONE)}
-        >
-          Prev list
-        </Button>
+      <div className={style.buttonsBlock}>
+        <div className={style.buttonContainer}>
+          <Button
+            disabled={portionPageNumber <= ONE}
+            className={style.button}
+            onClick={() => setPortionPageNumber(portionPageNumber - ONE)}
+          >
+            Prev list
+          </Button>
+        </div>
 
-        <Button
-          disabled={currentPage <= ONE || !contentInitialized}
-          className={style.button}
-          onClick={prevPageAction}
-        >
-          Prev
-        </Button>
+        <div className={style.buttonContainer}>
+          <Button
+            disabled={currentPage <= ONE || !contentInitialized}
+            className={style.button}
+            onClick={prevPageAction}
+          >
+            Prev
+          </Button>
+        </div>
 
-        <Button
-          disabled={currentPage >= pagesCount || !contentInitialized}
-          className={style.button}
-          onClick={nextPageAction}
-        >
-          Next
-        </Button>
+        <div className={style.buttonContainer}>
+          <Button
+            disabled={currentPage >= pagesCount || !contentInitialized}
+            className={style.button}
+            onClick={nextPageAction}
+          >
+            Next
+          </Button>
+        </div>
 
-        <Button
-          disabled={portionCount <= portionPageNumber}
-          className={style.button}
-          onClick={() => setPortionPageNumber(portionPageNumber + ONE)}
-        >
-          Next list
-        </Button>
+        <div className={style.buttonContainer}>
+          <Button
+            disabled={portionCount <= portionPageNumber}
+            className={style.button}
+            onClick={() => setPortionPageNumber(portionPageNumber + ONE)}
+          >
+            Next list
+          </Button>
+        </div>
       </div>
       <div>
         <div className={style.pageBlock}>

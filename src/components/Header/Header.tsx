@@ -51,11 +51,6 @@ const StyledAuthContainer = styled.div`
   display: flex;
 `;
 
-const StyledAuthLink = styled(Link)`
-  color: var(--white);
-  margin: 0 10px;
-`;
-
 export const Header = (): ReturnComponentType => (
   <StyledContainer>
     <StyledCategoriesContainer>
@@ -80,8 +75,8 @@ export const Header = (): ReturnComponentType => (
       <StyledHeaderLink to={PATH.SEARCH}>Search</StyledHeaderLink>
     </StyledCategoriesContainer>
     <StyledAuthContainer>
-      <StyledAuthLink to={PATH.LOGIN}>Login</StyledAuthLink>
-      <StyledAuthLink to={PATH.REGISTRATION}>Registration</StyledAuthLink>
+      <StyledHeaderLink to={PATH.LOGIN}>Login</StyledHeaderLink>
+      <StyledHeaderLink to={PATH.SIGNUP}>Sign up</StyledHeaderLink>
     </StyledAuthContainer>
   </StyledContainer>
 );

@@ -8,6 +8,13 @@ import { MoviesSection } from 'components/Pages/MoviesPage/MoviesSection/MoviesS
 import { ZERO, VisiblePaginationLinkCount } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
 import { setCurrentPage } from 'store/actions/movieActions';
+import { getAppInitialized, getContentInitialized } from 'store/selectors/appSelectors';
+import {
+  getCurrentPage,
+  getMoviesCountInOnePage,
+  getMoviesList,
+  getTotalMoviesCount,
+} from 'store/selectors/moviesSelectors';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
@@ -16,21 +23,16 @@ import { MovieType } from 'types/reducers/movieReducerTypes';
 export const MoviesPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const sectionTitle = 'Movies';
-  const moviesList = useSelector<AppRootStateType, MovieType[]>(
-    state => state.movies.moviesList,
-  );
+  const moviesList = useSelector<AppRootStateType, MovieType[]>(getMoviesList);
+  const appInitialized = useSelector<AppRootStateType, boolean>(getAppInitialized);
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
-    state => state.app.contentInitialized,
+    getContentInitialized,
   );
-  const currentPage = useSelector<AppRootStateType, number>(
-    state => state.movies.currentPage,
-  );
+  const currentPage = useSelector<AppRootStateType, number>(getCurrentPage);
   const movieCountInOnePage = useSelector<AppRootStateType, number>(
-    state => state.movies.moviesCountInOnePage,
+    getMoviesCountInOnePage,
   );
-  const totalMovieCount = useSelector<AppRootStateType, number>(
-    state => state.movies.totalMoviesCount,
-  );
+  const totalMovieCount = useSelector<AppRootStateType, number>(getTotalMoviesCount);
   const onMoviePageChanged = (pageNumber: number): void => {
     dispatch(appContentInitializedFalse());
     dispatch(setCurrentPage(pageNumber));
@@ -41,11 +43,11 @@ export const MoviesPage = (): ReturnComponentType => {
     if (moviesList.length === ZERO) dispatch(getPopularMovies());
   }, []);
 
-  if (appContentInitialized && moviesList.length === ZERO) {
+  if (appInitialized && appContentInitialized && moviesList.length === ZERO) {
     return <div>{sectionTitle} not found</div>;
   }
 
-  if (moviesList.length !== ZERO) {
+  if (appContentInitialized && moviesList.length !== ZERO) {
     return (
       <>
         <MoviesSection moviesList={moviesList} sectionTitle={sectionTitle} />

@@ -6,7 +6,6 @@ import { HashRouter } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 import { App } from 'App';
-import reportWebVitals from 'reportWebVitals';
 import { store } from 'store/store';
 
 const GlobalStyles = createGlobalStyle`
@@ -55,5 +54,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 );
-
-reportWebVitals();

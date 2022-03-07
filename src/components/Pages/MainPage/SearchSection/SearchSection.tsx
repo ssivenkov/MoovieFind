@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import styled from 'styled-components';
 
 import { Button } from 'components/common/Button/Button';
-import style from 'components/Pages/MainPage/SearchSection/SearchSection.module.scss';
+import { StyledField, StyledFormRow } from 'components/Pages/commonStyles/Styles';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 const StyledSearchContainer = styled.div`
@@ -12,7 +12,7 @@ const StyledSearchContainer = styled.div`
   margin-right: 15px;
 `;
 
-interface onSubmitType {
+interface submitObjectType {
   search: string;
 }
 
@@ -21,22 +21,22 @@ export const SearchSection = (): ReturnComponentType => {
     search: '',
   };
 
-  const onSubmit = (onSubmitObject: onSubmitType): void => {
-    console.log(onSubmitObject.search);
+  const onSubmit = (submitObject: submitObjectType): void => {
+    console.log(submitObject.search);
   };
 
   return (
     <StyledSearchContainer>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form className={style.searchContainer}>
-          <Field
+        <StyledFormRow>
+          <StyledField
             type="text"
             name="search"
-            placeholder="Search for a movie / TV show / person"
-            className={style.searchInput}
+            placeholder="Search for a movie, TV show or person"
+            marginRight
           />
           <Button type="submit">Search</Button>
-        </Form>
+        </StyledFormRow>
       </Formik>
     </StyledSearchContainer>
   );

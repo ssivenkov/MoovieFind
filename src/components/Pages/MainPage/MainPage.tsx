@@ -10,6 +10,19 @@ import { TrendingSection } from 'components/Pages/MainPage/TrendingSection/Trend
 import { WhatsPopularSection } from 'components/Pages/MainPage/WhatsPopularSection/WhatsPopularSection';
 import { MOVIE, TV, ONE, DAY, WEEK, ZERO } from 'constants/common';
 import { clearSearchImageLink } from 'store/actions/mainActions';
+import { getAppLanguage } from 'store/selectors/appSelectors';
+import {
+  getSearchImageLink,
+  getTrendingFilter,
+  getTrendingTimeFilter,
+  getWhatsPopularFilter,
+} from 'store/selectors/mainSelectors';
+import { getMoviesList } from 'store/selectors/moviesSelectors';
+import {
+  getTrendingMoviesList,
+  getTrendingTVShowsList,
+} from 'store/selectors/trendingSelectors';
+import { getTVShowsList } from 'store/selectors/TVShowsSelectors';
 import { AppRootStateType } from 'store/store';
 import { setRandomSearchBackgroundImage } from 'store/thunks/mainThunk';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
@@ -69,33 +82,21 @@ const StyledSectionsContainer = styled.div``;
 export const MainPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const page = ONE;
-  const language = useSelector<AppRootStateType, string>(state => state.app.language);
+  const language = useSelector<AppRootStateType, string>(getAppLanguage);
   const requestObj: RequestObjectType = { api_key, language, page };
 
-  const popularTVShowsList = useSelector<AppRootStateType, TVShowType[]>(
-    state => state.TVShows.TVShowsList,
-  );
-  const popularMoviesList = useSelector<AppRootStateType, MovieType[]>(
-    state => state.movies.moviesList,
-  );
+  const popularTVShowsList = useSelector<AppRootStateType, TVShowType[]>(getTVShowsList);
+  const popularMoviesList = useSelector<AppRootStateType, MovieType[]>(getMoviesList);
   const trendingTVShowsList = useSelector<AppRootStateType, TVShowType[]>(
-    state => state.trending.trendingTVShows,
+    getTrendingTVShowsList,
   );
   const trendingMoviesList = useSelector<AppRootStateType, MovieType[]>(
-    state => state.trending.trendingMovies,
+    getTrendingMoviesList,
   );
-  const whatsPopularFilter = useSelector<AppRootStateType, string>(
-    state => state.main.WhatsPopularFilter,
-  );
-  const trendingFilter = useSelector<AppRootStateType, string>(
-    state => state.main.TrendingFilter,
-  );
-  const trendingTimeFilter = useSelector<AppRootStateType, string>(
-    state => state.main.TrendingTimeFilter,
-  );
-  const searchImageLink = useSelector<AppRootStateType, string>(
-    state => state.main.SearchImageLink,
-  );
+  const whatsPopularFilter = useSelector<AppRootStateType, string>(getWhatsPopularFilter);
+  const trendingFilter = useSelector<AppRootStateType, string>(getTrendingFilter);
+  const trendingTimeFilter = useSelector<AppRootStateType, string>(getTrendingTimeFilter);
+  const searchImageLink = useSelector<AppRootStateType, string>(getSearchImageLink);
 
   useEffect(() => {
     switch (whatsPopularFilter) {

@@ -1,7 +1,11 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import {
+  StyledSectionTitle,
+  StyledSectionTitleContainer,
+} from 'components/Pages/commonStyles/Styles';
 import { getAuthUserData } from 'store/thunks/authThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
@@ -10,5 +14,9 @@ export const SearchPage = (): ReturnComponentType => {
   useEffect(() => {
     dispatch(getAuthUserData());
   }, []);
-  return <div>Search</div>;
+  return (
+    <StyledSectionTitleContainer>
+      <StyledSectionTitle>Search</StyledSectionTitle>
+    </StyledSectionTitleContainer>
+  );
 };
