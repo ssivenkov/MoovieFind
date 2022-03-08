@@ -21,13 +21,6 @@
     height: 45px;
 }
 
-.currentNumber {
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 700;
-    margin: 12px 0;
-}
-
 .page {
     font-weight: 800;
     display: inline-block;
@@ -49,11 +42,6 @@
     &:last-child{
         margin-right: 0;
     }
-}
-
-.disabledPage {
-    cursor: default;
-    color:rgba(79, 98, 108, .3);
 }
 
 .selectPage {

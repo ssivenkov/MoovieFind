@@ -6,11 +6,13 @@ import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { Error404Page } from 'components/Pages/ErrorPages/Error404Page';
 import { LoginPage } from 'components/Pages/LoginPage/LoginPage';
 import { MainPage } from 'components/Pages/MainPage/MainPage';
+import { MoviePage } from 'components/Pages/MoviePage/MoviePage';
 import { MoviesPage } from 'components/Pages/MoviesPage/MoviesPage';
 import { PeoplePage } from 'components/Pages/PeoplePage/PeoplePage';
 import { SearchPage } from 'components/Pages/SearchPage/SearchPage';
 import { SignUpPage } from 'components/Pages/SignUpPage/SignUpPage';
 import { TVShowsPage } from 'components/Pages/TVShowsPage/TVShowsPage';
+import { TWShowPage } from 'components/Pages/TWShowPage/TWShowPage';
 import { PATH } from 'routes/routes';
 import { appInitializedFalse } from 'store/actions/appActions';
 import { getAppInitialized } from 'store/selectors/appSelectors';
@@ -35,6 +37,8 @@ export const RoutesContainer = (): ReturnComponentType => {
       <Route path={PATH.LOGIN} element={<LoginPage />} />
       <Route path={PATH.SIGNUP} element={<SignUpPage />} />
       <Route path={PATH.MAIN} element={<MainPage />} />
+      <Route path={`${PATH.MOVIE}/:movieID`} element={<MoviePage />} />
+      <Route path={`${PATH.TVSHOW}/:TWShowID`} element={<TWShowPage />} />
       <Route path={PATH.MOVIES} element={<Outlet />}>
         <Route index element={<Navigate to={PATH.POPULAR} />} />
         <Route path={PATH.POPULAR} element={<MoviesPage />} />

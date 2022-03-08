@@ -23,6 +23,7 @@ export const MoviesSection: FC<MoovieSectionPropsType> = ({
       {moviesList.map((movie: MovieType) => (
         <MovieCard
           key={movie.id}
+          movieID={movie.id}
           posterPath={movie.poster_path}
           title={movie.title}
           voteAverage={movie.vote_average}

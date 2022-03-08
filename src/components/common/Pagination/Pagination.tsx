@@ -136,7 +136,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
                 disabled={!contentInitialized}
                 className={`${style.page} ${
                   currentPage === page ? style.selectPage : ''
-                } ${!contentInitialized && style.disabledPage}`}
+                }`}
               >
                 {page}
               </button>

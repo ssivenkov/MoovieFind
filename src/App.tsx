@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 
-import 'Null.scss';
 import styled from 'styled-components';
 
 import { Footer } from 'components/Footer/Footer';

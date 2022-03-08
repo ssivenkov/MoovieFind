@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { image300x450 } from 'api/config';
@@ -15,6 +16,7 @@ import {
   StyledText,
 } from 'components/common/Card/commonStyles';
 import { ZERO } from 'constants/common';
+import { PATH } from 'routes/routes';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import {
   MovieCardPropsType,
@@ -73,33 +75,34 @@ const StyledMovieTitle = styled.div`
   ${StyledCardTitle}
 `;
 
-export const MovieCard: FC<MovieCardPropsType> = ({
-  posterPath,
-  title,
-  voteAverage,
-  releaseDate,
-}): ReturnComponentType => (
-  <StyledMovie>
-    <StyledMovieContainer>
-      <StyledMovieInfoContainer>
-        <StyledMovieRate voteAverage={voteAverage}>
-          {voteAverage === ZERO ? 'Not rated' : voteAverage}
-        </StyledMovieRate>
-        <StyledMovieReleaseDate>
-          {releaseDate ? moment(releaseDate).format('MMMM DD, YYYY') : 'No date'}
-        </StyledMovieReleaseDate>
-      </StyledMovieInfoContainer>
-      <StyledMoviePosterShadowContainer>
-        {posterPath ? (
-          <StyledMoviePoster
-            src={`${image300x450}${posterPath}`}
-            alt={`poster for the ${title}`}
-          />
-        ) : (
-          <StyledMovieNoPoster />
-        )}
-      </StyledMoviePosterShadowContainer>
-    </StyledMovieContainer>
-    <StyledMovieTitle>{title}</StyledMovieTitle>
-  </StyledMovie>
-);
+export const MovieCard: FC<MovieCardPropsType> = (
+  props: MovieCardPropsType,
+): ReturnComponentType => {
+  const { movieID, posterPath, title, voteAverage, releaseDate } = props;
+  const navigate = useNavigate();
+  return (
+    <StyledMovie>
+      <StyledMovieContainer onClick={() => navigate(`/${PATH.MOVIE}/${movieID}`)}>
+        <StyledMovieInfoContainer>
+          <StyledMovieRate voteAverage={voteAverage}>
+            {voteAverage === ZERO ? 'Not rated' : voteAverage}
+          </StyledMovieRate>
+          <StyledMovieReleaseDate>
+            {releaseDate ? moment(releaseDate).format('MMMM DD, YYYY') : 'No date'}
+          </StyledMovieReleaseDate>
+        </StyledMovieInfoContainer>
+        <StyledMoviePosterShadowContainer>
+          {posterPath ? (
+            <StyledMoviePoster
+              src={`${image300x450}${posterPath}`}
+              alt={`poster for the ${title}`}
+            />
+          ) : (
+            <StyledMovieNoPoster />
+          )}
+        </StyledMoviePosterShadowContainer>
+      </StyledMovieContainer>
+      <StyledMovieTitle>{title}</StyledMovieTitle>
+    </StyledMovie>
+  );
+};
