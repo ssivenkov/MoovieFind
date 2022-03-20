@@ -37,19 +37,22 @@ export const StyledSectionContainer = styled.div`
   align-items: center;
 `;
 
-type StyledFieldPropsType = {
-  marginBottom?: boolean;
-  marginRight?: boolean;
-};
-
-export const StyledField = styled(Field)<StyledFieldPropsType>`
+export const StyledSearchField = styled(Field)`
   width: 100%;
   font-size: 20px;
   font-weight: 500;
   padding: 7px 15px;
   border-radius: 7px;
-  ${props => (props.marginBottom ? 'margin-bottom: 15px' : '')};
-  ${props => (props.marginRight ? 'margin-right: 20px' : '')};
+  margin-right: 20px;
+`;
+
+export const StyledField = styled(Field)`
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 7px;
+  margin-bottom: 15px;
 `;
 
 export const StyledFormRow = styled(Form)`

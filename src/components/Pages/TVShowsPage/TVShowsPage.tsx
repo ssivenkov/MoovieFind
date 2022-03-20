@@ -8,12 +8,15 @@ import { TVShowsSection } from 'components/Pages/TVShowsPage/TVShowsSection/TVSh
 import { VisiblePaginationLinkCount, ZERO } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
 import { setCurrentPage } from 'store/actions/TVShowActions';
-import { getAppInitialized, getContentInitialized } from 'store/selectors/appSelectors';
 import {
-  getCurrentPage,
-  getTotalTVShowsCount,
-  getTVShowsCountInOnePage,
-  getTVShowsList,
+  getAppInitializedSelector,
+  getContentInitializedSelector,
+} from 'store/selectors/appSelectors';
+import {
+  getCurrentPageSelector,
+  getTotalTVShowsCountSelector,
+  getTVShowsCountInOnePageSelector,
+  getTVShowsListSelector,
 } from 'store/selectors/TVShowsSelectors';
 import { AppRootStateType } from 'store/store';
 import { getPopularTVShows } from 'store/thunks/TVShowsThunk';
@@ -23,16 +26,22 @@ import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 export const TVShowsPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const sectionTitle = 'TV Shows';
-  const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(getTVShowsList);
-  const appInitialized = useSelector<AppRootStateType, boolean>(getAppInitialized);
+  const TVShowsList = useSelector<AppRootStateType, Array<TVShowType>>(
+    getTVShowsListSelector,
+  );
+  const appInitialized = useSelector<AppRootStateType, boolean>(
+    getAppInitializedSelector,
+  );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
-    getContentInitialized,
+    getContentInitializedSelector,
   );
-  const currentPage = useSelector<AppRootStateType, number>(getCurrentPage);
+  const currentPage = useSelector<AppRootStateType, number>(getCurrentPageSelector);
   const TVShowsCountInOnePage = useSelector<AppRootStateType, number>(
-    getTVShowsCountInOnePage,
+    getTVShowsCountInOnePageSelector,
   );
-  const totalTVShowsCount = useSelector<AppRootStateType, number>(getTotalTVShowsCount);
+  const totalTVShowsCount = useSelector<AppRootStateType, number>(
+    getTotalTVShowsCountSelector,
+  );
   const onTVShowPageChanged = (pageNumber: number): void => {
     dispatch(appContentInitializedFalse());
     dispatch(setCurrentPage(pageNumber));

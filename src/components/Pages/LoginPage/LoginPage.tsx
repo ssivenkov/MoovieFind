@@ -39,13 +39,8 @@ export const LoginPage = (): ReturnComponentType => {
       </StyledSectionTitleContainer>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <StyledFormColumn>
-          <StyledField type="text" name="login" placeholder="Login" marginBottom />
-          <StyledField
-            type="password"
-            name="password"
-            placeholder="Password"
-            marginBottom
-          />
+          <StyledField type="text" name="login" placeholder="Login" />
+          <StyledField type="password" name="password" placeholder="Password" />
           <StyledButtonsContainer>
             <Button type="submit">Login</Button>
           </StyledButtonsContainer>

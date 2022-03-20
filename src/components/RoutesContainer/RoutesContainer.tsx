@@ -15,14 +15,14 @@ import { TVShowsPage } from 'components/Pages/TVShowsPage/TVShowsPage';
 import { TWShowPage } from 'components/Pages/TWShowPage/TWShowPage';
 import { PATH } from 'routes/routes';
 import { appInitializedFalse } from 'store/actions/appActions';
-import { getAppInitialized } from 'store/selectors/appSelectors';
+import { getAppInitializedSelector } from 'store/selectors/appSelectors';
 import { getAuthUserData } from 'store/thunks/authThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 export const RoutesContainer = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const appInitialized = useSelector(getAppInitialized);
+  const appInitialized = useSelector(getAppInitializedSelector);
 
   useEffect(() => {
     dispatch(getAuthUserData());

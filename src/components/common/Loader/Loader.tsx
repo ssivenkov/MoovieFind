@@ -9,6 +9,6 @@ const StyledLoader = styled.img`
   user-select: none;
 `;
 
-export const Loader = (): ReturnComponentType => (
-  <StyledLoader src={loader} alt="loader" />
+export const Loader = React.memo(
+  (): ReturnComponentType => <StyledLoader src={loader} alt="loader" />,
 );

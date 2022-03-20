@@ -9,14 +9,13 @@ export type MoviesDataResponseType = {
   total_results: number;
 };
 
-export type SetMoviesActionType = {
+export type SetMovieDataActionType = {
   type: string;
-  moviesData: MoviesDataResponseType;
+  movieData: any;
 };
 
-export type SetCurrentPageActionType = {
+export type ClearMovieDataActionType = {
   type: string;
-  currentPage: number;
 };
 
-export type MoviesActionsTypes = SetMoviesActionType & SetCurrentPageActionType;
+export type MovieActionsTypes = SetMovieDataActionType & ClearMovieDataActionType;

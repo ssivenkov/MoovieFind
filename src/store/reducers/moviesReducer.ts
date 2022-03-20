@@ -1,7 +1,7 @@
 import { CardsCountInOnePage, ONE, ZERO } from 'constants/common';
 import { MOVIES_ACTIONS } from 'enums/moviesEnum';
 import { MoviesActionsTypes } from 'types/actions/moviesActionsTypes';
-import { InitialMoviesStateType } from 'types/reducers/movieReducerTypes';
+import { InitialMoviesStateType } from 'types/reducers/moviesReducerTypes';
 
 const initialMoviesState = {
   moviesList: [],

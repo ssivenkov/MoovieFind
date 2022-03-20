@@ -4,3 +4,5 @@ export type RequestObjectType = {
   language: string;
   page: number;
 };
+
+export type SmallRequestObjectType = Pick<RequestObjectType, 'api_key' | 'language'>;

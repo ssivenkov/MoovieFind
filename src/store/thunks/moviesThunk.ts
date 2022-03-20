@@ -5,8 +5,9 @@ import { api_key } from 'api/config';
 import { MoviesAPI } from 'api/MoviesAPI';
 import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
 import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setMoviesData } from 'store/actions/movieActions';
+import { setMoviesData } from 'store/actions/moviesActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
+import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
 export const getPopularMovies =
   (): AppThunk =>
@@ -16,7 +17,7 @@ export const getPopularMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj = { api_key, language, page };
+    const requestObj: RequestObjectType = { api_key, language, page };
     try {
       const pageOneRequestObject = { ...requestObj };
       pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
@@ -52,7 +53,7 @@ export const getNowPlayingMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj = { api_key, language, page };
+    const requestObj: RequestObjectType = { api_key, language, page };
     try {
       const pageOneRequestObject = { ...requestObj };
       pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
@@ -92,7 +93,7 @@ export const getUpcomingMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj = { api_key, language, page };
+    const requestObj: RequestObjectType = { api_key, language, page };
     try {
       const pageOneRequestObject = { ...requestObj };
       pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
@@ -128,7 +129,7 @@ export const getTopRatedMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj = { api_key, language, page };
+    const requestObj: RequestObjectType = { api_key, language, page };
     try {
       const pageOneRequestObject = { ...requestObj };
       pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;

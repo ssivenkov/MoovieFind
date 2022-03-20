@@ -1,13 +1,13 @@
 import { AppRootStateType } from 'store/store';
 
-export const getWhatsPopularFilter = (state: AppRootStateType): string =>
+export const getWhatsPopularFilterSelector = (state: AppRootStateType): string =>
   state.main.WhatsPopularFilter;
 
-export const getTrendingFilter = (state: AppRootStateType): string =>
+export const getTrendingFilterSelector = (state: AppRootStateType): string =>
   state.main.TrendingFilter;
 
-export const getTrendingTimeFilter = (state: AppRootStateType): string =>
+export const getTrendingTimeFilterSelector = (state: AppRootStateType): string =>
   state.main.TrendingTimeFilter;
 
-export const getSearchImageLink = (state: AppRootStateType): string =>
+export const getSearchImageLinkSelector = (state: AppRootStateType): string =>
   state.main.SearchImageLink;

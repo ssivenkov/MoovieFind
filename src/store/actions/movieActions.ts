@@ -1,12 +1,15 @@
-import { MOVIES_ACTIONS } from 'enums/moviesEnum';
+import { MOVIE_ACTIONS } from 'enums/movieEnum';
 import {
-  MoviesDataResponseType,
-  SetCurrentPageActionType,
-  SetMoviesActionType,
-} from 'types/actions/moviesActionsTypes';
+  ClearMovieDataActionType,
+  SetMovieDataActionType,
+} from 'types/actions/movieActionsTypes';
+import { MovieDataType } from 'types/reducers/movieReducerTypes';
 
-export const setMoviesData = (moviesData: MoviesDataResponseType): SetMoviesActionType =>
-  ({ type: MOVIES_ACTIONS.SET_MOVIES_DATA, moviesData } as const);
+export const setMovieData = (movieData: MovieDataType): SetMovieDataActionType => ({
+  type: MOVIE_ACTIONS.SET_MOVIE_DATA,
+  movieData,
+});
 
-export const setCurrentPage = (currentPage: number): SetCurrentPageActionType =>
-  ({ type: MOVIES_ACTIONS.SET_CURRENT_PAGE, currentPage } as const);
+export const clearMovieData = (): ClearMovieDataActionType => ({
+  type: MOVIE_ACTIONS.CLEAR_MOVIE_DATA,
+});

@@ -21,7 +21,7 @@ import { PATH } from 'routes/routes';
 import { setWhatsPopularFilter } from 'store/actions/mainActions';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { WhatsPopularSectionPropsType } from 'types/components/MainTypes/WhatsPopularSectionTypes/WhatsPopularSectionType';
-import { MovieType } from 'types/reducers/movieReducerTypes';
+import { MovieType } from 'types/reducers/moviesReducerTypes';
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
@@ -70,6 +70,7 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
           {filter === TV &&
             popularList.map((popularTVShow: TVShowType) => (
               <MovieCard
+                movieID={popularTVShow.id}
                 key={popularTVShow.id}
                 posterPath={popularTVShow.poster_path ? popularTVShow.poster_path : ''}
                 title={popularTVShow.name}
@@ -80,11 +81,12 @@ export const WhatsPopularSection: FC<WhatsPopularSectionPropsType> = ({
           {filter === MOVIE &&
             popularList.map((popularMovie: MovieType) => (
               <MovieCard
+                movieID={popularMovie.id}
                 key={popularMovie.id}
                 posterPath={popularMovie.poster_path ? popularMovie.poster_path : ''}
-                title={popularMovie.title}
-                voteAverage={popularMovie.vote_average}
-                releaseDate={popularMovie.release_date}
+                title={popularMovie.title ? popularMovie.title : ''}
+                voteAverage={popularMovie.vote_average ? popularMovie.vote_average : ZERO}
+                releaseDate={popularMovie.release_date ? popularMovie.release_date : ''}
               />
             ))}
           {popularList.length !== ZERO && (

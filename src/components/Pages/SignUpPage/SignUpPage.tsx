@@ -43,19 +43,13 @@ export const SignUpPage = (): ReturnComponentType => {
       </StyledSectionTitleContainer>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <StyledFormColumn>
-          <StyledField type="text" name="name" placeholder="Name" marginBottom />
-          <StyledField type="text" name="email" placeholder="Email" marginBottom />
-          <StyledField
-            type="password"
-            name="password"
-            placeholder="Password"
-            marginBottom
-          />
+          <StyledField type="text" name="name" placeholder="Name" />
+          <StyledField type="text" name="email" placeholder="Email" />
+          <StyledField type="password" name="password" placeholder="Password" />
           <StyledField
             type="password"
             name="confirmPassword"
             placeholder="Confirm password"
-            marginBottom
           />
           <StyledButtonsContainer>
             <Button type="submit">Sign up</Button>

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Button } from 'components/common/Button/Button';
 import style from 'components/common/Pagination/Pagination.module.scss';
 import { ZERO, ONE } from 'constants/common';
-import { getContentInitialized } from 'store/selectors/appSelectors';
+import { getContentInitializedSelector } from 'store/selectors/appSelectors';
 import { AppRootStateType } from 'store/store';
 
 type PaginationPropsType = {
@@ -29,7 +29,7 @@ export const Pagination: React.FC<PaginationPropsType> = ({
     pages.push(index);
   }
   const contentInitialized = useSelector<AppRootStateType, boolean>(
-    getContentInitialized,
+    getContentInitializedSelector,
   );
   const portionCount = Math.ceil(pagesCount / visiblePaginationLinkCount);
   const [portionPageNumber, setPortionPageNumber] = useState<number>(ONE);

@@ -1,4 +1,4 @@
-import { MovieType } from './movieReducerTypes';
+import { MovieType } from './moviesReducerTypes';
 import { TVShowType } from './TVShowsReducerTypes';
 
 export type InitialMoviesStateType = {

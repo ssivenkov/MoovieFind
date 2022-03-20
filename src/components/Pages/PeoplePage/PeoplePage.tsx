@@ -8,12 +8,15 @@ import { PeopleSection } from 'components/Pages/PeoplePage/PeopleSection/PeopleS
 import { ZERO, VisiblePaginationLinkCount } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
 import { setCurrentPage } from 'store/actions/peopleActions';
-import { getAppInitialized, getContentInitialized } from 'store/selectors/appSelectors';
 import {
-  getCurrentPage,
-  getPeopleCountInOnePage,
-  getPeopleList,
-  getTotalPeopleCount,
+  getAppInitializedSelector,
+  getContentInitializedSelector,
+} from 'store/selectors/appSelectors';
+import {
+  getCurrentPageSelector,
+  getPeopleCountInOnePageSelector,
+  getPeopleListSelector,
+  getTotalPeopleCountSelector,
 } from 'store/selectors/peopleSelectors';
 import { AppRootStateType } from 'store/store';
 import { getPeople } from 'store/thunks/peopleThunk';
@@ -23,16 +26,20 @@ import { PeopleType } from 'types/reducers/peopleReducerTypes';
 export const PeoplePage = (): ReturnComponentType => {
   const sectionTitle = 'People';
   const dispatch = useDispatch();
-  const peopleList = useSelector<AppRootStateType, PeopleType[]>(getPeopleList);
-  const appInitialized = useSelector<AppRootStateType, boolean>(getAppInitialized);
+  const peopleList = useSelector<AppRootStateType, PeopleType[]>(getPeopleListSelector);
+  const appInitialized = useSelector<AppRootStateType, boolean>(
+    getAppInitializedSelector,
+  );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
-    getContentInitialized,
+    getContentInitializedSelector,
   );
-  const currentPage = useSelector<AppRootStateType, number>(getCurrentPage);
+  const currentPage = useSelector<AppRootStateType, number>(getCurrentPageSelector);
   const peopleCountInOnePage = useSelector<AppRootStateType, number>(
-    getPeopleCountInOnePage,
+    getPeopleCountInOnePageSelector,
   );
-  const totalPeopleCount = useSelector<AppRootStateType, number>(getTotalPeopleCount);
+  const totalPeopleCount = useSelector<AppRootStateType, number>(
+    getTotalPeopleCountSelector,
+  );
   const onPeoplePageChanged = (pageNumber: number): void => {
     dispatch(appContentInitializedFalse());
     dispatch(setCurrentPage(pageNumber));

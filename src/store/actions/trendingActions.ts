@@ -3,7 +3,7 @@ import {
   SetTrendingMoviesActionType,
   SetTrendingTVShowsActionType,
 } from 'types/actions/trendingActionsTypes';
-import { MovieType } from 'types/reducers/movieReducerTypes';
+import { MovieType } from 'types/reducers/moviesReducerTypes';
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const setTrendingMovies = (

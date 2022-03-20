@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import styled from 'styled-components';
 
 import { Button } from 'components/common/Button/Button';
-import { StyledField, StyledFormRow } from 'components/Pages/commonStyles/Styles';
+import { StyledFormRow, StyledSearchField } from 'components/Pages/commonStyles/Styles';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 
 const StyledSearchContainer = styled.div`
@@ -29,11 +29,10 @@ export const SearchSection = (): ReturnComponentType => {
     <StyledSearchContainer>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <StyledFormRow>
-          <StyledField
+          <StyledSearchField
             type="text"
             name="search"
             placeholder="Search for a movie, TV show or person"
-            marginRight
           />
           <Button type="submit">Search</Button>
         </StyledFormRow>

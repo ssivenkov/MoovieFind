@@ -1,14 +1,14 @@
 import { AppRootStateType } from 'store/store';
-import { MovieType } from 'types/reducers/movieReducerTypes';
+import { MovieType } from 'types/reducers/moviesReducerTypes';
 
-export const getMoviesList = (state: AppRootStateType): MovieType[] =>
+export const getMoviesListSelector = (state: AppRootStateType): MovieType[] =>
   state.movies.moviesList;
 
-export const getMoviesCountInOnePage = (state: AppRootStateType): number =>
+export const getMoviesCountInOnePageSelector = (state: AppRootStateType): number =>
   state.movies.moviesCountInOnePage;
 
-export const getCurrentPage = (state: AppRootStateType): number =>
+export const getCurrentPageSelector = (state: AppRootStateType): number =>
   state.movies.currentPage;
 
-export const getTotalMoviesCount = (state: AppRootStateType): number =>
+export const getTotalMoviesCountSelector = (state: AppRootStateType): number =>
   state.movies.totalMoviesCount;

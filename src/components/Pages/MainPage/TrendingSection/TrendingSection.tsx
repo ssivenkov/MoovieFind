@@ -21,7 +21,7 @@ import { PATH } from 'routes/routes';
 import { setTrendingFilter, setTrendingTimeFilter } from 'store/actions/mainActions';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { TrendingSectionPropsType } from 'types/components/MainTypes/TrendingSectionSypes/TrendingSectionType';
-import { MovieType } from 'types/reducers/movieReducerTypes';
+import { MovieType } from 'types/reducers/moviesReducerTypes';
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
 export const TrendingSection: FC<TrendingSectionPropsType> = ({
@@ -93,6 +93,7 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
           {filter === TV &&
             trendingList.map((trendingTVShow: TVShowType) => (
               <MovieCard
+                movieID={trendingTVShow.id}
                 key={trendingTVShow.id}
                 posterPath={trendingTVShow.poster_path ? trendingTVShow.poster_path : ''}
                 title={trendingTVShow.name}
@@ -103,11 +104,14 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
           {filter === MOVIE &&
             trendingList.map((trendingMovie: MovieType) => (
               <MovieCard
+                movieID={trendingMovie.id}
                 key={trendingMovie.id}
                 posterPath={trendingMovie.poster_path ? trendingMovie.poster_path : ''}
-                title={trendingMovie.title}
-                voteAverage={trendingMovie.vote_average}
-                releaseDate={trendingMovie.release_date}
+                title={trendingMovie.title ? trendingMovie.title : ''}
+                voteAverage={
+                  trendingMovie.vote_average ? trendingMovie.vote_average : ZERO
+                }
+                releaseDate={trendingMovie.release_date ? trendingMovie.release_date : ''}
               />
             ))}
           <ExtraCard

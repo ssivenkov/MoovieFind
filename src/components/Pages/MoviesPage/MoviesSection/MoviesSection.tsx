@@ -7,9 +7,10 @@ import {
   StyledSectionTitle,
   StyledSectionTitleContainer,
 } from 'components/Pages/commonStyles/Styles';
+import { ZERO } from 'constants/common';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { MoovieSectionPropsType } from 'types/components/commonTypes/MovieSectionTypes/MovieSectionTypes';
-import { MovieType } from 'types/reducers/movieReducerTypes';
+import { MovieType } from 'types/reducers/moviesReducerTypes';
 
 export const MoviesSection: FC<MoovieSectionPropsType> = ({
   moviesList,
@@ -24,10 +25,10 @@ export const MoviesSection: FC<MoovieSectionPropsType> = ({
         <MovieCard
           key={movie.id}
           movieID={movie.id}
-          posterPath={movie.poster_path}
-          title={movie.title}
-          voteAverage={movie.vote_average}
-          releaseDate={movie.release_date}
+          posterPath={movie.poster_path ? movie.poster_path : ''}
+          title={movie.title ? movie.title : ''}
+          voteAverage={movie.vote_average ? movie.vote_average : ZERO}
+          releaseDate={movie.release_date ? movie.release_date : ''}
         />
       ))}
     </StyledSectionContent>

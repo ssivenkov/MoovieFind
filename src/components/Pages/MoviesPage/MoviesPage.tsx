@@ -7,32 +7,39 @@ import { Pagination } from 'components/common/Pagination/Pagination';
 import { MoviesSection } from 'components/Pages/MoviesPage/MoviesSection/MoviesSection';
 import { ZERO, VisiblePaginationLinkCount } from 'constants/common';
 import { appContentInitializedFalse } from 'store/actions/appActions';
-import { setCurrentPage } from 'store/actions/movieActions';
-import { getAppInitialized, getContentInitialized } from 'store/selectors/appSelectors';
+import { setCurrentPage } from 'store/actions/moviesActions';
 import {
-  getCurrentPage,
-  getMoviesCountInOnePage,
-  getMoviesList,
-  getTotalMoviesCount,
+  getAppInitializedSelector,
+  getContentInitializedSelector,
+} from 'store/selectors/appSelectors';
+import {
+  getCurrentPageSelector,
+  getMoviesCountInOnePageSelector,
+  getMoviesListSelector,
+  getTotalMoviesCountSelector,
 } from 'store/selectors/moviesSelectors';
 import { AppRootStateType } from 'store/store';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { MovieType } from 'types/reducers/movieReducerTypes';
+import { MovieType } from 'types/reducers/moviesReducerTypes';
 
 export const MoviesPage = (): ReturnComponentType => {
   const dispatch = useDispatch();
   const sectionTitle = 'Movies';
-  const moviesList = useSelector<AppRootStateType, MovieType[]>(getMoviesList);
-  const appInitialized = useSelector<AppRootStateType, boolean>(getAppInitialized);
+  const moviesList = useSelector<AppRootStateType, MovieType[]>(getMoviesListSelector);
+  const appInitialized = useSelector<AppRootStateType, boolean>(
+    getAppInitializedSelector,
+  );
   const appContentInitialized = useSelector<AppRootStateType, boolean>(
-    getContentInitialized,
+    getContentInitializedSelector,
   );
-  const currentPage = useSelector<AppRootStateType, number>(getCurrentPage);
+  const currentPage = useSelector<AppRootStateType, number>(getCurrentPageSelector);
   const movieCountInOnePage = useSelector<AppRootStateType, number>(
-    getMoviesCountInOnePage,
+    getMoviesCountInOnePageSelector,
   );
-  const totalMovieCount = useSelector<AppRootStateType, number>(getTotalMoviesCount);
+  const totalMovieCount = useSelector<AppRootStateType, number>(
+    getTotalMoviesCountSelector,
+  );
   const onMoviePageChanged = (pageNumber: number): void => {
     dispatch(appContentInitializedFalse());
     dispatch(setCurrentPage(pageNumber));

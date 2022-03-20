@@ -7,6 +7,7 @@ import {
   StyledSectionTitle,
   StyledSectionTitleContainer,
 } from 'components/Pages/commonStyles/Styles';
+import { ZERO } from 'constants/common';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { TVShowsSectionPropsType } from 'types/components/commonTypes/TVShowSectionTypes/TVShowSectionTypes';
 import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
@@ -22,11 +23,12 @@ export const TVShowsSection: FC<TVShowsSectionPropsType> = ({
     <StyledSectionContent>
       {TVShowsList.map((TVShow: TVShowType) => (
         <MovieCard
+          movieID={TVShow.id}
           key={TVShow.id}
-          posterPath={TVShow.poster_path}
-          title={TVShow.name}
-          voteAverage={TVShow.vote_average}
-          releaseDate={TVShow.first_air_date}
+          posterPath={TVShow.poster_path ? TVShow.poster_path : ''}
+          title={TVShow.name ? TVShow.name : ''}
+          voteAverage={TVShow.vote_average ? TVShow.vote_average : ZERO}
+          releaseDate={TVShow.first_air_date ? TVShow.first_air_date : ''}
         />
       ))}
     </StyledSectionContent>
