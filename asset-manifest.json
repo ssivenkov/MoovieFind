@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/MoovieFind/static/css/main.3e47a083.chunk.css",
-    "main.js": "/MoovieFind/static/js/main.da73a604.chunk.js",
-    "main.js.map": "/MoovieFind/static/js/main.da73a604.chunk.js.map",
+    "main.js": "/MoovieFind/static/js/main.e0818af3.chunk.js",
+    "main.js.map": "/MoovieFind/static/js/main.e0818af3.chunk.js.map",
     "runtime-main.js": "/MoovieFind/static/js/runtime-main.28d0d0bf.js",
     "runtime-main.js.map": "/MoovieFind/static/js/runtime-main.28d0d0bf.js.map",
     "static/css/2.cc1d49f5.chunk.css": "/MoovieFind/static/css/2.cc1d49f5.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.cc1d49f5.chunk.css",
     "static/js/2.95d24afe.chunk.js",
     "static/css/main.3e47a083.chunk.css",
-    "static/js/main.da73a604.chunk.js"
+    "static/js/main.e0818af3.chunk.js"
   ]
 }
