@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 
+import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
+import { genresFormatting } from '../../../helpers/genresFormatting';
 
 import {
   StyledMovieContainer,
@@ -20,6 +23,8 @@ import {
 
 import { image300x450 } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
+import { ONE, ZERO } from 'constants/common';
+import { timeFormatting } from 'helpers/timeFormatting';
 import { getAppInitializedSelector } from 'store/selectors/appSelectors';
 import { getMovieSelector } from 'store/selectors/movieSelectors';
 import { AppRootStateType } from 'store/store';
@@ -37,6 +42,21 @@ export const MoviePage = (): ReturnComponentType => {
 
   console.log(movieData);
 
+  let movieTime;
+  if (movieData.runtime && movieData.runtime > ZERO) {
+    movieTime = timeFormatting(movieData.runtime);
+  }
+
+  let releaseDate;
+  if (movieData.release_date) {
+    releaseDate = moment(movieData.release_date).format('MMMM DD, YYYY');
+  }
+
+  let genres;
+  if (movieData.genres) {
+    genres = genresFormatting(movieData.genres);
+  }
+
   useEffect(() => {
     if (movieID) {
       dispatch(getMovie(movieID));
@@ -53,9 +73,11 @@ export const MoviePage = (): ReturnComponentType => {
           <StyledMovieInfoContainer>
             <StyledTitleContainer>
               <StyledTitle>{movieData.title && movieData.title}</StyledTitle>
-              <div>Duration: {movieData.runtime && movieData.runtime}</div>
-              <div>Release date: {movieData.release_date && movieData.release_date}</div>
-              <div>Genres: {movieData.genres && movieData.genres.toString()}</div>
+              {movieData.runtime && movieTime && (
+                <div>{`Duration: ${movieTime[ZERO]}h ${movieTime[ONE]}m`}</div>
+              )}
+              <div>Release date: {movieData.release_date && releaseDate}</div>
+              <div>Genres: {movieData.genres && genres}</div>
             </StyledTitleContainer>
             <StyledUserScoreContainer>
               User score: {movieData.vote_average && movieData.vote_average}
