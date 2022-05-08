@@ -3,7 +3,7 @@ type genreType = {
   name: string;
 };
 
-export const genresFormatting = (array: any[]): string => {
+export const arrayOfStringsFormattingHelper = (array: any[]): string => {
   const genresArr = array.map((genre: genreType) => genre.name);
   return genresArr.join(', ');
 };

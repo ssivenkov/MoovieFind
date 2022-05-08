@@ -11,3 +11,4 @@ export const TV = 'tv';
 export const MOVIE = 'movie';
 export const DAY = 'day';
 export const WEEK = 'week';
+export const NOT_AVAILABLE = 'N/A';

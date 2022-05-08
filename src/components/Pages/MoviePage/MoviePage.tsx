@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { genresFormatting } from '../../../helpers/genresFormatting';
+import { arrayOfStringsFormattingHelper } from '../../../helpers/arrayOfStringsFormattingHelper';
 
 import {
   StyledMovieContainer,
@@ -23,28 +23,27 @@ import {
 
 import { image300x450 } from 'api/config';
 import { Loader } from 'components/common/Loader/Loader';
-import { ONE, ZERO } from 'constants/common';
-import { timeFormatting } from 'helpers/timeFormatting';
+import { NOT_AVAILABLE, ONE, ZERO } from 'constants/common';
+import { timeFormattingHelper } from 'helpers/timeFormattingHelper';
 import { getAppInitializedSelector } from 'store/selectors/appSelectors';
 import { getMovieSelector } from 'store/selectors/movieSelectors';
 import { AppRootStateType } from 'store/store';
-import { getMovie } from 'store/thunks/movieThunk';
+import { getExternalMovieLinks, getMovie } from 'store/thunks/movieThunk';
 import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
 import { MovieDataType } from 'types/reducers/movieReducerTypes';
 
 export const MoviePage = (): ReturnComponentType => {
   const dispatch = useDispatch();
+
   const { movieID } = useParams<string>();
   const appInitialized = useSelector<AppRootStateType, boolean>(
     getAppInitializedSelector,
   );
   const movieData = useSelector<AppRootStateType, MovieDataType>(getMovieSelector);
 
-  console.log(movieData);
-
   let movieTime;
   if (movieData.runtime && movieData.runtime > ZERO) {
-    movieTime = timeFormatting(movieData.runtime);
+    movieTime = timeFormattingHelper(movieData.runtime);
   }
 
   let releaseDate;
@@ -54,12 +53,18 @@ export const MoviePage = (): ReturnComponentType => {
 
   let genres;
   if (movieData.genres) {
-    genres = genresFormatting(movieData.genres);
+    genres = arrayOfStringsFormattingHelper(movieData.genres);
+  }
+
+  let spokenLanguages;
+  if (movieData.spoken_languages) {
+    spokenLanguages = arrayOfStringsFormattingHelper(movieData.spoken_languages);
   }
 
   useEffect(() => {
     if (movieID) {
       dispatch(getMovie(movieID));
+      dispatch(getExternalMovieLinks(movieID));
     }
   }, []);
 
@@ -72,53 +77,47 @@ export const MoviePage = (): ReturnComponentType => {
           </StyledPosterContainer>
           <StyledMovieInfoContainer>
             <StyledTitleContainer>
-              <StyledTitle>{movieData.title && movieData.title}</StyledTitle>
-              {movieData.runtime && movieTime && (
+              {movieData.title && <StyledTitle>{movieData.title}</StyledTitle>}
+              {movieTime && (
                 <div>{`Duration: ${movieTime[ZERO]}h ${movieTime[ONE]}m`}</div>
               )}
-              <div>Release date: {movieData.release_date && releaseDate}</div>
-              <div>Genres: {movieData.genres && genres}</div>
+              {movieData.release_date && <div>Release date: {releaseDate}</div>}
+              {movieData.genres && <div>Genres: {genres}</div>}
             </StyledTitleContainer>
             <StyledUserScoreContainer>
-              User score: {movieData.vote_average && movieData.vote_average}
+              {'User score: '}
+              {movieData.vote_average! > ZERO ? movieData.vote_average : 'No user scores'}
             </StyledUserScoreContainer>
             <StyledDescriptionContainer>
-              <StyledTagline>{movieData.tagline && movieData.tagline}</StyledTagline>
-              <div>
-                <StyledOverviewExplanation>Overview</StyledOverviewExplanation>
-                {movieData.overview && movieData.overview}
-              </div>
+              {movieData.tagline && <StyledTagline>{movieData.tagline}</StyledTagline>}
+              {movieData.overview && (
+                <div>
+                  <StyledOverviewExplanation>Overview</StyledOverviewExplanation>
+                  {movieData.overview}
+                </div>
+              )}
             </StyledDescriptionContainer>
           </StyledMovieInfoContainer>
         </StyledMainContainer>
         <StyledAdditionalContainer>
-          <div>Status: {movieData.status && movieData.status}</div>
+          {movieData.status && <div>{`Status: ${movieData.status}`}</div>}
+          {movieData.original_language && (
+            <div>{`Original language: ${movieData.original_language}`}</div>
+          )}
+          {spokenLanguages && <div>{`Spoken languages: ${spokenLanguages}`}</div>}
           <div>
-            Original language:{' '}
-            {movieData.original_language && movieData.original_language}
+            {'Budget: '}
+            {movieData.budget! > ZERO ? movieData.budget : NOT_AVAILABLE}
           </div>
-          <div>Budget: {movieData.budget && movieData.budget}</div>
-          <div>Revenue: {movieData.revenue && movieData.revenue}</div>
-          <div>Homepage: {movieData.homepage && movieData.homepage}</div>
+          <div>
+            {'Revenue: '}
+            {movieData.revenue! > ZERO ? movieData.revenue : NOT_AVAILABLE}
+          </div>
+          {movieData.homepage && <div>{`Homepage: ${movieData.homepage}`}</div>}
+          {movieData.production_companies && (
+            <div>{`Production companies: ${movieData.production_companies.toString()}`}</div>
+          )}
         </StyledAdditionalContainer>
-        {/* <div>Movie id: {movieData.id && movieData.id}</div>
-        <div>Movie imdb_id: {movieData.imdb_id && movieData.imdb_id}</div>
-        <div>Movie adult: {movieData.adult && movieData.adult}</div>
-        <div>
-          Movie belongs_to_collection:{' '}
-          {movieData.belongs_to_collection && movieData.belongs_to_collection.toString()}
-        </div>
-       
-        <div>poster_path: {movieData.poster_path && movieData.poster_path}</div>
-        <div>
-          Movie production_companies:{' '}
-          {movieData.production_companies && movieData.production_companies.toString()}
-        </div>
-        <div>
-          Movie production_countries:{' '}
-          {movieData.production_countries && movieData.production_countries.toString()}
-        </div>
-        <div>Movie video: {movieData.video && movieData.video}</div> */}
       </StyledMovieContainer>
     );
   }

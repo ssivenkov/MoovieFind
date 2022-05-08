@@ -10,7 +10,10 @@ import {
 } from 'store/actions/appActions';
 import { clearMovieData, setMovieData } from 'store/actions/movieActions';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { SmallRequestObjectType } from 'types/commonTypes/RequestObjectType';
+import {
+  APIKeyRequestObjectType,
+  SmallRequestObjectType,
+} from 'types/commonTypes/RequestObjectType';
 
 export const getMovie =
   (movieID: string): AppThunk =>
@@ -25,11 +28,29 @@ export const getMovie =
     try {
       const movieResponse = await MovieAPI.getMovie(movieID, requestObj);
       const movieData = movieResponse.data;
-      console.log(movieData);
       await dispatch(setMovieData(movieData));
       dispatch(appContentInitializedTrue());
     } catch (error) {
       console.log(`Error getting movie. ${error}`);
+    } finally {
+      dispatch(appInitializedTrue());
+    }
+  };
+
+export const getExternalMovieLinks =
+  (movieID: string): AppThunk =>
+  async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
+    await dispatch(appContentInitializedFalse());
+    await dispatch(clearMovieData());
+    const apiKey: APIKeyRequestObjectType = { api_key };
+    try {
+      const response = await MovieAPI.getExternalMovieLinks(movieID, apiKey);
+      const links = response.data;
+      console.log(links);
+      /* await dispatch(setMovieData(movieData));
+      dispatch(appContentInitializedTrue()); */
+    } catch (error) {
+      console.log(`Error getting external IDs. ${error}`);
     } finally {
       dispatch(appInitializedTrue());
     }
