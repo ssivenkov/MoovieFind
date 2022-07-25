@@ -1,14 +1,11 @@
 import { ThunkDispatch } from 'redux-thunk';
 
-// eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
 import { MovieAPI } from 'api/MovieAPI';
-import {
-  appContentInitializedFalse,
-  appContentInitializedTrue,
-  appInitializedTrue,
-} from 'store/actions/appActions';
-import { clearMovieData, setMovieData } from 'store/actions/movieActions';
+import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
+import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
+import { clearMovieDataAction } from 'store/actions/movieReducerActions/clearMovieDataAction';
+import { setMovieDataAction } from 'store/actions/movieReducerActions/setMovieDataAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 import {
   APIKeyRequestObjectType,
@@ -21,27 +18,27 @@ export const getMovie =
     dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>,
     getState,
   ) => {
-    await dispatch(appContentInitializedFalse());
-    await dispatch(clearMovieData());
+    await dispatch(setAppContentInitializeAction({ contentInitialized: false }));
+    await dispatch(clearMovieDataAction());
     const { language } = getState().app;
     const requestObj: SmallRequestObjectType = { api_key, language };
     try {
       const movieResponse = await MovieAPI.getMovie(movieID, requestObj);
       const movieData = movieResponse.data;
-      await dispatch(setMovieData(movieData));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setMovieDataAction(movieData));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting movie. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };
 
 export const getExternalMovieLinks =
   (movieID: string): AppThunk =>
   async (dispatch: ThunkDispatch<AppRootStateType, unknown, AppRootActionsType>) => {
-    await dispatch(appContentInitializedFalse());
-    await dispatch(clearMovieData());
+    await dispatch(setAppContentInitializeAction({ contentInitialized: false }));
+    await dispatch(clearMovieDataAction());
     const apiKey: APIKeyRequestObjectType = { api_key };
     try {
       const response = await MovieAPI.getExternalMovieLinks(movieID, apiKey);
@@ -52,6 +49,6 @@ export const getExternalMovieLinks =
     } catch (error) {
       console.log(`Error getting external IDs. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };

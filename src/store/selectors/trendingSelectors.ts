@@ -1,12 +1,14 @@
+import { TrendingReducerStateType } from 'store/reducers/trendingReducer/types';
 import { AppRootStateType } from 'store/store';
-import { MovieType } from 'types/reducers/moviesReducerTypes';
-import { TVShowType } from 'types/reducers/TVShowsReducerTypes';
 
-export const getTrendingMoviesListSelector = (state: AppRootStateType): MovieType[] =>
-  state.trending.trendingMovies;
+export const getTrendingMoviesListSelector = (
+  state: AppRootStateType,
+): TrendingReducerStateType['trendingMovies'] => state.trending.trendingMovies;
 
-export const getTrendingTVShowsListSelector = (state: AppRootStateType): TVShowType[] =>
-  state.trending.trendingTVShows;
+export const getTrendingTVShowsListSelector = (
+  state: AppRootStateType,
+): TrendingReducerStateType['trendingTVShows'] => state.trending.trendingTVShows;
 
-export const getSliderPageSelector = (state: AppRootStateType): number =>
-  state.trending.sliderPage;
+export const getSliderPageSelector = (
+  state: AppRootStateType,
+): TrendingReducerStateType['sliderPage'] => state.trending.sliderPage;

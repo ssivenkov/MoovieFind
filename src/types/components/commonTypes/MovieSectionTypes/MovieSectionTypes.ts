@@ -1,4 +1,4 @@
-import { MovieType } from 'types/reducers/moviesReducerTypes';
+import { MovieType } from 'store/reducers/moviesReducer/types';
 
 export type MoovieSectionPropsType = {
   moviesList: Array<MovieType>;

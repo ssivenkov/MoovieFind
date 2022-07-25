@@ -1,13 +1,18 @@
+import { AppReducerStateType } from 'store/reducers/appReducer/types';
 import { AppRootStateType } from 'store/store';
 
-export const getAppInitializedSelector = (state: AppRootStateType): boolean =>
-  state.app.appInitialized;
+export const getAppInitializedSelector = (
+  state: AppRootStateType,
+): AppReducerStateType['appInitialized'] => state.app.appInitialized;
 
-export const getContentInitializedSelector = (state: AppRootStateType): boolean =>
-  state.app.contentInitialized;
+export const getContentInitializedSelector = (
+  state: AppRootStateType,
+): AppReducerStateType['contentInitialized'] => state.app.contentInitialized;
 
-export const getAppLanguageSelector = (state: AppRootStateType): string =>
-  state.app.language;
+export const getAppLanguageSelector = (
+  state: AppRootStateType,
+): AppReducerStateType['language'] => state.app.language;
 
-export const getSearchRequestSelector = (state: AppRootStateType): string =>
-  state.app.searchRequest;
+export const getSearchRequestSelector = (
+  state: AppRootStateType,
+): AppReducerStateType['searchRequest'] => state.app.searchRequest;

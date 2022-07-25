@@ -1,6 +1,6 @@
 import { ThunkDispatch } from 'redux-thunk';
 
-import { setSearchImageLink } from 'store/actions/mainActions';
+import { setSearchImageLinkAction } from 'store/actions/mainReducerActions/setSearchImageLinkAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 
 export const setRandomSearchBackgroundImage =
@@ -11,7 +11,9 @@ export const setRandomSearchBackgroundImage =
       const linksArr = argsArr.map(movie => movie.backdrop_path);
       const filteredLinksArr = linksArr.filter(movie => movie !== null);
       const randomNumber = Math.floor(Math.random() * filteredLinksArr.length);
-      dispatch(setSearchImageLink(filteredLinksArr[randomNumber]));
+      dispatch(
+        setSearchImageLinkAction({ searchImageLink: filteredLinksArr[randomNumber] }),
+      );
     } catch (error) {
       console.log(`Error setting random search background image. ${error}`);
     }

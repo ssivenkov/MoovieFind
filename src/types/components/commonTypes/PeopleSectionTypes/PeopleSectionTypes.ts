@@ -1,4 +1,4 @@
-import { PeopleType } from 'types/reducers/peopleReducerTypes';
+import { PeopleType } from 'store/reducers/peopleReducer/types';
 
 export type PeopleSectionPropsType = {
   peopleList: Array<PeopleType>;

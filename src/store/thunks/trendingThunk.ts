@@ -2,8 +2,10 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import { TrendingAPI } from 'api/TrendingAPI';
 import { ONE, TWO } from 'constants/common';
-import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setTrendingMovies, setTrendingTVShows } from 'store/actions/trendingActions';
+import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
+import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
+import { setTrendingMoviesAction } from 'store/actions/trendingReducerActions/setTrendingMoviesAction';
+import { setTrendingTVShowsAction } from 'store/actions/trendingReducerActions/setTrendingTVShowsAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
@@ -21,12 +23,12 @@ export const getTrendingTVShows =
         timeWindow,
       );
       const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setTrendingTVShows(resultResponse));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setTrendingTVShowsAction({ trendingTVShows: resultResponse }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting trending TWShows. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };
 
@@ -44,11 +46,11 @@ export const getTrendingMovies =
         timeWindow,
       );
       const resultResponse = [...response1.data.results, ...response2.data.results];
-      await dispatch(setTrendingMovies(resultResponse));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setTrendingMoviesAction({ trendingMovies: resultResponse }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting trending movies. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };

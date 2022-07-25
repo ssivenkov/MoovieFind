@@ -1,11 +1,11 @@
 import { ThunkDispatch } from 'redux-thunk';
 
-// eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
 import { PeopleAPI } from 'api/PeopleAPI';
 import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
-import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setPeopleData } from 'store/actions/peopleActions';
+import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
+import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
+import { setPeopleDataAction } from 'store/actions/peopleReducerActions/setPeopleDataAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 
 export const getPeople =
@@ -35,11 +35,11 @@ export const getPeople =
         ...peopleListResponse1.data.results,
         ...peopleListResponse2.data.results,
       ];
-      await dispatch(setPeopleData(resultPeopleData));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setPeopleDataAction({ peopleData: resultPeopleData }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting people. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };

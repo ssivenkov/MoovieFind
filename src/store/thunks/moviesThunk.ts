@@ -1,11 +1,11 @@
 import { ThunkDispatch } from 'redux-thunk';
 
-// eslint-disable-next-line camelcase
 import { api_key } from 'api/config';
 import { MoviesAPI } from 'api/MoviesAPI';
 import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
-import { appContentInitializedTrue, appInitializedTrue } from 'store/actions/appActions';
-import { setMoviesData } from 'store/actions/moviesActions';
+import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
+import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
+import { setMoviesDataAction } from 'store/actions/moviesReducerActions/setMoviesDataAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
 
@@ -36,12 +36,12 @@ export const getPopularMovies =
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesData(resultMoviesData));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting popular movies. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };
 
@@ -76,12 +76,12 @@ export const getNowPlayingMovies =
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesData(resultMoviesData));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting now playing movies. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };
 
@@ -112,12 +112,12 @@ export const getUpcomingMovies =
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesData(resultMoviesData));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting upcoming movies. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };
 
@@ -148,11 +148,11 @@ export const getTopRatedMovies =
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesData(resultMoviesData));
-      dispatch(appContentInitializedTrue());
+      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+      dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
       console.log(`Error getting top rated movies. ${error}`);
     } finally {
-      dispatch(appInitializedTrue());
+      dispatch(setAppInitializeAction({ appInitialized: true }));
     }
   };
