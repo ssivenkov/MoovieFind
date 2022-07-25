@@ -1,21 +1,20 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk, { ThunkAction } from 'redux-thunk';
 
-import { AppReducerActionsType } from './reducers/appReducer/types';
-import { MainReducerActionsType } from './reducers/mainReducer/types';
-import { MoviesReducerActionsType } from './reducers/moviesReducer/types';
-import { PeopleReducerActionsType } from './reducers/peopleReducer/types';
-import { TrendingReducerActionsType } from './reducers/trendingReducer/types';
-import { TVShowsReducerActionsType } from './reducers/tvShowsReducer/types';
-
 import { appReducer } from 'store/reducers/appReducer/appReducer';
+import { AppReducerActionsType } from 'store/reducers/appReducer/types';
 import { mainReducer } from 'store/reducers/mainReducer/mainReducer';
+import { MainReducerActionsType } from 'store/reducers/mainReducer/types';
 import { movieReducer } from 'store/reducers/movieReducer/movieReducer';
 import { MovieReducerActionsType } from 'store/reducers/movieReducer/types';
 import { moviesReducer } from 'store/reducers/moviesReducer/moviesReducer';
+import { MoviesReducerActionsType } from 'store/reducers/moviesReducer/types';
 import { peopleReducer } from 'store/reducers/peopleReducer/peopleReducer';
+import { PeopleReducerActionsType } from 'store/reducers/peopleReducer/types';
 import { trendingReducer } from 'store/reducers/trendingReducer/trendingReducer';
+import { TrendingReducerActionsType } from 'store/reducers/trendingReducer/types';
 import { tvShowsReducer } from 'store/reducers/tvShowsReducer/tvShowsReducer';
+import { TVShowsReducerActionsType } from 'store/reducers/tvShowsReducer/types';
 
 const rootReducer = combineReducers({
   app: appReducer,
