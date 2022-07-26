@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 import styled from 'styled-components';
 
+import { Modal } from './components/common/modal/Modal';
+
 import { Footer } from 'components/footer/Footer';
 import { Header } from 'components/header/Header';
 import { RoutesContainer } from 'components/routesContainer/RoutesContainer';
@@ -44,6 +46,7 @@ export const App: FC = (): ReturnComponentType => (
       <Header />
       <RoutesContainer />
       <Footer />
+      <Modal />
     </AppWrapper>
   </AppContainer>
 );

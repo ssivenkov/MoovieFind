@@ -16,3 +16,7 @@ export const getAppLanguageSelector = (
 export const getSearchRequestSelector = (
   state: AppRootStateType,
 ): AppReducerStateType['searchRequest'] => state.app.searchRequest;
+
+export const modalTextSelector = (
+  state: AppRootStateType,
+): AppReducerStateType['modalText'] => state.app.modalText;

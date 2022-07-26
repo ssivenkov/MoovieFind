@@ -8,6 +8,7 @@ const appReducerState = {
   language: 'en-US',
   contentInitialized: false,
   searchRequest: EMPTY_STRING,
+  modalText: EMPTY_STRING,
 };
 
 export const appReducer = (
@@ -19,6 +20,8 @@ export const appReducer = (
       return { ...state, appInitialized: action.payload.appInitialized };
     case APP_ACTIONS.SET_APP_CONTENT_INITIALIZE:
       return { ...state, contentInitialized: action.payload.contentInitialized };
+    case APP_ACTIONS.SET_MODAL_TEXT:
+      return { ...state, modalText: action.payload.modalText };
     default:
       return state;
   }
