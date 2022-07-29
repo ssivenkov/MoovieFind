@@ -1,10 +1,11 @@
-import { ThunkDispatch } from 'redux-thunk';
+import { MAX_ITEMS_COUNT, MAX_PAGES_COUNT } from 'constants/common';
 
 import { api_key } from 'api/config';
-import { TVShowsAPI } from 'api/TVShowsAPI';
-import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
+import { TVShowsAPI } from 'api/TVShowsAPI/TVShowsAPI';
+import { ThunkDispatch } from 'redux-thunk';
 import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
 import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
+import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
 import { setTVShowsDataAction } from 'store/actions/tvShowReducerActions/setTVShowsDataAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
 
@@ -17,28 +18,35 @@ export const getPopularTVShows =
     const { language } = getState().app;
     const page = getState().tvShows.currentPage;
     const requestObj = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const TVShowsListResponse1 = await TVShowsAPI.getPopularTVs(pageOneRequestObject);
-      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
-        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const tvShowsListResponse1 = await TVShowsAPI.getPopularTVs(pageOneRequestObject);
+
+      if (tvShowsListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        tvShowsListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
-        TVShowsListResponse1.data.total_results = MaxItemsCount;
+
+      if (tvShowsListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        tvShowsListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
-      const resultTVShowsData = TVShowsListResponse1.data;
+
+      const resultTVShowsData = tvShowsListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
       const TVShowsListResponse2 = await TVShowsAPI.getPopularTVs(pageTwoRequestObject);
+
       resultTVShowsData.results = [
-        ...TVShowsListResponse1.data.results,
+        ...tvShowsListResponse1.data.results,
         ...TVShowsListResponse2.data.results,
       ];
-      await dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
+      dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting popular TVShows. ${error}`);
+      setModalTextAction({ modalText: `Error getting popular TV shows. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }
@@ -53,32 +61,37 @@ export const getAiringTodayTVShows =
     const { language } = getState().app;
     const page = getState().tvShows.currentPage;
     const requestObj = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const TVShowsListResponse1 = await TVShowsAPI.getAiringTodayTVs(
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const tvShowsListResponse1 = await TVShowsAPI.getAiringTodayTVs(
         pageOneRequestObject,
       );
-      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
-        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+
+      if (tvShowsListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        tvShowsListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
-        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      if (tvShowsListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        tvShowsListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
-      const resultTVShowsData = TVShowsListResponse1.data;
+      const resultTVShowsData = tvShowsListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const TVShowsListResponse2 = await TVShowsAPI.getAiringTodayTVs(
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const tvShowsListResponse2 = await TVShowsAPI.getAiringTodayTVs(
         pageTwoRequestObject,
       );
+
       resultTVShowsData.results = [
-        ...TVShowsListResponse1.data.results,
-        ...TVShowsListResponse2.data.results,
+        ...tvShowsListResponse1.data.results,
+        ...tvShowsListResponse2.data.results,
       ];
-      await dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
+      dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting airing today TVShows. ${error}`);
+      setModalTextAction({ modalText: `Error getting airing today TVShows. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }
@@ -93,28 +106,33 @@ export const getOnTheAirTVShows =
     const { language } = getState().app;
     const page = getState().tvShows.currentPage;
     const requestObj = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const TVShowsListResponse1 = await TVShowsAPI.getOnTheAirTVs(pageOneRequestObject);
-      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
-        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const tvShowsListResponse1 = await TVShowsAPI.getOnTheAirTVs(pageOneRequestObject);
+
+      if (tvShowsListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        tvShowsListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
-        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      if (tvShowsListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        tvShowsListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
-      const resultTVShowsData = TVShowsListResponse1.data;
+      const resultTVShowsData = tvShowsListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const TVShowsListResponse2 = await TVShowsAPI.getOnTheAirTVs(pageTwoRequestObject);
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const tvShowsListResponse2 = await TVShowsAPI.getOnTheAirTVs(pageTwoRequestObject);
+
       resultTVShowsData.results = [
-        ...TVShowsListResponse1.data.results,
-        ...TVShowsListResponse2.data.results,
+        ...tvShowsListResponse1.data.results,
+        ...tvShowsListResponse2.data.results,
       ];
-      await dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
+      dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting on the air TVShows. ${error}`);
+      setModalTextAction({ modalText: `Error getting on the air TVShows. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }
@@ -129,28 +147,33 @@ export const getTopRatedTVShows =
     const { language } = getState().app;
     const page = getState().tvShows.currentPage;
     const requestObj = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const TVShowsListResponse1 = await TVShowsAPI.getTopRatedTVs(pageOneRequestObject);
-      if (TVShowsListResponse1.data.total_pages > MaxPagesCount) {
-        TVShowsListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const tvShowsListResponse1 = await TVShowsAPI.getTopRatedTVs(pageOneRequestObject);
+
+      if (tvShowsListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        tvShowsListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (TVShowsListResponse1.data.total_results > MaxItemsCount) {
-        TVShowsListResponse1.data.total_results = MaxItemsCount;
+      if (tvShowsListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        tvShowsListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
-      const resultTVShowsData = TVShowsListResponse1.data;
+      const resultTVShowsData = tvShowsListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const TVShowsListResponse2 = await TVShowsAPI.getTopRatedTVs(pageTwoRequestObject);
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const tvShowsListResponse2 = await TVShowsAPI.getTopRatedTVs(pageTwoRequestObject);
+
       resultTVShowsData.results = [
-        ...TVShowsListResponse1.data.results,
-        ...TVShowsListResponse2.data.results,
+        ...tvShowsListResponse1.data.results,
+        ...tvShowsListResponse2.data.results,
       ];
-      await dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
+      dispatch(setTVShowsDataAction({ tvShowsData: resultTVShowsData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting top rated TVShows. ${error}`);
+      setModalTextAction({ modalText: `Error getting top rated TVShows. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }

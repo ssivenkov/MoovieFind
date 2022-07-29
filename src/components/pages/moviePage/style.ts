@@ -18,18 +18,16 @@ export const StyledPoster = styled.img`
 
 export const StyledMovieInfoContainer = styled.div``;
 
-export const StyledTitleContainer = styled.div``;
+export const StyledInfoContainer = styled.div``;
 
 export const StyledTitle = styled.div`
   font-size: 30px;
   margin-bottom: 30px;
 `;
 
-export const StyledUserScoreContainer = styled.div``;
-
 export const StyledDescriptionContainer = styled.div``;
 
-export const StyledOverviewExplanation = styled.div`
+export const StyledOverviewTitle = styled.div`
   font-size: 21px;
   font-weight: 500;
   margin-bottom: 15px;

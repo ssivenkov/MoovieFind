@@ -1,4 +1,5 @@
-import { ZERO, ONE, CardsCountInOnePage } from 'constants/common';
+import { CARDS_PER_PAGE } from 'constants/common';
+
 import { PEOPLE_ACTIONS } from 'enums/peopleEnum';
 import {
   PeopleReducerActionsType,
@@ -7,9 +8,9 @@ import {
 
 const peopleReducerState = {
   peopleList: [],
-  currentPage: ONE,
-  peopleCountInOnePage: CardsCountInOnePage,
-  totalPeopleCount: ZERO,
+  currentPage: 1,
+  peopleCountInOnePage: CARDS_PER_PAGE,
+  totalPeopleCount: 0,
 };
 
 export const peopleReducer = (

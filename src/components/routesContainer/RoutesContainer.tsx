@@ -1,8 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
-
 import { Error404Page } from 'components/pages/errorPages/Error404Page';
 import { LoginPage } from 'components/pages/loginPage/LoginPage';
 import { MainPage } from 'components/pages/mainPage/MainPage';
@@ -13,46 +10,50 @@ import { SearchPage } from 'components/pages/searchPage/SearchPage';
 import { SignUpPage } from 'components/pages/signUpPage/SignUpPage';
 import { TVShowPage } from 'components/pages/tvShowPage/TVShowPage';
 import { TVShowsPage } from 'components/pages/tvShowsPage/TVShowsPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { PATH } from 'routes/routes';
 import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
-import { getAppInitializedSelector } from 'store/selectors/appSelectors';
+import { appInitializedSelector } from 'store/selectors/appSelectors';
 import { getAuthUserData } from 'store/thunks/authThunk';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const RoutesContainer = (): ReturnComponentType => {
+export const RoutesContainer = (): ComponentType => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const appInitialized = useSelector(getAppInitializedSelector);
 
-  useEffect(() => {
-    dispatch(getAuthUserData());
-  }, []);
+  const location = useLocation();
+
+  const appInitialized = useSelector(appInitializedSelector);
 
   useLayoutEffect(() => {
     if (appInitialized) dispatch(setAppInitializeAction({ appInitialized: false }));
   }, [location.pathname]);
 
+  useEffect(() => {
+    dispatch(getAuthUserData());
+  }, []);
+
   return (
     <Routes>
-      <Route path={PATH.LOGIN} element={<LoginPage />} />
-      <Route path={PATH.SIGNUP} element={<SignUpPage />} />
-      <Route path={PATH.MAIN} element={<MainPage />} />
-      <Route path={`${PATH.MOVIE}/:movieID`} element={<MoviePage />} />
-      <Route path={`${PATH.TVSHOW}/:TWShowID`} element={<TVShowPage />} />
-      <Route path={PATH.MOVIES} element={<Outlet />}>
-        <Route index element={<Navigate to={PATH.POPULAR} />} />
-        <Route path={PATH.POPULAR} element={<MoviesPage />} />
-        <Route path={PATH.TRENDING} element={<MoviesPage />} />
+      <Route element={<LoginPage />} path={PATH.LOGIN} />
+      <Route element={<SignUpPage />} path={PATH.SIGNUP} />
+      <Route element={<MainPage />} path={PATH.START_PAGE} />
+      <Route element={<MoviePage />} path={`${PATH.MOVIE}/:movieID`} />
+      <Route element={<TVShowPage />} path={`${PATH.TV_SHOW}/:TWShowID`} />
+      <Route element={<Outlet />} path={PATH.MOVIES}>
+        <Route element={<Navigate to={PATH.POPULAR} />} index />
+        <Route element={<MoviesPage />} path={PATH.POPULAR} />
+        <Route element={<MoviesPage />} path={PATH.TRENDING} />
       </Route>
-      <Route path={PATH.TVSHOWS} element={<Outlet />}>
-        <Route index element={<Navigate to={PATH.POPULAR} />} />
-        <Route path={PATH.POPULAR} element={<TVShowsPage />} />
-        <Route path={PATH.TRENDING} element={<TVShowsPage />} />
+      <Route element={<Outlet />} path={PATH.TV_SHOWS}>
+        <Route element={<Navigate to={PATH.POPULAR} />} index />
+        <Route element={<TVShowsPage />} path={PATH.POPULAR} />
+        <Route element={<TVShowsPage />} path={PATH.TRENDING} />
       </Route>
-      <Route path={PATH.PEOPLE} element={<PeoplePage />} />
-      <Route path={PATH.SEARCH} element={<SearchPage />} />
-      <Route path={PATH.ERROR} element={<Error404Page />} />
-      <Route path={PATH.WRONG_PAGE} element={<Navigate to={PATH.ERROR} />} />
+      <Route element={<PeoplePage />} path={PATH.PEOPLE} />
+      <Route element={<SearchPage />} path={PATH.SEARCH} />
+      <Route element={<Error404Page />} path={PATH.ERROR} />
+      <Route element={<Navigate to={PATH.ERROR} />} path={PATH.WRONG_PAGE} />
     </Routes>
   );
 };

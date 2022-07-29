@@ -1,4 +1,4 @@
-import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnum';
+import { TV_SHOWS_ACTIONS } from 'enums/TVShowsEnum';
 import { TVShowsReducerStateType } from 'store/reducers/tvShowsReducer/types';
 
 type SetCurrentPageActionPayloadType = {
@@ -6,7 +6,7 @@ type SetCurrentPageActionPayloadType = {
 };
 
 export type SetCurrentPageActionReturnType = {
-  type: TVSHOWS_ACTIONS.SET_CURRENT_PAGE;
+  type: TV_SHOWS_ACTIONS.SET_CURRENT_PAGE;
   payload: SetCurrentPageActionPayloadType;
 };
 
@@ -17,6 +17,6 @@ export type SetCurrentPageActionType = (
 export const setCurrentPageAction: SetCurrentPageActionType = (
   payload,
 ): SetCurrentPageActionReturnType => ({
-  type: TVSHOWS_ACTIONS.SET_CURRENT_PAGE,
+  type: TV_SHOWS_ACTIONS.SET_CURRENT_PAGE,
   payload,
 });

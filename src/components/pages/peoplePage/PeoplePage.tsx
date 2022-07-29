@@ -1,35 +1,38 @@
-import { useEffect } from 'react';
+import { PAGINATION_LINKS_PER_PAGE } from 'constants/common';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { Loader } from 'components/common/loader/Loader';
 import { Pagination } from 'components/common/pagination/Pagination';
 import { PeopleSection } from 'components/pages/peoplePage/PeopleSection/PeopleSection';
-import { VisiblePaginationLinkCount, ZERO } from 'constants/common';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
 import { setCurrentPageAction } from 'store/actions/peopleReducerActions/setCurrentPageAction';
 import {
-  getAppInitializedSelector,
-  getContentInitializedSelector,
+  appInitializedSelector,
+  contentInitializedSelector,
 } from 'store/selectors/appSelectors';
 import {
-  getCurrentPageSelector,
-  getPeopleCountInOnePageSelector,
-  getPeopleListSelector,
-  getTotalPeopleCountSelector,
+  currentPageSelector,
+  peopleCountInOnePageSelector,
+  peopleListSelector,
+  totalPeopleCountSelector,
 } from 'store/selectors/peopleSelectors';
 import { getPeople } from 'store/thunks/peopleThunk';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const PeoplePage = (): ReturnComponentType => {
-  const sectionTitle = 'People';
+export const PeoplePage = (): ComponentType => {
   const dispatch = useDispatch();
-  const peopleList = useSelector(getPeopleListSelector);
-  const appInitialized = useSelector(getAppInitializedSelector);
-  const appContentInitialized = useSelector(getContentInitializedSelector);
-  const currentPage = useSelector(getCurrentPageSelector);
-  const peopleCountInOnePage = useSelector(getPeopleCountInOnePageSelector);
-  const totalPeopleCount = useSelector(getTotalPeopleCountSelector);
+
+  const sectionTitle = 'People';
+
+  const peopleList = useSelector(peopleListSelector);
+  const appInitialized = useSelector(appInitializedSelector);
+  const appContentInitialized = useSelector(contentInitializedSelector);
+  const currentPage = useSelector(currentPageSelector);
+  const peopleCountInOnePage = useSelector(peopleCountInOnePageSelector);
+  const totalPeopleCount = useSelector(totalPeopleCountSelector);
+
   const onPeoplePageChanged = (pageNumber: number): void => {
     dispatch(setAppContentInitializeAction({ contentInitialized: false }));
     dispatch(setCurrentPageAction({ currentPage: pageNumber }));
@@ -37,23 +40,25 @@ export const PeoplePage = (): ReturnComponentType => {
   };
 
   useEffect(() => {
-    if (peopleList.length === ZERO) dispatch(getPeople());
+    if (peopleList.length === 0) {
+      dispatch(getPeople());
+    }
   }, []);
 
-  if (appInitialized && appContentInitialized && peopleList.length === ZERO) {
-    return <div>{sectionTitle} not found</div>;
+  if (appInitialized && appContentInitialized && peopleList.length === 0) {
+    return <div>{`${sectionTitle} not found`}</div>;
   }
 
-  if (appContentInitialized && peopleList.length !== ZERO) {
+  if (appContentInitialized && peopleList.length !== 0) {
     return (
       <>
         <PeopleSection peopleList={peopleList} sectionTitle={sectionTitle} />
         <Pagination
-          totalItemsCount={totalPeopleCount}
           currentPage={currentPage}
           onPageChanged={onPeoplePageChanged}
           pageSize={peopleCountInOnePage}
-          visiblePaginationLinkCount={VisiblePaginationLinkCount}
+          paginationLinkCount={PAGINATION_LINKS_PER_PAGE}
+          totalItemsCount={totalPeopleCount}
         />
       </>
     );

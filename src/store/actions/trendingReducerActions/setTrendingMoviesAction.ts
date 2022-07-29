@@ -1,8 +1,8 @@
 import { TRENDING_ACTIONS } from 'enums/trendingEnum';
-import { MovieType } from 'store/reducers/moviesReducer/types';
+import { TrendingReducerStateType } from 'store/reducers/trendingReducer/types';
 
 type SetTrendingMoviesActionPayloadType = {
-  trendingMovies: MovieType[];
+  trendingMovies: TrendingReducerStateType['trendingMovies'];
 };
 
 export type SetTrendingMoviesActionReturnType = {

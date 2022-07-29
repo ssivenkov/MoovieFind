@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
 import logo from 'assets/images/logo.svg';
 import { Dropdown } from 'components/common/dropdown/Dropdown';
+import { Link } from 'react-router-dom';
 import { PATH } from 'routes/routes';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -51,24 +50,24 @@ const StyledAuthContainer = styled.div`
   display: flex;
 `;
 
-export const Header = (): ReturnComponentType => (
+export const Header = (): ComponentType => (
   <StyledContainer>
     <StyledCategoriesContainer>
       <StyledAppLogoContainer>
-        <Link to={PATH.MAIN}>
+        <Link to={PATH.START_PAGE}>
           <StyledAppLogo src={logo} />
         </Link>
       </StyledAppLogoContainer>
-      <Dropdown title="Movies">
+      <Dropdown title='Movies'>
         {[
           ['Popular', `${PATH.MOVIES}/${PATH.POPULAR}`],
           ['Trending', `${PATH.MOVIES}/${PATH.TRENDING}`],
         ]}
       </Dropdown>
-      <Dropdown title="TV Shows">
+      <Dropdown title='TV Shows'>
         {[
-          ['Popular', `${PATH.TVSHOWS}/${PATH.POPULAR}`],
-          ['Trending', `${PATH.TVSHOWS}/${PATH.TRENDING}`],
+          ['Popular', `${PATH.TV_SHOWS}/${PATH.POPULAR}`],
+          ['Trending', `${PATH.TV_SHOWS}/${PATH.TRENDING}`],
         ]}
       </Dropdown>
       <StyledHeaderLink to={PATH.PEOPLE}>People</StyledHeaderLink>

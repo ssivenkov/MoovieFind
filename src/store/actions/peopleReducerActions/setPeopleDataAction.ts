@@ -1,8 +1,8 @@
+import { GetPeopleDataResponseType } from 'api/PeopleAPI/types';
 import { PEOPLE_ACTIONS } from 'enums/peopleEnum';
-import { PeopleDataResponseType } from 'store/reducers/peopleReducer/types';
 
 type SetPeopleDataActionPayloadType = {
-  peopleData: PeopleDataResponseType;
+  peopleData: GetPeopleDataResponseType;
 };
 
 export type SetPeopleDataActionReturnType = {

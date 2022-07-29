@@ -1,13 +1,14 @@
-import { ThunkDispatch } from 'redux-thunk';
+import { MAX_ITEMS_COUNT, MAX_PAGES_COUNT } from 'constants/common';
 
 import { api_key } from 'api/config';
-import { MoviesAPI } from 'api/MoviesAPI';
-import { MaxItemsCount, MaxPagesCount, ONE, TWO } from 'constants/common';
+import { MoviesAPI } from 'api/MoviesAPI/MoviesAPI';
+import { ThunkDispatch } from 'redux-thunk';
 import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
 import { setAppInitializeAction } from 'store/actions/appReducerActions/setAppInitializeAction';
+import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
 import { setMoviesDataAction } from 'store/actions/moviesReducerActions/setMoviesDataAction';
 import { AppRootActionsType, AppRootStateType, AppThunk } from 'store/store';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
+import { FullRequestType } from 'types/api/requestTypes';
 
 export const getPopularMovies =
   (): AppThunk =>
@@ -17,29 +18,37 @@ export const getPopularMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj: RequestObjectType = { api_key, language, page };
+    const requestObj: FullRequestType = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const moviesListResponse1 = await MoviesAPI.getPopularMovies(pageOneRequestObject);
-      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
-        moviesListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const moviesListResponse1 = await MoviesAPI.getPopular(pageOneRequestObject);
+
+      if (moviesListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        moviesListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (moviesListResponse1.data.total_results > MaxItemsCount) {
-        moviesListResponse1.data.total_results = MaxItemsCount;
+
+      if (moviesListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        moviesListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
+
       const resultMoviesData = moviesListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const moviesListResponse2 = await MoviesAPI.getPopularMovies(pageTwoRequestObject);
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const moviesListResponse2 = await MoviesAPI.getPopular(pageTwoRequestObject);
+
       resultMoviesData.results = [
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+
+      dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting popular movies. ${error}`);
+      setModalTextAction({ modalText: `Error getting popular movies. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }
@@ -53,33 +62,37 @@ export const getNowPlayingMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj: RequestObjectType = { api_key, language, page };
+    const requestObj: FullRequestType = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const moviesListResponse1 = await MoviesAPI.getNowPlayingMovies(
-        pageOneRequestObject,
-      );
-      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
-        moviesListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const moviesListResponse1 = await MoviesAPI.getNowPlaying(pageOneRequestObject);
+
+      if (moviesListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        moviesListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (moviesListResponse1.data.total_results > MaxItemsCount) {
-        moviesListResponse1.data.total_results = MaxItemsCount;
+
+      if (moviesListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        moviesListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
+
       const resultMoviesData = moviesListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const moviesListResponse2 = await MoviesAPI.getNowPlayingMovies(
-        pageTwoRequestObject,
-      );
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const moviesListResponse2 = await MoviesAPI.getNowPlaying(pageTwoRequestObject);
+
       resultMoviesData.results = [
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+
+      dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting now playing movies. ${error}`);
+      setModalTextAction({ modalText: `Error getting now playing movies. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }
@@ -93,29 +106,37 @@ export const getUpcomingMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj: RequestObjectType = { api_key, language, page };
+    const requestObj: FullRequestType = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const moviesListResponse1 = await MoviesAPI.getUpcomingMovies(pageOneRequestObject);
-      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
-        moviesListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const moviesListResponse1 = await MoviesAPI.getUpcoming(pageOneRequestObject);
+
+      if (moviesListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        moviesListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (moviesListResponse1.data.total_results > MaxItemsCount) {
-        moviesListResponse1.data.total_results = MaxItemsCount;
+
+      if (moviesListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        moviesListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
+
       const resultMoviesData = moviesListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const moviesListResponse2 = await MoviesAPI.getUpcomingMovies(pageTwoRequestObject);
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const moviesListResponse2 = await MoviesAPI.getUpcoming(pageTwoRequestObject);
+
       resultMoviesData.results = [
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+
+      dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting upcoming movies. ${error}`);
+      setModalTextAction({ modalText: `Error getting upcoming movies. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }
@@ -129,29 +150,37 @@ export const getTopRatedMovies =
   ) => {
     const { language } = getState().app;
     const page = getState().movies.currentPage;
-    const requestObj: RequestObjectType = { api_key, language, page };
+    const requestObj: FullRequestType = { api_key, language, page };
+
     try {
       const pageOneRequestObject = { ...requestObj };
-      pageOneRequestObject.page = pageOneRequestObject.page * TWO - ONE;
-      const moviesListResponse1 = await MoviesAPI.getTopRatedMovies(pageOneRequestObject);
-      if (moviesListResponse1.data.total_pages > MaxPagesCount) {
-        moviesListResponse1.data.total_pages = MaxPagesCount;
+
+      pageOneRequestObject.page = pageOneRequestObject.page * 2 - 1;
+      const moviesListResponse1 = await MoviesAPI.getTopRated(pageOneRequestObject);
+
+      if (moviesListResponse1.data.total_pages > MAX_PAGES_COUNT) {
+        moviesListResponse1.data.total_pages = MAX_PAGES_COUNT;
       }
-      if (moviesListResponse1.data.total_results > MaxItemsCount) {
-        moviesListResponse1.data.total_results = MaxItemsCount;
+
+      if (moviesListResponse1.data.total_results > MAX_ITEMS_COUNT) {
+        moviesListResponse1.data.total_results = MAX_ITEMS_COUNT;
       }
+
       const resultMoviesData = moviesListResponse1.data;
       const pageTwoRequestObject = { ...requestObj };
-      pageTwoRequestObject.page = pageOneRequestObject.page + ONE;
-      const moviesListResponse2 = await MoviesAPI.getTopRatedMovies(pageTwoRequestObject);
+
+      pageTwoRequestObject.page = pageOneRequestObject.page + 1;
+      const moviesListResponse2 = await MoviesAPI.getTopRated(pageTwoRequestObject);
+
       resultMoviesData.results = [
         ...moviesListResponse1.data.results,
         ...moviesListResponse2.data.results,
       ];
-      await dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
+
+      dispatch(setMoviesDataAction({ moviesData: resultMoviesData }));
       dispatch(setAppContentInitializeAction({ contentInitialized: true }));
     } catch (error) {
-      console.log(`Error getting top rated movies. ${error}`);
+      setModalTextAction({ modalText: `Error getting top rated movies. ${error}` });
     } finally {
       dispatch(setAppInitializeAction({ appInitialized: true }));
     }

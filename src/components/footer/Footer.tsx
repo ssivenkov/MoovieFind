@@ -1,10 +1,9 @@
 import React from 'react';
 
-import styled from 'styled-components';
-
 import tmdbLogo from 'assets/images/tmdb_logo.svg';
-import { ContactButton } from 'components/footer/ContactButton';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ContactButton } from 'components/footer/contactButton/ContactButton';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
 
 const StyledFooter = styled.div`
   width: 100%;
@@ -37,24 +36,24 @@ const StyledTmdbLogo = styled.img`
   }
 `;
 
-export const Footer = (): ReturnComponentType => (
+export const Footer = (): ComponentType => (
   <StyledFooter>
     <StyledContactsContainer>
       <ContactButton
-        link="https://www.linkedin.com/in/ssivenkov"
-        iconClass="fa-linkedin-in"
+        iconClass='fa-linkedin-in'
+        link='https://www.linkedin.com/in/ssivenkov'
       />
-      <ContactButton link="https://t.me/sergei_sivenkov" iconClass="fa-telegram" />
-      <ContactButton link="https://github.com/ssivenkov" iconClass="fa-github" />
+      <ContactButton iconClass='fa-telegram' link='https://t.me/sergei_sivenkov' />
+      <ContactButton iconClass='fa-github' link='https://github.com/ssivenkov' />
       <ContactButton
-        link="https://join.skype.com/invite/cdkkYBX1uutB"
-        iconClass="fa-skype"
+        iconClass='fa-skype'
+        link='https://join.skype.com/invite/cdkkYBX1uutB'
       />
     </StyledContactsContainer>
     <StyledTmdbContainer>
-      data provided by
-      <a href="https://themoviedb.org" target="_blank" rel="noreferrer">
-        <StyledTmdbLogo src={tmdbLogo} alt="tmdb logo" />
+      <span>data provided by</span>
+      <a href='https://themoviedb.org' rel='noreferrer' target='_blank'>
+        <StyledTmdbLogo alt='themoviedb.org logo' src={tmdbLogo} />
       </a>
     </StyledTmdbContainer>
   </StyledFooter>

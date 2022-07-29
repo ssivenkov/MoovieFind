@@ -1,8 +1,8 @@
 import { MOVIE_ACTIONS } from 'enums/movieEnum';
-import { MovieDataType } from 'store/reducers/movieReducer/types';
+import { MovieReducerStateType } from 'store/reducers/movieReducer/types';
 
 type SetMovieDataActionPayloadType = {
-  movieData: MovieDataType;
+  movieData: MovieReducerStateType['movieData'];
 };
 
 export type SetMovieDataActionReturnType = {

@@ -1,8 +1,8 @@
 import { MAIN_ACTIONS } from 'enums/mainEnum';
-import { TimeFilterType } from 'types/commonTypes/FilterTypes';
+import { MainReducerStateType } from 'store/reducers/mainReducer/types';
 
 type SetTrendingTimeFilterActionPayloadType = {
-  trendingTimeFilter: TimeFilterType;
+  trendingTimeFilter: MainReducerStateType['trendingTimeFilter'];
 };
 
 export type SetTrendingTimeFilterActionReturnType = {

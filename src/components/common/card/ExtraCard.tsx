@@ -1,7 +1,4 @@
-import React, { FC } from 'react';
-
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react';
 
 import {
   StyledContainer,
@@ -11,8 +8,11 @@ import {
   StyledNoContent,
   StyledText,
 } from 'components/common/card/commonStyles';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { ExtraCardPropsType } from 'types/components/commonTypes/CardTypes/CardTypes';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
+
+import { ExtraCardPropsType } from './types';
 
 const StyledExtraCardLink = styled(Link)``;
 
@@ -50,18 +50,19 @@ const StyledContent = styled.div`
   ${StyledNoContent}
 `;
 
-export const ExtraCard: FC<ExtraCardPropsType> = ({
-  title,
-  link,
-}): ReturnComponentType => (
-  <StyledExtraCardLink to={link}>
-    <StyledExtraCardContainer>
-      <StyledExtraCardInfoContainer>
-        <StyledTitle>{title}</StyledTitle>
-      </StyledExtraCardInfoContainer>
-      <StyledBackgroundContentContainer>
-        <StyledContent />
-      </StyledBackgroundContentContainer>
-    </StyledExtraCardContainer>
-  </StyledExtraCardLink>
-);
+export const ExtraCard = (props: ExtraCardPropsType): ComponentType => {
+  const { title, link } = props;
+
+  return (
+    <StyledExtraCardLink to={link}>
+      <StyledExtraCardContainer>
+        <StyledExtraCardInfoContainer>
+          <StyledTitle>{title}</StyledTitle>
+        </StyledExtraCardInfoContainer>
+        <StyledBackgroundContentContainer>
+          <StyledContent />
+        </StyledBackgroundContentContainer>
+      </StyledExtraCardContainer>
+    </StyledExtraCardLink>
+  );
+};

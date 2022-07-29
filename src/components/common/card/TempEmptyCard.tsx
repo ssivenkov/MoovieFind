@@ -1,8 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
 const StyledMovie = styled.div`
   width: 150px;
@@ -26,7 +25,7 @@ const StyledMovieTitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const TempEmptyCard = (): ReturnComponentType => (
+export const TempEmptyCard = (): ComponentType => (
   <StyledMovie>
     <StyledMovieContainer />
     <StyledMovieTitle>Movie</StyledMovieTitle>

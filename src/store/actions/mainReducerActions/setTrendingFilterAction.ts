@@ -1,8 +1,8 @@
 import { MAIN_ACTIONS } from 'enums/mainEnum';
-import { MovieFilterType } from 'types/commonTypes/FilterTypes';
+import { MainReducerStateType } from 'store/reducers/mainReducer/types';
 
 type SetTrendingFilterActionPayloadType = {
-  trendingFilter: MovieFilterType;
+  trendingFilter: MainReducerStateType['trendingFilter'];
 };
 
 export type SetTrendingFilterActionReturnType = {

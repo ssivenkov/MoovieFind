@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
-
 import {
   StyledSectionTitle,
   StyledSectionTitleContainer,
 } from 'components/pages/commonStyles/Styles';
+import { useDispatch } from 'react-redux';
 import { getAuthUserData } from 'store/thunks/authThunk';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const SearchPage = (): ReturnComponentType => {
+export const SearchPage = (): ComponentType => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAuthUserData());
   }, []);
+
   return (
     <StyledSectionTitleContainer>
       <StyledSectionTitle>Search</StyledSectionTitle>

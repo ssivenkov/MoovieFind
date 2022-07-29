@@ -1,5 +1,6 @@
-import { CardsCountInOnePage, ONE, ZERO } from 'constants/common';
-import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnum';
+import { CARDS_PER_PAGE } from 'constants/common';
+
+import { TV_SHOWS_ACTIONS } from 'enums/TVShowsEnum';
 import {
   TVShowsReducerActionsType,
   TVShowsReducerStateType,
@@ -7,22 +8,23 @@ import {
 
 const tvShowReducerState = {
   tvShowsList: [],
-  currentPage: ONE,
-  tvShowsCountInOnePage: CardsCountInOnePage,
-  totalTVShowsCount: ZERO,
+  currentPage: 1,
+  tvShowsCountInOnePage: CARDS_PER_PAGE,
+  totalTVShowsCount: 0,
 };
+
 export const tvShowsReducer = (
   state: TVShowsReducerStateType = tvShowReducerState,
   action: TVShowsReducerActionsType,
 ): TVShowsReducerStateType => {
   switch (action.type) {
-    case TVSHOWS_ACTIONS.SET_TVSHOWS_DATA:
+    case TV_SHOWS_ACTIONS.SET_TV_SHOWS_DATA:
       return {
         ...state,
         tvShowsList: action.payload.tvShowsData.results,
         totalTVShowsCount: action.payload.tvShowsData.total_results,
       };
-    case TVSHOWS_ACTIONS.SET_CURRENT_PAGE:
+    case TV_SHOWS_ACTIONS.SET_CURRENT_PAGE:
       return { ...state, currentPage: action.payload.currentPage };
     default:
       return state;

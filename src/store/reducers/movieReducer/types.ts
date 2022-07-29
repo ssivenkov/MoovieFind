@@ -1,49 +1,50 @@
 import { ClearMovieDataActionReturnType } from 'store/actions/movieReducerActions/clearMovieDataAction';
 import { SetMovieDataActionReturnType } from 'store/actions/movieReducerActions/setMovieDataAction';
-import { NullableType } from 'types/commonTypes/NullableType';
+import { NullableType } from 'types/common/nullableType';
 
-export type GenresType = {
+export type GenreType = {
   id?: number;
   name?: string;
 };
 
-export type ProductionCompaniesType = {
+export type ProductionCompanyType = {
   name?: string;
   id?: number;
   logo_path?: NullableType<string>;
   origin_country?: string;
 };
 
-export type ProductionCountriesType = {
+export type ProductionCountryType = {
   iso_639_1?: string;
   name?: string;
 };
 
-export type SpokenLanguagesType = {
+export type SpokenLanguageType = {
   iso_3166_1?: string;
   name?: string;
 };
 
 export type MovieDataType = {
+  id: number;
+
   adult?: boolean;
   backdrop_path?: NullableType<string>;
   belongs_to_collection?: NullableType<object>;
   budget?: number;
-  genres?: GenresType[];
+  genres?: GenreType[];
   homepage?: NullableType<string>;
-  id: number;
   imdb_id?: NullableType<string>;
   original_language?: string;
   original_title?: string;
   overview?: NullableType<string>;
   popularity?: number;
   poster_path?: NullableType<string>;
-  production_companies?: ProductionCompaniesType[];
-  production_countries?: Array<any>;
+  production_companies?: ProductionCompanyType[];
+  production_countries?: ProductionCountryType[];
   release_date?: string;
   revenue?: number;
   runtime?: NullableType<number>;
-  spoken_languages?: SpokenLanguagesType[];
+  spoken_languages?: SpokenLanguageType[];
   status?: string;
   tagline?: NullableType<string>;
   title?: string;
@@ -54,6 +55,7 @@ export type MovieDataType = {
 
 export type MovieReducerStateType = {
   movieData: MovieDataType;
+  externalLinks: string[];
 };
 
 export type MovieReducerActionsType =

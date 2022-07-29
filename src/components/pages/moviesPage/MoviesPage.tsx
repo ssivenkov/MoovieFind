@@ -1,35 +1,38 @@
-import { useEffect } from 'react';
+import { PAGINATION_LINKS_PER_PAGE } from 'constants/common';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { Loader } from 'components/common/loader/Loader';
 import { Pagination } from 'components/common/pagination/Pagination';
 import { MoviesSection } from 'components/pages/moviesPage/MoviesSection/MoviesSection';
-import { VisiblePaginationLinkCount, ZERO } from 'constants/common';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
 import { setCurrentPageAction } from 'store/actions/moviesReducerActions/setCurrentPageAction';
 import {
-  getAppInitializedSelector,
-  getContentInitializedSelector,
+  appInitializedSelector,
+  contentInitializedSelector,
 } from 'store/selectors/appSelectors';
 import {
-  getCurrentPageSelector,
-  getMoviesCountInOnePageSelector,
-  getMoviesListSelector,
-  getTotalMoviesCountSelector,
+  currentPageSelector,
+  moviesCountInOnePageSelector,
+  moviesListSelector,
+  totalMoviesCountSelector,
 } from 'store/selectors/moviesSelectors';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const MoviesPage = (): ReturnComponentType => {
+export const MoviesPage = (): ComponentType => {
   const dispatch = useDispatch();
+
+  const moviesList = useSelector(moviesListSelector);
+  const appInitialized = useSelector(appInitializedSelector);
+  const appContentInitialized = useSelector(contentInitializedSelector);
+  const currentPage = useSelector(currentPageSelector);
+  const movieCountInOnePage = useSelector(moviesCountInOnePageSelector);
+  const totalMovieCount = useSelector(totalMoviesCountSelector);
+
   const sectionTitle = 'Movies';
-  const moviesList = useSelector(getMoviesListSelector);
-  const appInitialized = useSelector(getAppInitializedSelector);
-  const appContentInitialized = useSelector(getContentInitializedSelector);
-  const currentPage = useSelector(getCurrentPageSelector);
-  const movieCountInOnePage = useSelector(getMoviesCountInOnePageSelector);
-  const totalMovieCount = useSelector(getTotalMoviesCountSelector);
+
   const onMoviePageChanged = (pageNumber: number): void => {
     dispatch(setAppContentInitializeAction({ contentInitialized: false }));
     dispatch(setCurrentPageAction({ currentPage: pageNumber }));
@@ -37,23 +40,23 @@ export const MoviesPage = (): ReturnComponentType => {
   };
 
   useEffect(() => {
-    if (moviesList.length === ZERO) dispatch(getPopularMovies());
+    if (moviesList.length === 0) dispatch(getPopularMovies());
   }, []);
 
-  if (appInitialized && appContentInitialized && moviesList.length === ZERO) {
-    return <div>{sectionTitle} not found</div>;
+  if (appInitialized && appContentInitialized && moviesList.length === 0) {
+    return <div>{`${sectionTitle} not found`}</div>;
   }
 
-  if (appContentInitialized && moviesList.length !== ZERO) {
+  if (appContentInitialized && moviesList.length !== 0) {
     return (
       <>
         <MoviesSection moviesList={moviesList} sectionTitle={sectionTitle} />
         <Pagination
-          totalItemsCount={totalMovieCount}
           currentPage={currentPage}
           onPageChanged={onMoviePageChanged}
           pageSize={movieCountInOnePage}
-          visiblePaginationLinkCount={VisiblePaginationLinkCount}
+          paginationLinkCount={PAGINATION_LINKS_PER_PAGE}
+          totalItemsCount={totalMovieCount}
         />
       </>
     );

@@ -1,8 +1,8 @@
+import { GetMoviesResponseInterface } from 'api/MoviesAPI/types';
 import { MOVIES_ACTIONS } from 'enums/moviesEnum';
-import { MoviesDataResponseType } from 'store/reducers/moviesReducer/types';
 
 type SetMoviesDataActionPayloadType = {
-  moviesData: MoviesDataResponseType;
+  moviesData: GetMoviesResponseInterface;
 };
 
 export type SetMoviesDataActionReturnType = {

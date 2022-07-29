@@ -1,5 +1,5 @@
 import React from 'react';
 
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const TVShowPage = (): ReturnComponentType => <div>TW show page</div>;
+export const TVShowPage = (): ComponentType => <div>TV show page</div>;

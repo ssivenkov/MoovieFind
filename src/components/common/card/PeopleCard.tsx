@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-
-import styled from 'styled-components';
+import React from 'react';
 
 import { image300x450 } from 'api/config';
 import {
@@ -12,13 +10,14 @@ import {
   StyledNoContent,
   StyledText,
 } from 'components/common/card/commonStyles';
-import { ZERO } from 'constants/common';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
+
 import {
   PeopleCardPropsType,
   StyledHumanPhotoContentContainerPropsType,
   StyledPeopleRatePropsType,
-} from 'types/components/commonTypes/CardTypes/CardTypes';
+} from './types';
 
 const StyledHuman = styled.div`
   ${StyledContainer}
@@ -31,9 +30,9 @@ const StyledHumanInfoContainer = styled.div`
 const StyledHumanRate = styled.div<StyledPeopleRatePropsType>`
   ${StyledText};
   opacity: 0;
-  transform: ${props =>
-    props.popularity === ZERO ? 'translate(-50%, 135%)' : 'translate(-50%, 60%)'};
-  font-size: ${props => (props.popularity === ZERO ? '22px' : '35px')};
+  transform: ${(props) =>
+    props.popularity === 0 ? 'translate(-50%, 135%)' : 'translate(-50%, 60%)'};
+  font-size: ${(props) => (props.popularity === 0 ? '22px' : '35px')};
 `;
 
 const StyledMovieReleaseDate = styled.div`
@@ -56,7 +55,7 @@ const StyledHumanContainerContainer = styled.div`
 
 const StyledHumanPhotoContentContainer = styled.div<StyledHumanPhotoContentContainerPropsType>`
   ${StyledContentContainer}
-  ${props => props.nullContent && StyledLightHover}
+  ${(props) => props.nullContent && StyledLightHover}
 `;
 
 const StyledHumanPhoto = styled.img`
@@ -78,28 +77,31 @@ const StyledHumanName = styled.div`
   ${StyledCardTitle}
 `;
 
-export const PeopleCard: FC<PeopleCardPropsType> = ({
-  name,
-  profilePath,
-  popularity,
-}): ReturnComponentType => (
-  <StyledHuman>
-    <StyledHumanContainerContainer>
-      <StyledHumanInfoContainer>
-        <StyledHumanRate popularity={popularity}>
-          {popularity === ZERO ? 'Not rated' : popularity}
-        </StyledHumanRate>
-      </StyledHumanInfoContainer>
-      <StyledHumanPhotoContentContainer nullContent={profilePath === null}>
-        {profilePath === null ? (
-          <StyledHumanNoPhotoContainer>
-            <StyledHumanNoPhotoTitle>No photo</StyledHumanNoPhotoTitle>
-          </StyledHumanNoPhotoContainer>
-        ) : (
-          <StyledHumanPhoto src={`${image300x450}${profilePath}`} alt={`${name} photo`} />
-        )}
-      </StyledHumanPhotoContentContainer>
-    </StyledHumanContainerContainer>
-    <StyledHumanName>{name}</StyledHumanName>
-  </StyledHuman>
-);
+export const PeopleCard = (props: PeopleCardPropsType): ComponentType => {
+  const { name, profilePath, popularity } = props;
+
+  return (
+    <StyledHuman>
+      <StyledHumanContainerContainer>
+        <StyledHumanInfoContainer>
+          <StyledHumanRate popularity={popularity}>
+            {popularity === 0 ? 'Not rated' : popularity}
+          </StyledHumanRate>
+        </StyledHumanInfoContainer>
+        <StyledHumanPhotoContentContainer nullContent={profilePath === null}>
+          {profilePath === null ? (
+            <StyledHumanNoPhotoContainer>
+              <StyledHumanNoPhotoTitle>No photo</StyledHumanNoPhotoTitle>
+            </StyledHumanNoPhotoContainer>
+          ) : (
+            <StyledHumanPhoto
+              alt={`${name} photo`}
+              src={`${image300x450}${profilePath}`}
+            />
+          )}
+        </StyledHumanPhotoContentContainer>
+      </StyledHumanContainerContainer>
+      <StyledHumanName>{name}</StyledHumanName>
+    </StyledHuman>
+  );
+};

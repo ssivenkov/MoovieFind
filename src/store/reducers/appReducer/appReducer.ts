@@ -1,14 +1,13 @@
-import { AppReducerActionsType, AppReducerStateType } from './types';
-
-import { EMPTY_STRING } from 'constants/common';
 import { APP_ACTIONS } from 'enums/appEnum';
+
+import { AppReducerActionsType, AppReducerStateType } from './types';
 
 const appReducerState = {
   appInitialized: false,
   language: 'en-US',
   contentInitialized: false,
-  searchRequest: EMPTY_STRING,
-  modalText: EMPTY_STRING,
+  searchRequest: '',
+  modalText: '',
 };
 
 export const appReducer = (

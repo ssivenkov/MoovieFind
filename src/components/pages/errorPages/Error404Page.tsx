@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-
 import { PATH } from 'routes/routes';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const Error404Page = (): ReturnComponentType => (
+export const Error404Page = (): ComponentType => (
   <div>
     <div>Error 404</div>
     <div>
-      <Link to={PATH.MAIN}>Back to home</Link>
+      <Link to={PATH.START_PAGE}>Back to home</Link>
     </div>
   </div>
 );

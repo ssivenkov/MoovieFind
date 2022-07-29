@@ -1,8 +1,8 @@
 import { MAIN_ACTIONS } from 'enums/mainEnum';
-import { MovieFilterType } from 'types/commonTypes/FilterTypes';
+import { MainReducerStateType } from 'store/reducers/mainReducer/types';
 
 type SetWhatsPopularFilterActionPayloadType = {
-  whatsPopularFilter: MovieFilterType;
+  whatsPopularFilter: MainReducerStateType['whatsPopularFilter'];
 };
 
 export type SetWhatsPopularFilterActionReturnType = {

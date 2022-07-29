@@ -1,8 +1,8 @@
 import { TRENDING_ACTIONS } from 'enums/trendingEnum';
-import { TVShowType } from 'store/reducers/tvShowsReducer/types';
+import { TrendingReducerStateType } from 'store/reducers/trendingReducer/types';
 
 type SetTrendingTVShowsActionPayloadType = {
-  trendingTVShows: TVShowType[];
+  trendingTVShows: TrendingReducerStateType['trendingTVShows'];
 };
 
 export type SetTrendingTVShowsActionReturnType = {

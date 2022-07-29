@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 import { PeopleCard } from 'components/common/card/PeopleCard';
 import {
   StyledSection,
@@ -7,27 +5,29 @@ import {
   StyledSectionTitle,
   StyledSectionTitleContainer,
 } from 'components/pages/commonStyles/Styles';
-import { PeopleType } from 'store/reducers/peopleReducer/types';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { PeopleSectionPropsType } from 'types/components/commonTypes/PeopleSectionTypes/PeopleSectionTypes';
+import { PersonType } from 'store/reducers/peopleReducer/types';
+import { ComponentType } from 'types/common/componentType';
 
-export const PeopleSection: FC<PeopleSectionPropsType> = ({
-  peopleList,
-  sectionTitle,
-}): ReturnComponentType => (
-  <StyledSection>
-    <StyledSectionTitleContainer>
-      <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
-    </StyledSectionTitleContainer>
-    <StyledSectionContent>
-      {peopleList.map((human: PeopleType) => (
-        <PeopleCard
-          key={human.id}
-          name={human.name}
-          profilePath={human.profile_path}
-          popularity={human.popularity}
-        />
-      ))}
-    </StyledSectionContent>
-  </StyledSection>
-);
+import { PeopleSectionPropsType } from './types';
+
+export const PeopleSection = (props: PeopleSectionPropsType): ComponentType => {
+  const { peopleList, sectionTitle } = props;
+
+  return (
+    <StyledSection>
+      <StyledSectionTitleContainer>
+        <StyledSectionTitle>{sectionTitle}</StyledSectionTitle>
+      </StyledSectionTitleContainer>
+      <StyledSectionContent>
+        {peopleList.map((person: PersonType) => (
+          <PeopleCard
+            key={person.id}
+            name={person.name}
+            popularity={person.popularity}
+            profilePath={person.profile_path}
+          />
+        ))}
+      </StyledSectionContent>
+    </StyledSection>
+  );
+};

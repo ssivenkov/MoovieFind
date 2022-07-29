@@ -1,13 +1,6 @@
 import { SetCurrentPageActionReturnType } from 'store/actions/moviesReducerActions/setCurrentPageAction';
 import { SetMoviesDataActionReturnType } from 'store/actions/moviesReducerActions/setMoviesDataAction';
-import { NullableType } from 'types/commonTypes/NullableType';
-
-export type MoviesDataResponseType = {
-  results: MovieType[];
-  page: number;
-  total_pages: number;
-  total_results: number;
-};
+import { NullableType } from 'types/common/nullableType';
 
 export type MovieType = {
   poster_path?: NullableType<string>;

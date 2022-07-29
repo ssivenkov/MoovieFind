@@ -1,33 +1,34 @@
-import React, { useEffect } from 'react';
+import { DAY, MOVIE, TV, WEEK } from 'constants/common';
 
-import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
 
 import { api_key, originalImage } from 'api/config';
 import { SearchSection } from 'components/pages/mainPage/searchSection/SearchSection';
 import { TrendingSection } from 'components/pages/mainPage/trendingSection/TrendingSection';
 import { WhatsPopularSection } from 'components/pages/mainPage/whatsPopularSection/WhatsPopularSection';
-import { DAY, MOVIE, ONE, TV, WEEK, ZERO } from 'constants/common';
-import { getAppLanguageSelector } from 'store/selectors/appSelectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { appLanguageSelector } from 'store/selectors/appSelectors';
 import {
-  getSearchImageLinkSelector,
-  getTrendingFilterSelector,
-  getTrendingTimeFilterSelector,
-  getWhatsPopularFilterSelector,
+  searchImageLinkSelector,
+  trendingFilterSelector,
+  trendingTimeFilterSelector,
+  whatsPopularFilterSelector,
 } from 'store/selectors/mainSelectors';
-import { getMoviesListSelector } from 'store/selectors/moviesSelectors';
+import { moviesListSelector } from 'store/selectors/moviesSelectors';
 import {
-  getTrendingMoviesListSelector,
-  getTrendingTVShowsListSelector,
+  trendingMoviesListSelector,
+  trendingTVShowsListSelector,
 } from 'store/selectors/trendingSelectors';
-import { getTVShowsListSelector } from 'store/selectors/tvShowsSelectors';
+import { tvShowsListSelector } from 'store/selectors/tvShowsSelectors';
 import { setRandomSearchBackgroundImage } from 'store/thunks/mainThunk';
 import { getPopularMovies } from 'store/thunks/moviesThunk';
 import { getTrendingMovies, getTrendingTVShows } from 'store/thunks/trendingThunk';
 import { getPopularTVShows } from 'store/thunks/tvShowsThunk';
-import { RequestObjectType } from 'types/commonTypes/RequestObjectType';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { StyledIntroWrapperPropsType } from 'types/components/MainTypes/MainTypes';
+import styled from 'styled-components';
+import { FullRequestType } from 'types/api/requestTypes';
+import { ComponentType } from 'types/common/componentType';
+
+import { StyledIntroWrapperPropsType } from './types';
 
 const StyledMainContainer = styled.div`
   width: 100%;
@@ -44,7 +45,7 @@ const StyledIntroWrapper = styled.div<StyledIntroWrapperPropsType>`
       rgba(0, 0, 0, 0.7) 0%,
       rgba(0, 0, 0, 0.7) 100%
     ),
-    ${props => props.imageLink.length > ZERO && `url(${originalImage}${props.imageLink})`};
+    ${(props) => props.imageLink.length > 0 && `url(${originalImage}${props.imageLink})`};
   background-size: cover;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
@@ -74,20 +75,20 @@ const StyledSearchContainer = styled.div`
 `;
 const StyledSectionsContainer = styled.div``;
 
-export const MainPage = (): ReturnComponentType => {
+export const MainPage = (): ComponentType => {
   const dispatch = useDispatch();
-  const page = ONE;
-  const language = useSelector(getAppLanguageSelector);
-  const requestObj: RequestObjectType = { api_key, language, page };
 
-  const popularTVShowsList = useSelector(getTVShowsListSelector);
-  const popularMoviesList = useSelector(getMoviesListSelector);
-  const trendingTVShowsList = useSelector(getTrendingTVShowsListSelector);
-  const trendingMoviesList = useSelector(getTrendingMoviesListSelector);
-  const whatsPopularFilter = useSelector(getWhatsPopularFilterSelector);
-  const trendingFilter = useSelector(getTrendingFilterSelector);
-  const trendingTimeFilter = useSelector(getTrendingTimeFilterSelector);
-  const searchImageLink = useSelector(getSearchImageLinkSelector);
+  const language = useSelector(appLanguageSelector);
+  const popularTVShowsList = useSelector(tvShowsListSelector);
+  const popularMoviesList = useSelector(moviesListSelector);
+  const trendingTVShowsList = useSelector(trendingTVShowsListSelector);
+  const trendingMoviesList = useSelector(trendingMoviesListSelector);
+  const whatsPopularFilter = useSelector(whatsPopularFilterSelector);
+  const trendingFilter = useSelector(trendingFilterSelector);
+  const trendingTimeFilter = useSelector(trendingTimeFilterSelector);
+  const searchImageLink = useSelector(searchImageLinkSelector);
+
+  const requestObj: FullRequestType = { api_key, language, page: 1 };
 
   useEffect(() => {
     switch (whatsPopularFilter) {
@@ -140,7 +141,7 @@ export const MainPage = (): ReturnComponentType => {
   }, [trendingTimeFilter]);
 
   useEffect(() => {
-    if (popularTVShowsList.length !== ZERO && trendingTVShowsList.length !== ZERO) {
+    if (popularTVShowsList.length !== 0 && trendingTVShowsList.length !== 0) {
       dispatch(setRandomSearchBackgroundImage([popularTVShowsList, trendingTVShowsList]));
     }
   }, [popularTVShowsList, trendingTVShowsList]);
@@ -162,13 +163,15 @@ export const MainPage = (): ReturnComponentType => {
       </StyledIntroWrapper>
       <StyledSectionsContainer>
         <WhatsPopularSection
-          popularList={whatsPopularFilter === TV ? popularTVShowsList : popularMoviesList}
           filter={whatsPopularFilter}
+          popularMoviesList={popularMoviesList}
+          popularTVShowsList={popularTVShowsList}
         />
         <TrendingSection
-          trendingList={trendingFilter === TV ? trendingTVShowsList : trendingMoviesList}
           filter={trendingFilter}
           timeFilter={trendingTimeFilter}
+          trendingMoviesList={trendingMoviesList}
+          trendingTVShowsList={trendingTVShowsList}
         />
       </StyledSectionsContainer>
     </StyledMainContainer>

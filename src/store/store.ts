@@ -1,6 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk, { ThunkAction } from 'redux-thunk';
-
 import { appReducer } from 'store/reducers/appReducer/appReducer';
 import { AppReducerActionsType } from 'store/reducers/appReducer/types';
 import { mainReducer } from 'store/reducers/mainReducer/mainReducer';
@@ -33,6 +32,7 @@ declare global {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 export type AppRootStateType = ReturnType<typeof rootReducer>;
 export type AppRootActionsType =

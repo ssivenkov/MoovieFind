@@ -1,12 +1,12 @@
-import { TVSHOWS_ACTIONS } from 'enums/TVShowsEnum';
-import { TVShowsDataResponseType } from 'store/reducers/tvShowsReducer/types';
+import { GetTVShowsResponseType } from 'api/TVShowsAPI/types';
+import { TV_SHOWS_ACTIONS } from 'enums/TVShowsEnum';
 
 type SetTVShowsDataActionPayloadType = {
-  tvShowsData: TVShowsDataResponseType;
+  tvShowsData: GetTVShowsResponseType;
 };
 
 export type SetTVShowsDataActionReturnType = {
-  type: TVSHOWS_ACTIONS.SET_TVSHOWS_DATA;
+  type: TV_SHOWS_ACTIONS.SET_TV_SHOWS_DATA;
   payload: SetTVShowsDataActionPayloadType;
 };
 
@@ -17,6 +17,6 @@ export type SetTVShowsDataActionType = (
 export const setTVShowsDataAction: SetTVShowsDataActionType = (
   payload,
 ): SetTVShowsDataActionReturnType => ({
-  type: TVSHOWS_ACTIONS.SET_TVSHOWS_DATA,
+  type: TV_SHOWS_ACTIONS.SET_TV_SHOWS_DATA,
   payload,
 });

@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { Formik } from 'formik';
-import styled from 'styled-components';
-
 import { Button } from 'components/common/button/Button';
 import {
   StyledField,
@@ -11,20 +8,18 @@ import {
   StyledSectionTitleContainer,
   StyledSectionContainer,
 } from 'components/pages/commonStyles/Styles';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { Formik } from 'formik';
+import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
 
-interface submitObjectType {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { SignUpSubmitType } from './types';
 
 const StyledButtonsContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const SignUpPage = (): ReturnComponentType => {
+export const SignUpPage = (): ComponentType => {
   const initialValues = {
     name: '',
     email: '',
@@ -32,8 +27,8 @@ export const SignUpPage = (): ReturnComponentType => {
     confirmPassword: '',
   };
 
-  const onSubmit = (values: submitObjectType): void => {
-    console.log(values);
+  const onSubmit = (submitData: SignUpSubmitType): void => {
+    setModalTextAction({ modalText: submitData.email });
   };
 
   return (
@@ -43,16 +38,16 @@ export const SignUpPage = (): ReturnComponentType => {
       </StyledSectionTitleContainer>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <StyledFormColumn>
-          <StyledField type="text" name="name" placeholder="Name" />
-          <StyledField type="text" name="email" placeholder="Email" />
-          <StyledField type="password" name="password" placeholder="Password" />
+          <StyledField name='name' placeholder='Name' type='text' />
+          <StyledField name='email' placeholder='Email' type='text' />
+          <StyledField name='password' placeholder='Password' type='password' />
           <StyledField
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm password"
+            name='confirmPassword'
+            placeholder='Confirm password'
+            type='password'
           />
           <StyledButtonsContainer>
-            <Button type="submit">Sign up</Button>
+            <Button type='submit'>Sign up</Button>
           </StyledButtonsContainer>
         </StyledFormColumn>
       </Formik>

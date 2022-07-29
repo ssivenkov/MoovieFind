@@ -1,35 +1,38 @@
-import { useEffect } from 'react';
+import { PAGINATION_LINKS_PER_PAGE } from 'constants/common';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { Loader } from 'components/common/loader/Loader';
 import { Pagination } from 'components/common/pagination/Pagination';
 import { TVShowsSection } from 'components/pages/tvShowsPage/tvShowsSection/TVShowsSection';
-import { VisiblePaginationLinkCount, ZERO } from 'constants/common';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAppContentInitializeAction } from 'store/actions/appReducerActions/appContentInitializeAction';
 import { setCurrentPageAction } from 'store/actions/tvShowReducerActions/setCurrentPageAction';
 import {
-  getAppInitializedSelector,
-  getContentInitializedSelector,
+  appInitializedSelector,
+  contentInitializedSelector,
 } from 'store/selectors/appSelectors';
 import {
-  getCurrentPageSelector,
-  getTotalTVShowsCountSelector,
-  getTVShowsCountInOnePageSelector,
-  getTVShowsListSelector,
+  currentPageSelector,
+  totalTVShowsCountSelector,
+  tvShowsCountInOnePageSelector,
+  tvShowsListSelector,
 } from 'store/selectors/tvShowsSelectors';
 import { getPopularTVShows } from 'store/thunks/tvShowsThunk';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const TVShowsPage = (): ReturnComponentType => {
+export const TVShowsPage = (): ComponentType => {
   const dispatch = useDispatch();
+
   const sectionTitle = 'TV Shows';
-  const TVShowsList = useSelector(getTVShowsListSelector);
-  const appInitialized = useSelector(getAppInitializedSelector);
-  const appContentInitialized = useSelector(getContentInitializedSelector);
-  const currentPage = useSelector(getCurrentPageSelector);
-  const TVShowsCountInOnePage = useSelector(getTVShowsCountInOnePageSelector);
-  const totalTVShowsCount = useSelector(getTotalTVShowsCountSelector);
+
+  const TVShowsList = useSelector(tvShowsListSelector);
+  const appInitialized = useSelector(appInitializedSelector);
+  const appContentInitialized = useSelector(contentInitializedSelector);
+  const currentPage = useSelector(currentPageSelector);
+  const TVShowsCountInOnePage = useSelector(tvShowsCountInOnePageSelector);
+  const totalTVShowsCount = useSelector(totalTVShowsCountSelector);
+
   const onTVShowPageChanged = (pageNumber: number): void => {
     dispatch(setAppContentInitializeAction({ contentInitialized: false }));
     dispatch(setCurrentPageAction({ currentPage: pageNumber }));
@@ -37,23 +40,25 @@ export const TVShowsPage = (): ReturnComponentType => {
   };
 
   useEffect(() => {
-    if (TVShowsList.length === ZERO) dispatch(getPopularTVShows());
+    if (TVShowsList.length === 0) {
+      dispatch(getPopularTVShows());
+    }
   }, []);
 
-  if (appInitialized && appContentInitialized && TVShowsList.length === ZERO) {
-    return <div>{sectionTitle} not found</div>;
+  if (appInitialized && appContentInitialized && TVShowsList.length === 0) {
+    return <div>{`${sectionTitle} not found`}</div>;
   }
 
-  if (appContentInitialized && TVShowsList.length !== ZERO) {
+  if (appContentInitialized && TVShowsList.length !== 0) {
     return (
       <>
-        <TVShowsSection TVShowsList={TVShowsList} sectionTitle={sectionTitle} />
+        <TVShowsSection sectionTitle={sectionTitle} tvShowsList={TVShowsList} />
         <Pagination
-          totalItemsCount={totalTVShowsCount}
           currentPage={currentPage}
           onPageChanged={onTVShowPageChanged}
           pageSize={TVShowsCountInOnePage}
-          visiblePaginationLinkCount={VisiblePaginationLinkCount}
+          paginationLinkCount={PAGINATION_LINKS_PER_PAGE}
+          totalItemsCount={totalTVShowsCount}
         />
       </>
     );

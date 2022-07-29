@@ -1,12 +1,11 @@
 import React from 'react';
 
+import { ButtonPropsType } from 'components/common/button/types';
 import styled from 'styled-components';
-
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { ButtonType } from 'types/components/commonTypes/ButtonTypes/ButtonTypes';
+import { ComponentType } from 'types/common/componentType';
 
 type StyledButtonPropsType = {
-  disabled: boolean | undefined;
+  disabled?: boolean;
 };
 
 const StyledButton = styled.button<StyledButtonPropsType>`
@@ -14,40 +13,32 @@ const StyledButton = styled.button<StyledButtonPropsType>`
   border-radius: 7px;
   font-size: 18px;
   font-weight: 500;
-  background-color: ${props => (props.disabled ? 'var(--gray)' : 'var(--primary)')};
-  cursor: ${props => (props.disabled ? 'initial' : 'pointer')};
+  background-color: ${(props) => (props.disabled ? 'var(--gray)' : 'var(--primary)')};
+  cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
   color: var(--white);
   @media (pointer: coarse) {
     & {
       padding: 8px 16px;
     }
     &:active {
-      box-shadow: ${props =>
+      box-shadow: ${(props) =>
         props.disabled ? 'none' : '0 0 10px 4px var(--primary_almost-medium)'};
     }
   }
   @media (pointer: fine) {
     &:hover {
-      box-shadow: ${props =>
+      box-shadow: ${(props) =>
         props.disabled ? 'none' : '0 0 10px 4px var(--primary_almost-medium)'};
     }
   }
 `;
 
-export const Button: React.FC<ButtonType> = ({
-  children,
-  onClick,
-  type,
-  disabled,
-  id,
-}): ReturnComponentType => (
-  <StyledButton
-    id={id}
-    /* eslint-disable-next-line react/button-has-type */
-    type={type}
-    onClick={onClick}
-    disabled={disabled}
-  >
-    {children}
-  </StyledButton>
-);
+export const Button = (props: ButtonPropsType): ComponentType => {
+  const { children, onClick, type, disabled, id } = props;
+
+  return (
+    <StyledButton disabled={disabled} id={id} onClick={onClick} type={type}>
+      {children}
+    </StyledButton>
+  );
+};

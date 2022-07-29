@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
 
-import { ONE, ZERO } from 'constants/common';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { DropdownPropsType } from 'types/components/commonTypes/DropdownTypes/DropdownTypes';
+import { DropdownListItemType, DropdownPropsType } from './types';
 
 const DropdownCommonBorderRadius = '10px';
 
@@ -64,18 +63,19 @@ const StyledDropdownItem = styled(Link)`
   }
 `;
 
-export const Dropdown: FC<DropdownPropsType> = ({
-  title,
-  children,
-}): ReturnComponentType => (
-  <StyledDropdownContainer>
-    <StyledDropdownTitleContainer>{title}</StyledDropdownTitleContainer>
-    <StyledDropdownItemsContainer>
-      {children.map((listItem: any) => (
-        <StyledDropdownItem key={listItem} to={listItem[ONE]}>
-          {listItem[ZERO]}
-        </StyledDropdownItem>
-      ))}
-    </StyledDropdownItemsContainer>
-  </StyledDropdownContainer>
-);
+export const Dropdown = (props: DropdownPropsType): ComponentType => {
+  const { title, children } = props;
+
+  return (
+    <StyledDropdownContainer>
+      <StyledDropdownTitleContainer>{title}</StyledDropdownTitleContainer>
+      <StyledDropdownItemsContainer>
+        {children.map((listItem: DropdownListItemType) => (
+          <StyledDropdownItem key={listItem[1]} to={listItem[1]}>
+            {listItem[0]}
+          </StyledDropdownItem>
+        ))}
+      </StyledDropdownItemsContainer>
+    </StyledDropdownContainer>
+  );
+};

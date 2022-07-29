@@ -2,37 +2,38 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
+import { modalTextSelector } from 'store/selectors/appSelectors';
+import { ComponentType } from 'types/common/componentType';
 
 import { ButtonsContainer, Container, ContentContainer } from './styles';
 
-import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
-import { modalTextSelector } from 'store/selectors/appSelectors';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-
-export const Modal = (): ReturnComponentType => {
+export const Modal = (): ComponentType => {
   const dispatch = useDispatch();
 
   const modalText = useSelector(modalTextSelector);
 
-  const onCancelPress = (): any => {
+  const portalElement = document.getElementById('portal');
+
+  const onCancelPress = (): void => {
     dispatch(setModalTextAction({ modalText: '' }));
   };
 
-  if (!modalText) {
-    return null;
+  if (portalElement !== null && !!modalText) {
+    return ReactDOM.createPortal(
+      <Container>
+        <ContentContainer>
+          <p>{modalText}</p>
+          <ButtonsContainer>
+            <button onClick={onCancelPress} type='button'>
+              Close
+            </button>
+          </ButtonsContainer>
+        </ContentContainer>
+      </Container>,
+      portalElement,
+    );
   }
 
-  return ReactDOM.createPortal(
-    <Container>
-      <ContentContainer>
-        <p>{modalText}</p>
-        <ButtonsContainer>
-          <button type="button" onClick={onCancelPress}>
-            Close
-          </button>
-        </ButtonsContainer>
-      </ContentContainer>
-    </Container>,
-    document.getElementById('portal')!,
-  );
+  return null;
 };

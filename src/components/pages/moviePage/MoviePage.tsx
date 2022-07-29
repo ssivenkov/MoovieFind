@@ -1,59 +1,80 @@
 import React, { useEffect } from 'react';
 
-import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
-import { image300x450 } from 'api/config';
 import { Loader } from 'components/common/loader/Loader';
 import {
   StyledAdditionalContainer,
   StyledDescriptionContainer,
+  StyledInfoContainer,
   StyledMainContainer,
   StyledMovieContainer,
   StyledMovieInfoContainer,
-  StyledOverviewExplanation,
-  StyledPoster,
+  StyledOverviewTitle,
   StyledPosterContainer,
   StyledTagline,
   StyledTitle,
-  StyledTitleContainer,
-  StyledUserScoreContainer,
 } from 'components/pages/moviePage/style';
-import { NOT_AVAILABLE, ONE, ZERO } from 'constants/common';
-import { arrayOfStringsFormattingHelper } from 'helpers/arrayOfStringsFormattingHelper';
-import { timeFormattingHelper } from 'helpers/timeFormattingHelper';
-import { getAppInitializedSelector } from 'store/selectors/appSelectors';
-import { getMovieSelector } from 'store/selectors/movieSelectors';
+import { formatByNameHelper } from 'helpers/formatByNameHelper';
+import { timeFormatHelper } from 'helpers/timeFormatHelper';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { appInitializedSelector } from 'store/selectors/appSelectors';
+import { movieSelector } from 'store/selectors/movieSelectors';
 import { getExternalMovieLinks, getMovie } from 'store/thunks/movieThunk';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { ComponentType } from 'types/common/componentType';
 
-export const MoviePage = (): ReturnComponentType => {
+import { Poster } from './poster/Poster';
+
+export const MoviePage = (): ComponentType => {
   const dispatch = useDispatch();
 
   const { movieID } = useParams<string>();
-  const appInitialized = useSelector(getAppInitializedSelector);
-  const movieData = useSelector(getMovieSelector);
+  const appInitialized = useSelector(appInitializedSelector);
+  const movieData = useSelector(movieSelector);
 
-  let movieTime;
-  if (movieData.runtime && movieData.runtime > ZERO) {
-    movieTime = timeFormattingHelper(movieData.runtime);
-  }
+  const posterPath = movieData.poster_path ? movieData.poster_path : '';
 
-  let releaseDate;
-  if (movieData.release_date) {
-    releaseDate = moment(movieData.release_date).format('MMMM DD, YYYY');
-  }
+  const title = movieData.title ? movieData.title : 'No title';
 
-  let genres;
-  if (movieData.genres) {
-    genres = arrayOfStringsFormattingHelper(movieData.genres);
-  }
+  const movieTime =
+    movieData.runtime && movieData.runtime > 0 ? timeFormatHelper(movieData.runtime) : '';
 
-  let spokenLanguages;
-  if (movieData.spoken_languages) {
-    spokenLanguages = arrayOfStringsFormattingHelper(movieData.spoken_languages);
-  }
+  const releaseDate = movieData.release_date
+    ? moment(movieData.release_date).format('MMMM DD, YYYY')
+    : '';
+
+  const genres =
+    movieData.genres && movieData.genres.length > 0
+      ? formatByNameHelper(movieData.genres)
+      : '';
+
+  const userScore =
+    movieData.vote_average && movieData.vote_average > 0
+      ? movieData.vote_average
+      : 'No user scores';
+
+  const tagline = movieData.tagline ? movieData.tagline : '';
+
+  const overview = movieData.overview ? movieData.overview : '';
+
+  const status = movieData.status ? movieData.status : '';
+
+  const originalLanguage = movieData.original_language ? movieData.original_language : '';
+
+  const spokenLanguages =
+    movieData.spoken_languages && movieData.spoken_languages.length > 0
+      ? formatByNameHelper(movieData.spoken_languages)
+      : '';
+
+  const budget = movieData.budget && movieData.budget > 0 ? movieData.budget : '';
+
+  const revenue = movieData.revenue && movieData.revenue > 0 ? movieData.revenue : '';
+
+  const productionCompanies = movieData.production_companies
+    ? formatByNameHelper(movieData.production_companies)
+    : '';
+
+  const homepage = movieData.homepage ? movieData.homepage : '';
 
   useEffect(() => {
     if (movieID) {
@@ -67,49 +88,40 @@ export const MoviePage = (): ReturnComponentType => {
       <StyledMovieContainer>
         <StyledMainContainer>
           <StyledPosterContainer>
-            <StyledPoster src={`${image300x450}${movieData.poster_path}`} />
+            {posterPath ? <Poster posterLink={posterPath} /> : <Loader />}
           </StyledPosterContainer>
           <StyledMovieInfoContainer>
-            <StyledTitleContainer>
-              {movieData.title && <StyledTitle>{movieData.title}</StyledTitle>}
-              {movieTime && (
-                <div>{`Duration: ${movieTime[ZERO]}h ${movieTime[ONE]}m`}</div>
-              )}
-              {movieData.release_date && <div>Release date: {releaseDate}</div>}
-              {movieData.genres && <div>Genres: {genres}</div>}
-            </StyledTitleContainer>
-            <StyledUserScoreContainer>
-              {'User score: '}
-              {movieData.vote_average! > ZERO ? movieData.vote_average : 'No user scores'}
-            </StyledUserScoreContainer>
+            <StyledInfoContainer>
+              <StyledTitle>{title}</StyledTitle>
+              {movieTime && <div>{`Duration: ${movieTime[0]}h ${movieTime[1]}m`}</div>}
+              {releaseDate && <div>{`Release date: ${releaseDate}`}</div>}
+              {genres && <div>{`Genres: ${genres}`}</div>}
+              <div>{`User score: ${userScore}`}</div>
+            </StyledInfoContainer>
             <StyledDescriptionContainer>
-              {movieData.tagline && <StyledTagline>{movieData.tagline}</StyledTagline>}
-              {movieData.overview && (
+              {tagline && <StyledTagline>{tagline}</StyledTagline>}
+              {overview && (
                 <div>
-                  <StyledOverviewExplanation>Overview</StyledOverviewExplanation>
-                  {movieData.overview}
+                  <StyledOverviewTitle>Overview</StyledOverviewTitle>
+                  {overview}
                 </div>
               )}
             </StyledDescriptionContainer>
           </StyledMovieInfoContainer>
         </StyledMainContainer>
         <StyledAdditionalContainer>
-          {movieData.status && <div>{`Status: ${movieData.status}`}</div>}
-          {movieData.original_language && (
-            <div>{`Original language: ${movieData.original_language}`}</div>
-          )}
+          {status && <div>{`Status: ${status}`}</div>}
+          {originalLanguage && <div>{`Original language: ${originalLanguage}`}</div>}
           {spokenLanguages && <div>{`Spoken languages: ${spokenLanguages}`}</div>}
-          <div>
-            {'Budget: '}
-            {movieData.budget! > ZERO ? movieData.budget : NOT_AVAILABLE}
-          </div>
-          <div>
-            {'Revenue: '}
-            {movieData.revenue! > ZERO ? movieData.revenue : NOT_AVAILABLE}
-          </div>
-          {movieData.homepage && <div>{`Homepage: ${movieData.homepage}`}</div>}
-          {movieData.production_companies && (
-            <div>{`Production companies: ${movieData.production_companies.toString()}`}</div>
+          {budget && <div>{`Budget: $${budget}`}</div>}
+          {revenue && <div>{`Revenue: $${revenue}`}</div>}
+          {productionCompanies && (
+            <div>{`Production companies: ${productionCompanies}`}</div>
+          )}
+          {homepage && (
+            <a href={homepage} rel='noreferrer' target='_blank'>
+              Homepage
+            </a>
           )}
         </StyledAdditionalContainer>
       </StyledMovieContainer>

@@ -1,4 +1,5 @@
-import { CardsCountInOnePage, ONE, ZERO } from 'constants/common';
+import { CARDS_PER_PAGE } from 'constants/common';
+
 import { MOVIES_ACTIONS } from 'enums/moviesEnum';
 import {
   MoviesReducerActionsType,
@@ -7,9 +8,9 @@ import {
 
 const moviesReducerState = {
   moviesList: [],
-  currentPage: ONE,
-  moviesCountInOnePage: CardsCountInOnePage,
-  totalMoviesCount: ZERO,
+  currentPage: 1,
+  moviesCountInOnePage: CARDS_PER_PAGE,
+  totalMoviesCount: 0,
 };
 
 export const moviesReducer = (

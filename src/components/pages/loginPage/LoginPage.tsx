@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { Formik } from 'formik';
-import styled from 'styled-components';
-
 import { Button } from 'components/common/button/Button';
 import {
   StyledField,
@@ -11,25 +8,25 @@ import {
   StyledSectionTitle,
   StyledSectionTitleContainer,
 } from 'components/pages/commonStyles/Styles';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { Formik } from 'formik';
+import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
 
-interface submitObjectType {
-  login: string;
-  password: string;
-}
+import { SignInSubmitType } from './types';
 
 const StyledButtonsContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const LoginPage = (): ReturnComponentType => {
+export const LoginPage = (): ComponentType => {
   const initialValues = {
     login: '',
     password: '',
   };
 
-  const onSubmit = (values: submitObjectType): void => {
-    console.log(values);
+  const onSubmit = (submitData: SignInSubmitType): void => {
+    setModalTextAction({ modalText: submitData.login });
   };
 
   return (
@@ -39,10 +36,10 @@ export const LoginPage = (): ReturnComponentType => {
       </StyledSectionTitleContainer>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <StyledFormColumn>
-          <StyledField type="text" name="login" placeholder="Login" />
-          <StyledField type="password" name="password" placeholder="Password" />
+          <StyledField name='login' placeholder='Login' type='text' />
+          <StyledField name='password' placeholder='Password' type='password' />
           <StyledButtonsContainer>
-            <Button type="submit">Login</Button>
+            <Button type='submit'>Login</Button>
           </StyledButtonsContainer>
         </StyledFormColumn>
       </Formik>

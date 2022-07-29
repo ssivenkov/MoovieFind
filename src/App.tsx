@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
-
-import styled from 'styled-components';
-
-import { Modal } from './components/common/modal/Modal';
+import React from 'react';
 
 import { Footer } from 'components/footer/Footer';
 import { Header } from 'components/header/Header';
 import { RoutesContainer } from 'components/routesContainer/RoutesContainer';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
+
+import { Modal } from './components/common/modal/Modal';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -40,7 +39,7 @@ const AppWrapper = styled.div`
   }
 `;
 
-export const App: FC = (): ReturnComponentType => (
+export const App = (): ComponentType => (
   <AppContainer>
     <AppWrapper>
       <Header />

@@ -1,28 +1,26 @@
 import React from 'react';
 
-import { Formik } from 'formik';
-import styled from 'styled-components';
-
 import { Button } from 'components/common/button/Button';
 import { StyledFormRow, StyledSearchField } from 'components/pages/commonStyles/Styles';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
+import { Formik } from 'formik';
+import { setModalTextAction } from 'store/actions/appReducerActions/setModalTextAction';
+import styled from 'styled-components';
+import { ComponentType } from 'types/common/componentType';
+
+import { SearchSubmitType } from './types';
 
 const StyledSearchContainer = styled.div`
   width: 100%;
   margin-right: 15px;
 `;
 
-interface submitObjectType {
-  search: string;
-}
-
-export const SearchSection = (): ReturnComponentType => {
+export const SearchSection = (): ComponentType => {
   const initialValues = {
     search: '',
   };
 
-  const onSubmit = (submitObject: submitObjectType): void => {
-    console.log(submitObject.search);
+  const onSubmit = (submitData: SearchSubmitType): void => {
+    setModalTextAction({ modalText: submitData.search });
   };
 
   return (
@@ -30,11 +28,11 @@ export const SearchSection = (): ReturnComponentType => {
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <StyledFormRow>
           <StyledSearchField
-            type="text"
-            name="search"
-            placeholder="Search for a movie, TV show or person"
+            name='search'
+            placeholder='Search for a movie, TV show or person'
+            type='text'
           />
-          <Button type="submit">Search</Button>
+          <Button type='submit'>Search</Button>
         </StyledFormRow>
       </Formik>
     </StyledSearchContainer>

@@ -1,7 +1,7 @@
-import { MovieReducerActionsType } from './types';
-
 import { MOVIE_ACTIONS } from 'enums/movieEnum';
 import { MovieReducerStateType } from 'store/reducers/movieReducer/types';
+
+import { MovieReducerActionsType } from './types';
 
 const movieReducerState = {
   movieData: {
@@ -31,6 +31,7 @@ const movieReducerState = {
     vote_average: 0,
     vote_count: 0,
   },
+  externalLinks: [],
 };
 
 export const movieReducer = (

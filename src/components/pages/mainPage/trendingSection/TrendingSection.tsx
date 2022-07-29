@@ -1,36 +1,39 @@
-import React, { FC } from 'react';
+import { DAY, MOVIE, TV, WEEK } from 'constants/common';
+import { tempList } from 'constants/lists';
 
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
 import { ExtraCard } from 'components/common/card/ExtraCard';
 import { MovieCard } from 'components/common/card/MovieСard';
 import { TempEmptyCard } from 'components/common/card/TempEmptyCard';
 import { SliderContainer } from 'components/common/slider/Slider';
+import { Switcher } from 'components/common/switcher/Switcher';
 import {
   StyledMainSectionContainer,
   StyledMainSectionContentContainer,
   StyledMainSectionFiltersContainer,
   StyledMainSectionFiltersWrapper,
-  StyledMainSectionLinkTitle,
   StyledMainSectionHeader,
-} from 'components/pages/mainPage/common/styledComponents/MainStyledComponents';
-import { SwitchButton } from 'components/pages/mainPage/common/switchButton/SwitchButton';
-import { DAY, MOVIE, TV, WEEK, ZERO } from 'constants/common';
-import { tempList } from 'constants/lists';
+  StyledMainSectionLinkTitle,
+} from 'components/pages/mainPage/commonStyles/MainStyledComponents';
+import { useDispatch } from 'react-redux';
 import { PATH } from 'routes/routes';
 import { setTrendingFilterAction } from 'store/actions/mainReducerActions/setTrendingFilterAction';
 import { setTrendingTimeFilterAction } from 'store/actions/mainReducerActions/setTrendingTimeFilterAction';
-import { MovieType } from 'store/reducers/moviesReducer/types';
-import { TVShowType } from 'store/reducers/tvShowsReducer/types';
-import { ReturnComponentType } from 'types/commonTypes/ReturnComponentType';
-import { TrendingSectionPropsType } from 'types/components/MainTypes/TrendingSectionSypes/TrendingSectionType';
+import { ComponentType } from 'types/common/componentType';
 
-export const TrendingSection: FC<TrendingSectionPropsType> = ({
-  trendingList,
-  filter,
-  timeFilter,
-}): ReturnComponentType => {
+import { TrendingSectionPropsType } from './types';
+
+export const TrendingSection = (props: TrendingSectionPropsType): ComponentType => {
+  const { trendingTVShowsList, trendingMoviesList, filter, timeFilter } = props;
+
   const dispatch = useDispatch();
+
+  const emptyCardsCondition =
+    trendingTVShowsList.length === 0 && trendingMoviesList.length === 0;
+  const extraCardCondition =
+    trendingTVShowsList.length !== 0 || trendingMoviesList.length !== 0;
+
   const onTVFilterClick = (): void => {
     dispatch(setTrendingFilterAction({ trendingFilter: TV }));
   };
@@ -48,77 +51,77 @@ export const TrendingSection: FC<TrendingSectionPropsType> = ({
     <StyledMainSectionContainer>
       <StyledMainSectionHeader>
         <StyledMainSectionLinkTitle
-          to={`${filter === TV ? PATH.TVSHOWS : PATH.MOVIES}/${PATH.TRENDING}`}
+          to={`${filter === TV ? PATH.TV_SHOWS : PATH.MOVIES}/${PATH.TRENDING}`}
         >
           Trending
         </StyledMainSectionLinkTitle>
         <StyledMainSectionFiltersWrapper>
           <StyledMainSectionFiltersContainer>
-            <SwitchButton
-              active={filter === TV}
-              onClick={onTVFilterClick}
+            <Switcher
               disabled={filter === TV}
+              isActive={filter === TV}
+              onClick={onTVFilterClick}
             >
               On TV
-            </SwitchButton>
-            <SwitchButton
-              active={filter === MOVIE}
-              onClick={onMoviesFilterClick}
+            </Switcher>
+            <Switcher
               disabled={filter === MOVIE}
+              isActive={filter === MOVIE}
+              onClick={onMoviesFilterClick}
             >
               In Theaters
-            </SwitchButton>
+            </Switcher>
           </StyledMainSectionFiltersContainer>
           <StyledMainSectionFiltersContainer>
-            <SwitchButton
-              active={timeFilter === DAY}
-              onClick={onDayClick}
+            <Switcher
               disabled={timeFilter === DAY}
+              isActive={timeFilter === DAY}
+              onClick={onDayClick}
             >
               Today
-            </SwitchButton>
-            <SwitchButton
-              active={timeFilter === WEEK}
-              onClick={onWeekClick}
+            </Switcher>
+            <Switcher
               disabled={timeFilter === WEEK}
+              isActive={timeFilter === WEEK}
+              onClick={onWeekClick}
             >
               This week
-            </SwitchButton>
+            </Switcher>
           </StyledMainSectionFiltersContainer>
         </StyledMainSectionFiltersWrapper>
       </StyledMainSectionHeader>
       <StyledMainSectionContentContainer>
         <SliderContainer>
-          {trendingList.length === ZERO &&
-            tempList.map(tempEmptyCard => <TempEmptyCard key={tempEmptyCard} />)}
+          {emptyCardsCondition &&
+            tempList.map((tempEmptyCard) => <TempEmptyCard key={tempEmptyCard} />)}
           {filter === TV &&
-            trendingList.map((trendingTVShow: TVShowType) => (
+            trendingTVShowsList.map((item) => (
               <MovieCard
-                movieID={trendingTVShow.id}
-                key={trendingTVShow.id}
-                posterPath={trendingTVShow.poster_path ? trendingTVShow.poster_path : ''}
-                title={trendingTVShow.name}
-                voteAverage={trendingTVShow.vote_average}
-                releaseDate={trendingTVShow.first_air_date}
+                key={item.id}
+                movieID={item.id}
+                posterPath={item.poster_path ? item.poster_path : ''}
+                releaseDate={item.first_air_date}
+                title={item.name}
+                voteAverage={item.vote_average}
               />
             ))}
           {filter === MOVIE &&
-            trendingList.map((trendingMovie: MovieType) => (
+            trendingMoviesList.map((item) => (
               <MovieCard
-                movieID={trendingMovie.id}
-                key={trendingMovie.id}
-                posterPath={trendingMovie.poster_path ? trendingMovie.poster_path : ''}
-                title={trendingMovie.title ? trendingMovie.title : ''}
-                voteAverage={
-                  trendingMovie.vote_average ? trendingMovie.vote_average : ZERO
-                }
-                releaseDate={trendingMovie.release_date ? trendingMovie.release_date : ''}
+                key={item.id}
+                movieID={item.id}
+                posterPath={item.poster_path ? item.poster_path : ''}
+                releaseDate={item.release_date ? item.release_date : ''}
+                title={item.title ? item.title : ''}
+                voteAverage={item.vote_average ? item.vote_average : 0}
               />
             ))}
-          <ExtraCard
-            link={`${filter === TV ? PATH.TVSHOWS : PATH.MOVIES}/${PATH.TRENDING}`}
-            title="See all"
-          />
+          {extraCardCondition && (
+            <ExtraCard
+              link={`${filter === TV ? PATH.TV_SHOWS : PATH.MOVIES}/${PATH.TRENDING}`}
+              title='See all'
+            />
+          )}
         </SliderContainer>
       </StyledMainSectionContentContainer>
     </StyledMainSectionContainer>
