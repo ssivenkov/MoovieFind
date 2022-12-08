@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { Footer } from 'components/footer/Footer';
+import { Header } from 'components/header/Header';
+import { RoutesContainer } from 'components/routesContainer/RoutesContainer';
+import { observer } from 'mobx-react-lite';
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+import './SimpleBar.scss';
 
-export default App;
+import { Modal } from './components/common/modal/Modal';
+import { AppContainer, AppWrapper } from './styles';
+
+export const App = observer(() => (
+  <SimpleBar style={{ maxHeight: '100vh', maxWidth: '100vw' }}>
+    <AppContainer>
+      <AppWrapper>
+        <Header />
+        <RoutesContainer />
+        <Footer />
+        <Modal />
+      </AppWrapper>
+    </AppContainer>
+  </SimpleBar>
+));

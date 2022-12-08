@@ -1,0 +1,16 @@
+export enum PATH {
+  MAIN_PAGE = '/',
+  LOGIN = 'login',
+  SIGNUP = 'signup',
+  MOVIES = 'movies',
+  MOVIE = 'movie',
+  POPULAR = 'popular',
+  TRENDING = 'trending',
+  TV_SHOWS = 'tv_shows',
+  TV_SHOW = 'tv_show',
+  CAST = 'cast',
+  PEOPLE = 'people',
+  SEARCH = 'search',
+  ERROR = '404',
+  WRONG_PAGE = '*',
+}

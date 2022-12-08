@@ -1,0 +1,98 @@
+$desktopBarWidth: 10;
+$desktopBarHeight: 10;
+$mobileBarWidth: 4;
+$mobileBarHeight: 4;
+$mobileBorderRadius: 4;
+$desktopBorderRadius: 5;
+
+.simplebar-track.simplebar-vertical {
+  // vertical full track
+  width: #{$desktopBarWidth}px;
+  max-width: #{$desktopBarWidth}px;
+  background-color: transparent;
+  margin-right: 1px;
+}
+
+@media (pointer:coarse) {
+  .simplebar-track.simplebar-vertical {
+    // vertical full track on mobile
+    width: #{$mobileBarWidth}px;
+    max-width: #{$mobileBarWidth}px;
+    margin-right: 0;
+  }
+}
+
+.simplebar-track.simplebar-horizontal {
+  // horizontal full track
+  height: #{$desktopBarHeight}px;
+  max-height: #{$desktopBarHeight}px;
+  background-color: transparent;
+  margin-bottom: 1px;
+}
+
+@media (pointer:coarse) {
+  .simplebar-track.simplebar-horizontal {
+    // horizontal full track on mobile
+    height: #{$mobileBarHeight}px;
+    max-height: #{$mobileBarHeight}px;
+    margin-bottom: 0;
+  }
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+  // vertical bar
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: #{$desktopBarWidth}px;
+  max-width: #{$desktopBarWidth}px;
+  border-radius: #{$desktopBorderRadius}px;
+  background: linear-gradient(180deg, var(--primary), var(--primary_medium));
+}
+
+@media (pointer:coarse) {
+  .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
+    // vertical bar on mobile
+    width: #{$mobileBarWidth}px;
+    max-width: #{$mobileBarWidth}px;
+    border-radius: #{$mobileBorderRadius}px;
+  }
+}
+
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar::before {
+  // horizontal bar
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: #{$desktopBarHeight}px;
+  max-height: #{$desktopBarHeight}px;
+  border-radius: #{$desktopBorderRadius}px;
+  background: linear-gradient(90deg, var(--primary), var(--primary_medium));
+}
+
+@media (pointer:coarse) {
+  .simplebar-track.simplebar-horizontal .simplebar-scrollbar::before {
+    // horizontal bar on mobile
+    height: #{$mobileBarHeight}px;
+    max-height: #{$mobileBarHeight}px;
+    border-radius: #{$mobileBorderRadius}px;
+  }
+}
+
+.simplebar-scrollbar.simplebar-visible::before {
+  // all bars before delay
+  opacity: 1;
+}
+
+.simplebar-scrollbar::before {
+  // all bars after delay
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar {
+  // fix default style for horizontal scroll
+  top: 0;
+}

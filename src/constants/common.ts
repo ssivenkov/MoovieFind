@@ -1,0 +1,14 @@
+export const PAGINATION_LINKS_COUNT = 7;
+export const CARDS_PER_PAGE_COUNT = 40;
+export const MAX_PAGES_COUNT = 500;
+export const MAX_ITEMS_COUNT = 10000;
+export const PAGE_MULTIPLIER = 2;
+export const WIDE_SCREEN = 1500;
+export const MEDIUM_SCREEN = 1300;
+export const SMALL_SCREEN = 1100;
+export const TV = 'tv';
+export const MOVIE = 'movie';
+export const DAY = 'day';
+export const WEEK = 'week';
+export const NOT_FOUND = 'not found';
+export const SEE_ALL = 'see all';
